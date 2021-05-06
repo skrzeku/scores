@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import Dashboard from './components/Dashboard/Dashboard';
+import React, {Component} from 'react';
+import { connect } from "react-redux";
+import { employeesFetched } from "./actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  componentDidMount() {
+      const CurrentEmployees = [
+          {
+              name: 'Pawel'
+          },
+          {
+              name: 'Lol',
+          }
+      ];
+
+
+      this.props.employeesFetched(CurrentEmployees);
+
+  }
+
+
+    render() {
+
+
+
+
+
+      return (
+          <div className="App">
+              <Dashboard />
+          </div>
+      );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        employees: state.employees
+    }
+};
+const mapDispatchToProps = { employeesFetched };
+
+export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
