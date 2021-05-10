@@ -4,8 +4,18 @@ import Scores from '../../Scores/Scores';
 
 
 const Employee = (props)=> {
+
+    console.log(props.scores);
+
+
+
   return(<div>
-      <tr><td>Imię: {props.name}</td> <td>Wynik: <Scores/></td></tr>
+      Imię: {props.name}<br/>
+      Nazwisko: {props.lastName}<br/>
+      Wyniki:{props.scores}<Scores/>
+
+
+
 
   </div>)
 };

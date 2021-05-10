@@ -3,22 +3,21 @@ import Dashboard from './components/Dashboard/Dashboard';
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { employeesFetched } from "./actions";
+import firebase from './firebase';
 
 class App extends Component{
 
+
+
   componentDidMount() {
-      const CurrentEmployees = [
-          {
-              name: 'Pawel'
-          },
-          {
-              name: 'Lol',
-          }
-      ];
+      let CurrentEmployees = [];
+      const db = firebase.firestore();
 
-
-      this.props.employeesFetched(CurrentEmployees);
-
+      db.collection('employees').get()
+          .then((result) => {
+             CurrentEmployees = result.docs.map(one => one.data());
+              this.props.employeesFetched(CurrentEmployees)
+          });
   }
 
 

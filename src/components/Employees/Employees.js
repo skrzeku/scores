@@ -1,90 +1,65 @@
 import React, {useEffect} from 'react';
 import Employee from './Employee/Employee';
-import { useDispatch, useSelector} from 'react-redux'
-
-import firebase from '../../firebase';
-
-
-
+import {useSelector} from 'react-redux'
+import AddEmployee from './AddEmployee/AddEmployee';
+import Styled from 'styled-components';
+import firebase from "../../firebase";
 
 
-const Employees = (props)=> {
+
+
+
+
+const Employees = ()=> {
 
     const db = firebase.firestore();
 
+    const OneEmployee = Styled.div`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
 
-    const dispatch = useDispatch();
 
+    const AllEmpls = Styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+    let allScores = [];
 
-    useEffect(() => {
+  useEffect(()=> {
+      db.collection('scores').get()
+          .then((result) => {
+              allScores = result.docs.map(one => one.data());
+              getEmployeeScores(0);
+          });
+  }, [allScores]);
 
-        db.collection('employees').get().then((employees)=> {
-            console.log(employees.docs.map((one)=> {
-                console.log(one.data());
-            }));
-        });
+  const getEmployeeScores = (id)=> {
 
-    }, []);
-
+  [...allScores].filter(one => {
+   return   one.employee === id});
+  };
 
 
     const employees = useSelector(state => state.employees);
 
-
-
-
-
-
-
-
-
     const AllEmployees = employees.map((one)=> {
-        return(<div><Employee key={one.name} name={one.name} /></div>)
+        console.log(one);
+        return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} scores={getEmployeeScores(one.id)}/></OneEmployee>)
     });
 
-
-    const addNewEmployee = ()=> {
-        const oneEmployee = {
-            name: '2denis',
-            scores: [992, 990]
-        };
-        const ref = db.collection('employees').add({employee: oneEmployee});
-
-
-        // dispatch({type: 'ADD_EMPLOYEE', employees: employees, employee: oneEmployee});
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return(<div>
+
         <h2>Pracownicy:</h2>
-       {AllEmployees}
-       <button onClick={addNewEmployee}>dodaj</button>
+       <AllEmpls>
+        {AllEmployees}
+       </AllEmpls>
+       <AddEmployee/>
+
     </div>)
 };
-//
-// const mapDispatchToProps = { AddEmployee };
-//
-// const mapStateToProps = state => {
-//     return {
-//         allEmployees: state.employees
-//     }
-// };
+
 
 
 

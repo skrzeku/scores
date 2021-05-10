@@ -8,9 +8,9 @@ import Score from './Score/Score';
 
 const Scores = ()=> {
 
-            //to run an action
-    const dispatch = useDispatch();
-    const employees = useSelector( state => state.employees);
+    //         //to run an action
+    // const dispatch = useDispatch();
+    // const employees = useSelector( state => state.employees);
 
 
     useEffect(()=> {
@@ -22,30 +22,21 @@ const Scores = ()=> {
 
     }, []);
 
-    const addnewEmploy = ()=> {
-        const newEmploy = {
-            name: 'siemano'
-        };
-        console.log(employees);
-        dispatch({type: 'ADD_EMPLOYEE', employees: employees, employee: newEmploy});
-
-    };
 
 
 
 
-    const allScores = [990, 990, 1500];
+    // const allScores = [990, 990, 1500];
 
-    const [scores] = useState(allScores);
+    const [scores] = useState('');
 
-    const mapScores = scores.map((one)=> {
-        return(<div><Score key={one} score={one} /></div>)
-    });
+    // const mapScores = scores.map((one)=> {
+    //     return(<div><Score /></div>)
+    // });
 
 
     return(<div>
-        {mapScores}
-        <button onClick={addnewEmploy}>addnewb Employee</button>
+       <Score/>
     </div>)
 };
 
