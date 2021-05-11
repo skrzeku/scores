@@ -73,7 +73,7 @@ const AddScore = () => {
                 }
             </select>
             <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-            <button onClick={addScoreHandler}>Dodaj wynik</button>
+            <button onClick={addScoreHandler}>Dodaj wyniks</button>
         </form>
 
     </div>)

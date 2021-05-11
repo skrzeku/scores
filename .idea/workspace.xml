@@ -68,7 +68,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620714810881</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Date picker update">
+      <created>1620714930723</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1620714930723</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,14 +86,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="Date picker update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1368" y="179" key="#Notifications" timestamp="1620714920812">
+    <state x="-1368" y="179" key="#Notifications" timestamp="1620714982917">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714920812" />
-    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1620714809516">
+    <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714982917" />
+    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1620714940509">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714809516" />
+    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714940509" />
     <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1620714816121">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
