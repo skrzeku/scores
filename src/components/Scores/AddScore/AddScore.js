@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import firebase from "../../../firebase";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -19,6 +22,8 @@ const AddScore = () => {
     console.log(mailing);
 
     const[employee, setEmployee] = useState(employees[0]?.id);
+    const [startDate, setStartDate] = useState(new Date());
+
 
 
     useEffect(()=> {
@@ -35,10 +40,11 @@ const AddScore = () => {
           score: score,
           type: type,
           mailing: mailing,
-          employee: +employee
+          employee: +employee,
+            date: startDate
         };
 
-        console.log(employee);
+        console.log(startDate);
         // db.collection('scores').add(newScore);
     };
 
@@ -66,6 +72,7 @@ const AddScore = () => {
                     })
                 }
             </select>
+            <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
             <button onClick={addScoreHandler}>Dodaj wynik</button>
         </form>
 

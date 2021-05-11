@@ -7,13 +7,6 @@ import AddScore from '../Scores/AddScore/AddScore';
 class Dashboar  extends Component {
 
 
-
-
-
-
-
-
-
     render() {
 
         let shownComponent = false;
@@ -23,9 +16,6 @@ class Dashboar  extends Component {
             shownComponent = !shownComponent;
             console.log(shownComponent);
         };
-
-
-
 
 
         console.log(this.props.employees);
