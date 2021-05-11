@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +61,35 @@
       <workItem from="1620467696305" duration="5343000" />
       <workItem from="1620548961610" duration="8593000" />
     </task>
+    <task id="LOCAL-00001" summary="Date picker update">
+      <created>1620714810881</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620714810881</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Date picker update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Date picker update" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1368" y="179" key="#Notifications" timestamp="1620714920812">
+      <screen x="-1920" y="1" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714920812" />
+    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1620714809516">
+      <screen x="-1920" y="1" width="1920" height="1040" />
+    </state>
+    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714809516" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1620714816121">
+      <screen x="-1920" y="1" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714816121" />
   </component>
 </project>
