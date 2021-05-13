@@ -9,3 +9,9 @@ export const AddEmployee = (employees, employee) => ({
     employees,
     employee
 });
+
+
+export const fetchScores = (scores) => ({
+   type: 'SCORES_FETCHED',
+   scores
+});

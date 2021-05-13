@@ -45,7 +45,7 @@ const AddScore = () => {
         };
 
         console.log(startDate);
-        // db.collection('scores').add(newScore);
+        db.collection('scores').add(newScore);
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];

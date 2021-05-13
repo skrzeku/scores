@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import AddEmployee from './AddEmployee/AddEmployee';
 import Styled from 'styled-components';
 import firebase from "../../firebase";
+import {fetchScores} from "../../actions/index";
 
 
 
@@ -28,25 +29,32 @@ const Employees = ()=> {
     let allScores = [];
 
   useEffect(()=> {
+      let CurrentScores = [];
       db.collection('scores').get()
           .then((result) => {
               allScores = result.docs.map(one => one.data());
-              getEmployeeScores(0);
+              fetchScores(CurrentScores);
+              console.log(allScores);
           });
   }, [allScores]);
 
   const getEmployeeScores = (id)=> {
 
-  [...allScores].filter(one => {
-   return   one.employee === id});
+      console.log(allScores.filter(ons=>ons.employee === id));
+      return  allScores?.filter(one => one.employee === id);
+  };
+
+  const checkit = (id)=> {
+      console.log(getEmployeeScores(id));
   };
 
 
     const employees = useSelector(state => state.employees);
 
-    const AllEmployees = employees.map((one)=> {
-        console.log(one);
-        return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} scores={getEmployeeScores(one.id)}/></OneEmployee>)
+    const AllEmployees = employees?.map((one)=> {
+        let scoress = allScores?.filter(ons=> ons.employee === 4);
+        console.log(scoress);
+        return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} id={one.id}/></OneEmployee>)
     });
 
     return(<div>
@@ -55,6 +63,7 @@ const Employees = ()=> {
        <AllEmpls>
         {AllEmployees}
        </AllEmpls>
+        <button onClick={()=> getEmployeeScores(4)}>pokaż</button>
        <AddEmployee/>
 
     </div>)

@@ -11,7 +11,7 @@ export const employees = (state = [], action) => {
         default:
             return state
     }
-}
+};
 
 
 

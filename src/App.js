@@ -3,6 +3,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { employeesFetched } from "./actions";
+import {fetchScores} from "./actions";
 import firebase from './firebase';
 
 class App extends Component{
@@ -10,6 +11,8 @@ class App extends Component{
 
 
   componentDidMount() {
+
+      //get employees
       let CurrentEmployees = [];
       const db = firebase.firestore();
 
@@ -18,6 +21,16 @@ class App extends Component{
              CurrentEmployees = result.docs.map(one => one.data());
               this.props.employeesFetched(CurrentEmployees)
           });
+
+
+      // //get scores
+      // let CurrentScores = [];
+      //
+      // db.collection('scores').get()
+      //     .then((result) => {
+      //   CurrentScores = result.docs.map(one => one.data());
+      //   this.props.fetchScores(CurrentScores);
+      // })
   }
 
 
@@ -37,9 +50,10 @@ class App extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        employees: state.employees
+        employees: state.employees,
+        scores: state.scores
     }
 };
-const mapDispatchToProps = { employeesFetched };
+const mapDispatchToProps = { employeesFetched, fetchScores };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

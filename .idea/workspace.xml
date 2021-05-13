@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/reducers/scores.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employees.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/employees.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +37,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectId" id="1sTA7Q6OzlGOYUFbu0s6kHiN7m7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -60,6 +75,9 @@
       <workItem from="1620226403457" duration="16270000" />
       <workItem from="1620467696305" duration="5343000" />
       <workItem from="1620548961610" duration="8593000" />
+      <workItem from="1620886063478" duration="4713000" />
+      <workItem from="1620908083712" duration="801000" />
+      <workItem from="1620908891518" duration="2610000" />
     </task>
     <task id="LOCAL-00001" summary="Date picker update">
       <created>1620714810881</created>
@@ -75,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620714930723</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Date picker update">
+      <created>1620715078475</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1620715078475</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,13 +115,17 @@
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
     <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714982917" />
-    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1620714940509">
+    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1620715077665">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714940509" />
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1620714816121">
+    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620715077665" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1620715082643">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714816121" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620715082643" />
+    <state x="-1151" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620715132042">
+      <screen x="-1920" y="1" width="1920" height="1040" />
+    </state>
+    <state x="-1151" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620715132042" />
   </component>
 </project>
