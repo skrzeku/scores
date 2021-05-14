@@ -7,9 +7,17 @@ import AddScore from '../Scores/AddScore/AddScore';
 class Dashboar  extends Component {
 
 
+
+
+
     render() {
 
         let shownComponent = false;
+        const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+
+       const MonthChangeHandler= (event)=> {
+            console.log(event);
+        };
 
 
         const addNewScore = ()=> {
@@ -24,6 +32,13 @@ class Dashboar  extends Component {
             <Employees/>
             <AddScore/>
             <button onClick={addNewScore}>Dodaj nowy wynik:</button>
+            <select onChange={event => MonthChangeHandler(event.target.value)}>
+                {
+                    months.map((one, index) => {
+                        return (<option value={index}>{one}</option>)
+                    })
+                }
+            </select>
 
         </div>)
     }

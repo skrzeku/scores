@@ -1,19 +1,28 @@
 import React from 'react';
-import Scores from '../../Scores/Scores';
+import Score from '../../Scores/Score/Score';
 import {useSelector} from "react-redux";
 
 
 const Employee = (props)=> {
 
-    console.log(props.id);
-    console.log(useSelector(state => state.scores));
+    // console.log(props.scores);
+
+
+    const scoresAll = useSelector(state => state.scores);
+
+    const employeeScore = scoresAll.filter(one=>one.employee === props.id);
+    console.log(employeeScore);
+
+    const AllScores = employeeScore.map((one)=> {
+        return(<Score score={one.score} scores={one}/>)
+    });
 
 
 
   return(<div>
       Imię: {props.name}<br/>
       Nazwisko: {props.lastName}<br/>
-      Wyniki:{props.scores}<Scores/>
+      Wyniki: {AllScores}
 
 
 

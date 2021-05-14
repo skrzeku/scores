@@ -23,14 +23,14 @@ class App extends Component{
           });
 
 
-      // //get scores
-      // let CurrentScores = [];
-      //
-      // db.collection('scores').get()
-      //     .then((result) => {
-      //   CurrentScores = result.docs.map(one => one.data());
-      //   this.props.fetchScores(CurrentScores);
-      // })
+      //get scores
+      let CurrentScores = [];
+
+      db.collection('scores').get()
+          .then((result) => {
+        CurrentScores = result.docs.map(one => one.data());
+        this.props.fetchScores(CurrentScores);
+      })
   }
 
 

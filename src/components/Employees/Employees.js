@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Employee from './Employee/Employee';
 import {useSelector} from 'react-redux'
 import AddEmployee from './AddEmployee/AddEmployee';
@@ -28,15 +28,14 @@ const Employees = ()=> {
 `;
     let allScores = [];
 
-  useEffect(()=> {
-      let CurrentScores = [];
-      db.collection('scores').get()
-          .then((result) => {
-              allScores = result.docs.map(one => one.data());
-              fetchScores(CurrentScores);
-              console.log(allScores);
-          });
-  }, [allScores]);
+  // useEffect(()=> {
+  //     // let CurrentScores = [];
+  //     // db.collection('scores').get()
+  //     //     .then((result) => {
+  //     //         allScores = result.docs.map(one => one.data());
+  //     //         fetchScores(CurrentScores);
+  //     //     });
+  // }, [allScores]);
 
   const getEmployeeScores = (id)=> {
 
@@ -44,16 +43,17 @@ const Employees = ()=> {
       return  allScores?.filter(one => one.employee === id);
   };
 
-  const checkit = (id)=> {
-      console.log(getEmployeeScores(id));
-  };
+
 
 
     const employees = useSelector(state => state.employees);
+    const scoresAll = useSelector(state => state.scores);
 
-    const AllEmployees = employees?.map((one)=> {
-        let scoress = allScores?.filter(ons=> ons.employee === 4);
-        console.log(scoress);
+    const AllEmployees = employees.map((one)=> {
+        let employeeScore = [...scoresAll].filter(ons=>ons.employee === one.id);
+        console.log(typeof employeeScore);
+
+
         return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} id={one.id}/></OneEmployee>)
     });
 

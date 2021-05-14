@@ -41,7 +41,7 @@ const AddScore = () => {
           type: type,
           mailing: mailing,
           employee: +employee,
-            date: startDate
+            date: new Date(startDate)
         };
 
         console.log(startDate);

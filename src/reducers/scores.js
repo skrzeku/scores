@@ -4,6 +4,10 @@ export const scores = (state = [], action) => {
             return [
                 ...action.scores
             ];
+        case 'FILTER_SCORES':
+            return [
+
+            ];
         default: return state;
     }
 };
