@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/reducers/month.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employees.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/scores.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/scores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
-    </list>
+    <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -321,7 +311,7 @@
       <workItem from="1621094492635" duration="2439000" />
       <workItem from="1621109856699" duration="1023000" />
       <workItem from="1621110922962" duration="1042000" />
-      <workItem from="1621166642733" duration="1864000" />
+      <workItem from="1621166642733" duration="2128000" />
     </task>
     <task id="LOCAL-00001" summary="Date picker update">
       <created>1620714810881</created>
@@ -351,11 +341,18 @@
       <option name="project" value="LOCAL" />
       <updated>1620911683457</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="month state, select months">
+      <created>1621178617319</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621178617320</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8311000" />
+    <option name="totallyTimeSpent" value="8575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="0" />
@@ -386,7 +383,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Date picker update" />
     <MESSAGE value="scores changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="scores changes" />
+    <MESSAGE value="month state, select months" />
+    <option name="LAST_COMMIT_MESSAGE" value="month state, select months" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1368" y="179" key="#Notifications" timestamp="1620714982917">
