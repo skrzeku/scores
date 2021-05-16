@@ -28,14 +28,7 @@ const Employees = ()=> {
 `;
     let allScores = [];
 
-  // useEffect(()=> {
-  //     // let CurrentScores = [];
-  //     // db.collection('scores').get()
-  //     //     .then((result) => {
-  //     //         allScores = result.docs.map(one => one.data());
-  //     //         fetchScores(CurrentScores);
-  //     //     });
-  // }, [allScores]);
+
 
   const getEmployeeScores = (id)=> {
 
@@ -51,8 +44,6 @@ const Employees = ()=> {
 
     const AllEmployees = employees.map((one)=> {
         let employeeScore = [...scoresAll].filter(ons=>ons.employee === one.id);
-        console.log(typeof employeeScore);
-
 
         return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} id={one.id}/></OneEmployee>)
     });

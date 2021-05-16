@@ -10,8 +10,14 @@ const Employee = (props)=> {
 
     const scoresAll = useSelector(state => state.scores);
 
-    const employeeScore = scoresAll.filter(one=>one.employee === props.id);
-    console.log(employeeScore);
+    const month = useSelector(state => state.month);
+
+    const employeeScore = scoresAll
+        .filter(one=>one.employee === props.id)
+        .filter(ons=>ons.date.toDate().getMonth() === month);
+
+    // const lol = employeeScore.filter(ons=>ons.date.toDate().getMonth() === 3);
+    // console.log(lol);
 
     const AllScores = employeeScore.map((one)=> {
         return(<Score score={one.score} scores={one}/>)

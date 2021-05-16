@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Employees from "../Employees/Employees";
 import AddScore from '../Scores/AddScore/AddScore';
+import {changeMonth} from '../../actions/index';
 
 
 class Dashboar  extends Component {
@@ -12,11 +13,13 @@ class Dashboar  extends Component {
 
     render() {
 
+
+
         let shownComponent = false;
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
        const MonthChangeHandler= (event)=> {
-            console.log(event);
+           this.props.changeMonth(+event);
         };
 
 
@@ -25,14 +28,12 @@ class Dashboar  extends Component {
             console.log(shownComponent);
         };
 
-
-        console.log(this.props.employees);
         return(<div>
             <h1>Tablica wyników {this.props.name}</h1>
             <Employees/>
             <AddScore/>
             <button onClick={addNewScore}>Dodaj nowy wynik:</button>
-            <select onChange={event => MonthChangeHandler(event.target.value)}>
+            <select onChange={event => MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
                 {
                     months.map((one, index) => {
                         return (<option value={index}>{one}</option>)
@@ -47,10 +48,14 @@ class Dashboar  extends Component {
 
 const mapStateToProps = state => {
     return {
-        employees: state.employees
+        employees: state.employees,
+        month: state.month
     }
 };
 
 
-const Dashboard = connect(mapStateToProps)(Dashboar);
+const mapDispatchToProps = {changeMonth};
+
+
+const Dashboard = connect(mapStateToProps, mapDispatchToProps)(Dashboar);
 export default Dashboard;

@@ -17,7 +17,9 @@ export const fetchScores = (scores) => ({
 });
 
 
-export const filterScores = (month) => ({
-   type: "FILTER_SCORES",
-   month
+
+
+export const changeMonth = (month) => ({
+    type: "CHANGE_MONTH",
+    month
 });
