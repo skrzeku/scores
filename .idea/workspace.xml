@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Employees/AddEmployee/AddEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/AddEmployee/AddEmployee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Scores/Score/Score.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/Score/Score.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/scores.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/scores.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620911683457</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="addScore validation">
+      <created>1621258746742</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621258746742</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,21 +119,22 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Date picker update" />
     <MESSAGE value="scores changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="scores changes" />
+    <MESSAGE value="addScore validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="addScore validation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1368" y="179" key="#Notifications" timestamp="1620714982917">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
     <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714982917" />
-    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1621258722156">
+    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1621258745931">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621258722156" />
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1620911687050">
+    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621258745931" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1621258752113">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620911687050" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621258752113" />
     <state x="-1151" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620997843415">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>

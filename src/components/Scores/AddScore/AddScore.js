@@ -45,12 +45,14 @@ const AddScore = () => {
           type: type,
           mailing: mailing,
           employee: +employee,
-          date: new Date(startDate),
+          date: new Date(startDate).getTime(),
           client: client
         };
 
+        // console.log(new Date(startDate).getTime());
+
         // db.collection('scores').add(newScore).then(()=> {
-            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
         // });
     };
 
