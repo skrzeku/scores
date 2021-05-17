@@ -6,6 +6,10 @@ export const scores = (state = [], action) => {
             return [
                 ...action.scores
             ];
+        case 'ADD_SCORE':
+            return [
+                ...action.scores, action.score
+            ];
         default: return state;
     }
 };

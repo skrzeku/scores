@@ -32,6 +32,8 @@ const AddEmployee = ()=> {
             id: maxID + 1
         };
 
+        console.log(newEmployee);
+
         // db.collection('employees').add(newEmployee)
         //     .then(()=> {
         //         dispatch({type: 'ADD_EMPLOYEE', employees: employees, employee: newEmployee});

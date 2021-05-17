@@ -16,6 +16,12 @@ export const fetchScores = (scores) => ({
    scores
 });
 
+export const addScore = (scores, score) => ({
+   type: 'ADD_SCORE',
+   scores,
+   score
+});
+
 
 
 

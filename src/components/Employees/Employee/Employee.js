@@ -14,10 +14,18 @@ const Employee = (props)=> {
 
     const employeeScore = scoresAll
         .filter(one=>one.employee === props.id)
-        .filter(ons=>ons.date.toDate().getMonth() === month);
+        .filter(ons => {
+            let date = ons.date;
+                if (!date.seconds) {
+                    return ons.date.getMonth() === month;
+                }
+                else {
+                    return ons.date.toDate().getMonth() === month;
+                }
 
-    // const lol = employeeScore.filter(ons=>ons.date.toDate().getMonth() === 3);
-    // console.log(lol);
+        });
+
+
 
     const AllScores = employeeScore.map((one)=> {
         return(<Score score={one.score} scores={one}/>)
