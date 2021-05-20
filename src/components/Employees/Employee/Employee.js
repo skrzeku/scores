@@ -17,7 +17,7 @@ const Employee = (props)=> {
         .filter(ons => {
             let date = ons.date;
                 if (!date.seconds) {
-                    return ons.date.getMonth() === month;
+                    return new Date(ons.date).getMonth() === month;
                 }
                 else {
                     return ons.date.toDate().getMonth() === month;
@@ -27,8 +27,8 @@ const Employee = (props)=> {
 
 
 
-    const AllScores = employeeScore.map((one)=> {
-        return(<Score score={one.score} scores={one}/>)
+    const AllScores = employeeScore.map((one, index)=> {
+        return(<Score score={one.score} scores={one} key={index}/>)
     });
 
 
@@ -37,8 +37,6 @@ const Employee = (props)=> {
       Imię: {props.name}<br/>
       Nazwisko: {props.lastName}<br/>
       Wyniki: {AllScores}
-
-
 
 
   </div>)

@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="fc563f7e-1a26-44a9-974a-feca7ea1021c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employee/Employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Employees/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Employees/Employees.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/AddScore/AddScore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Scores/Score/Score.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scores/Score/Score.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,11 +28,6 @@
         <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>AddEmployee</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,6 +76,11 @@
       <workItem from="1620912312527" duration="1394000" />
       <workItem from="1620972557327" duration="5381000" />
       <workItem from="1620992315437" duration="4769000" />
+      <workItem from="1621318699916" duration="2915000" />
+      <workItem from="1621405302185" duration="2581000" />
+      <workItem from="1621428294308" duration="3109000" />
+      <workItem from="1621496566458" duration="621000" />
+      <workItem from="1621501136582" duration="3912000" />
     </task>
     <task id="LOCAL-00001" summary="Date picker update">
       <created>1620714810881</created>
@@ -110,7 +117,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621258746742</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="score timestamp vbalidation">
+      <created>1621259081105</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621259081105</updated>
+    </task>
+    <task id="LOCAL-00007" summary="score timestamp vbalidation">
+      <created>1621259107973</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621259107973</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,21 +141,22 @@
     <MESSAGE value="Date picker update" />
     <MESSAGE value="scores changes" />
     <MESSAGE value="addScore validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="addScore validation" />
+    <MESSAGE value="score timestamp vbalidation" />
+    <option name="LAST_COMMIT_MESSAGE" value="score timestamp vbalidation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1368" y="179" key="#Notifications" timestamp="1620714982917">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
     <state x="-1368" y="179" key="#Notifications/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1620714982917" />
-    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1621259080315">
+    <state x="-1335" y="115" key="CommitChangelistDialog2" timestamp="1621259104785">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621259080315" />
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1621258752113">
+    <state x="-1335" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621259104785" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2" timestamp="1621259111632">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621258752113" />
+    <state x="-1368" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.1.1920.1040@-1920.1.1920.1040" timestamp="1621259111632" />
     <state x="-1151" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620997843415">
       <screen x="-1920" y="1" width="1920" height="1040" />
     </state>

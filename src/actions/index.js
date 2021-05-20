@@ -29,3 +29,10 @@ export const changeMonth = (month) => ({
     type: "CHANGE_MONTH",
     month
 });
+
+
+export const addMonthObject = (months, month) => ({
+    type: "ADD_MONTH",
+    months,
+    month
+});

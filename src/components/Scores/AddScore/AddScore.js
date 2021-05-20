@@ -35,6 +35,7 @@ const AddScore = () => {
 
     useEffect(()=> {
             setEmployee(employees[0]?.id);
+            setType(options[0]);
     }, [employees]);
 
     const addScoreHandler = (e) => {
@@ -51,9 +52,9 @@ const AddScore = () => {
 
         // console.log(new Date(startDate).getTime());
 
-        // db.collection('scores').add(newScore).then(()=> {
-        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-        // });
+        db.collection('scores').add(newScore).then(()=> {
+            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+        });
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];
