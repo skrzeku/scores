@@ -36,3 +36,14 @@ export const addMonthObject = (months, month) => ({
     months,
     month
 });
+
+export const fetchCalendar = (calendar) => ({
+    type: "CALENDAR_FETCHED",
+    calendar,
+});
+
+export const addMonthCalendar = (calendar, month) => ({
+   type: "ADD_MONTHTOCALENDAR",
+   calendar,
+   month
+});

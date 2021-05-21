@@ -22,7 +22,6 @@ const Employee = (props)=> {
                 else {
                     return ons.date.toDate().getMonth() === month;
                 }
-
         });
 
 
