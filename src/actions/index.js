@@ -16,10 +16,34 @@ export const fetchScores = (scores) => ({
    scores
 });
 
+export const addScore = (scores, score) => ({
+   type: 'ADD_SCORE',
+   scores,
+   score
+});
+
 
 
 
 export const changeMonth = (month) => ({
     type: "CHANGE_MONTH",
     month
+});
+
+
+export const addMonthObject = (months, month) => ({
+    type: "ADD_MONTH",
+    months,
+    month
+});
+
+export const fetchCalendar = (calendar) => ({
+    type: "CALENDAR_FETCHED",
+    calendar,
+});
+
+export const addMonthCalendar = (calendar, month) => ({
+   type: "ADD_MONTHTOCALENDAR",
+   calendar,
+   month
 });

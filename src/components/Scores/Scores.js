@@ -6,10 +6,10 @@ import Score from './Score/Score';
 
 
 
-const Scores = ()=> {
+const Scores = (props)=> {
 
-    const scoresAll = useSelector(state => state.scores);
-
+    // const scoresAll = useSelector(state => state.scores);
+        console.log(props.scores);
 
     useEffect(()=> {
 
@@ -26,7 +26,6 @@ const Scores = ()=> {
 
     // const allScores = [990, 990, 1500];
 
-    const [scores] = useState('');
 
     // const mapScores = scores.map((one)=> {
     //     return(<div><Score /></div>)
@@ -34,7 +33,7 @@ const Scores = ()=> {
 
 
     return(<div>
-       <Score/>
+      lol
     </div>)
 };
 

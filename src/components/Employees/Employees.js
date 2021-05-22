@@ -42,10 +42,13 @@ const Employees = ()=> {
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
 
-    const AllEmployees = employees.map((one)=> {
-        let employeeScore = [...scoresAll].filter(ons=>ons.employee === one.id);
 
-        return(<OneEmployee><Employee name={one.name} key={one.id} lastName={one.lastname} id={one.id}/></OneEmployee>)
+    const AllEmployees = employees.map((one, index)=> {
+        let employeeScore = [...scoresAll]
+            .filter(ons=>ons.employee === one.id);
+
+
+        return(<Employee name={one.name}  lastName={one.lastname} id={one.id} key={index}/>)
     });
 
     return(<div>
