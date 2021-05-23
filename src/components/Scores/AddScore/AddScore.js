@@ -47,14 +47,15 @@ const AddScore = () => {
           mailing: mailing,
           employee: +employee,
           date: new Date(startDate),
-          client: client
+          client: client,
+            week: new Date(startDate).getDate().getWeek()
         };
 
-        // console.log(new Date(startDate).getTime());
+        // console.log(new Date(startDate).getDate().getWeek());
 
-        db.collection('scores').add(newScore).then(()=> {
-            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-        });
+        // db.collection('scores').add(newScore).then(()=> {
+        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+        // });
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];

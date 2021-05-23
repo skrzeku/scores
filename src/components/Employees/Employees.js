@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Employee from './Employee/Employee';
 import {useSelector} from 'react-redux'
 import AddEmployee from './AddEmployee/AddEmployee';
@@ -22,10 +22,7 @@ const Employees = ()=> {
 `;
 
 
-    const AllEmpls = Styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+
     let allScores = [];
 
 
@@ -51,16 +48,15 @@ const Employees = ()=> {
         return(<Employee name={one.name}  lastName={one.lastname} id={one.id} key={index}/>)
     });
 
-    return(<div>
+    return(<React.Fragment>
 
-        <h2>Pracownicy:</h2>
-       <AllEmpls>
+       <tr>
         {AllEmployees}
-       </AllEmpls>
-        <button onClick={()=> getEmployeeScores(4)}>pokaż</button>
-       <AddEmployee/>
+       </tr>
+        {/*<button onClick={()=> getEmployeeScores(4)}>pokaż</button>*/}
+       {/*<AddEmployee/>*/}
 
-    </div>)
+    </React.Fragment>)
 };
 
 

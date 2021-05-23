@@ -4,6 +4,7 @@ import Employees from "../Employees/Employees";
 import AddScore from '../Scores/AddScore/AddScore';
 import {addMonthObject, changeMonth} from '../../actions/index';
 import Flatpickr from "react-flatpickr";
+import Scores from '../Scores/Scores';
 
 import "flatpickr/dist/themes/material_green.css";
 import firebase from "../../firebase";
@@ -101,7 +102,8 @@ class Dashboar  extends Component {
 
         return(<div>
             <h1>Tablica wyników {this.props.name}</h1>
-            <Employees/>
+            {/*<Employees/>*/}
+            {/*<Scores scores={[]}/>*/}
             <AddScore/>
             {/*<button onClick={addNewScore}>Dodaj nowy wynik:</button>*/}
             <select onChange={event => MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
@@ -113,6 +115,13 @@ class Dashboar  extends Component {
             </select>
             <Flatpickr onChange={event=> startDay(event)}/>
             <Flatpickr onChange={event=> endDate(event)}/>
+
+            <table>
+
+                    <Employees/>
+                    <Scores scores={[]}/>
+
+            </table>
 
 
 

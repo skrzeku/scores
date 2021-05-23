@@ -17,11 +17,18 @@ const Employee = (props)=> {
 
     const lol = scoresAll.map((one) => one.date);
 
-    console.log(lol);
+    // console.log(lol);
+    Date.prototype.getWeek = function() {
+        var onejan = new Date(this.getFullYear(),0,1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+    };
+    const today = new Date();
+    const weekNumber = today.getWeek();
+ 
 
 
 
-    console.log(calendar);
+    // console.log(calendar);
 
     const employeeScore = scoresAll
         .filter(one=>one.employee === props.id)
@@ -48,21 +55,21 @@ const Employee = (props)=> {
 
 
     const AllScores = employeeScore.map((one, index)=> {
-        console.log(one.score);
+        console.log(one.date.toDate().getWeek());
         return(<Score score={one.score} scores={one} key={index}/>)
     });
 
 
 
-  return(<div>
+  return(<th>
       Imię: {props.name}<br/>
       Nazwisko: {props.lastName}<br/>
       Wyniki: {AllScores}
 
-      <Scores scores = {employeeScore} />
+      {/*<Scores scores = {employeeScore} />*/}
 
 
-  </div>)
+  </th>)
 };
 
 
