@@ -8,11 +8,14 @@ import Scores from '../Scores/Scores';
 
 import "flatpickr/dist/themes/material_green.css";
 import firebase from "../../firebase";
+import Styled from "styled-components";
 
 
 
 
 class Dashboar  extends Component {
+
+
 
 
 
@@ -24,8 +27,11 @@ class Dashboar  extends Component {
 
     render() {
 
-
-
+        const MyTable = Styled.table`
+    min-height: 300px;
+    border-spacing: 0;
+    border-collapse: collapse;
+  `;
 
         const MonthObject = [
             {
@@ -116,12 +122,12 @@ class Dashboar  extends Component {
             <Flatpickr onChange={event=> startDay(event)}/>
             <Flatpickr onChange={event=> endDate(event)}/>
 
-            <table>
+            <MyTable>
 
                     <Employees/>
                     <Scores scores={[]}/>
 
-            </table>
+            </MyTable>
 
 
 

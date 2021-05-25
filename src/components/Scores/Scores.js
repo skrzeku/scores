@@ -15,12 +15,28 @@ const Scores = (props)=> {
 
     const calendar = useSelector(state => state.calendar[month]);
 
+
+    const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
+        const setedWeeks = [...new Set(weeks)];
+    console.log([...new Set(weeks)]);
+
     const Month = [1, 2, 3, 4];
         console.log(scoresAll);
 
     const OneRow = Styled.tr`
     min-height: 300px;
     border: solid 1px red; `;
+
+    const TableCell = Styled.td`
+    padding: 0!important;
+    border: solid 1px red;
+     vertical-align: top;`;
+
+    const TableScore = Styled.p`
+    margin: 0;
+    border-bottom: solid 1px red; `;
+
+
 
     useEffect(()=> {
 
@@ -33,13 +49,14 @@ const Scores = (props)=> {
     });
 
 
-    const newScores = Month.map((one) => {
-       return (<tr>
+    const newScores = setedWeeks.map((onet) => {
+        console.log(onet);
+       return (<OneRow>
            {
                employees.map((one, index)=> {
                    const employeeScore = scoresAll
                        .filter(ons=>ons.employee === one.id)
-                   .filter(ont => {
+                       .filter(ont => {
                            const date = ont.date.toDate().getTime();
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
                            // if (!date.seconds) {
@@ -48,14 +65,18 @@ const Scores = (props)=> {
                            // else {
                            //     return ons.date.toDate().getMonth() === month;
                            // }
-                       });
-                   console.log(employeeScore);
-                   return(<td>siema{
-
-                   }</td>)
+                       })
+                       .filter(ono => {
+                           console.log(onet);
+                           return ono.week === onet});
+                   return(<TableCell>{
+                                employeeScore.map((oni)=> {
+                                    return (<TableScore>{oni.score}</TableScore>)
+                                })
+                   }</TableCell>)
                })
            }
-       </tr>)
+       </OneRow>)
     });
 
 

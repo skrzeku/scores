@@ -48,14 +48,14 @@ const AddScore = () => {
           employee: +employee,
           date: new Date(startDate),
           client: client,
-            week: new Date(startDate).getDate().getWeek()
+            week: new Date(startDate).getWeek()
         };
 
-        // console.log(new Date(startDate).getDate().getWeek());
+        console.log(new Date(startDate).getWeek());
 
-        // db.collection('scores').add(newScore).then(()=> {
-        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-        // });
+        db.collection('scores').add(newScore).then(()=> {
+            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+        });
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];
