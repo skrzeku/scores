@@ -122,7 +122,7 @@ class Dashboar  extends Component {
             <Flatpickr onChange={event=> startDay(event)}/>
             <Flatpickr onChange={event=> endDate(event)}/>
 
-            <MyTable>
+            <MyTable >
 
                     <Employees/>
                     <Scores scores={[]}/>

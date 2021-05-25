@@ -33,7 +33,7 @@ const Employee = (props)=> {
     const employeeScore = scoresAll
         .filter(one=>one.employee === props.id)
         .filter(ons => {
-            const date = ons.date.toDate().getTime();
+            const date = ons.date.seconds ? ons.date.toDate().getTime() : ons.date.getTime();
                 // if (!ons.date.seconds) {
                 //     date = ons.date
                 // }
@@ -55,7 +55,6 @@ const Employee = (props)=> {
 
 
     const AllScores = employeeScore.map((one, index)=> {
-        console.log(one.date.toDate().getWeek());
         return(<Score score={one.score} scores={one} key={index}/>)
     });
 

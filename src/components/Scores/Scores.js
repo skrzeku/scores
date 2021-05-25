@@ -20,15 +20,38 @@ const Scores = (props)=> {
         const setedWeeks = [...new Set(weeks)];
     console.log([...new Set(weeks)]);
 
+         const sequential = (to, from = 0)=> {
+            return  Array.from(Array(to + 1).keys()).slice(from)
+    };
+
+
+
+    console.log(calendar?.startDate);
+    let correctweeks = [];
+
+    if (calendar?.startDate) {
+        correctweeks = sequential(calendar?.endDate.toDate().getWeek(), calendar?.startDate.toDate().getWeek());
+        console.log(correctweeks);
+
+    }
+
+
+   //  const range = (min, max) => [...Array(max - min + 1).keys()].map(i => i + min);
+   //  for (let i of range(20,25)) {
+   //     console.log(i);
+   // }
+   //  console.log(calendar?.startDate.toDate().getWeek());
+
     const Month = [1, 2, 3, 4];
-        console.log(scoresAll);
+        // console.log(scoresAll);
 
     const OneRow = Styled.tr`
     min-height: 300px;
     border: solid 1px red; `;
 
     const TableCell = Styled.td`
-    padding: 0!important;
+     padding: 0px; 
+   margin: 0;
     border: solid 1px red;
      vertical-align: top;`;
 
@@ -43,13 +66,13 @@ const Scores = (props)=> {
     }, []);
 
     const AllScores = employees.map((one, index)=> {
-        console.log(one);
+        // console.log(one);
         return(<td>{one.lastname}</td>)
         // return(<Score score={one.score} scores={one} key={index}/>)
     });
 
 
-    const newScores = setedWeeks.map((onet) => {
+    const newScores = correctweeks.map((onet) => {
         console.log(onet);
        return (<OneRow>
            {
@@ -57,17 +80,11 @@ const Scores = (props)=> {
                    const employeeScore = scoresAll
                        .filter(ons=>ons.employee === one.id)
                        .filter(ont => {
-                           const date = ont.date.toDate().getTime();
+                           const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
-                           // if (!date.seconds) {
-                           //     return new Date(ons.date).getMonth() === month;
-                           // }
-                           // else {
-                           //     return ons.date.toDate().getMonth() === month;
-                           // }
                        })
                        .filter(ono => {
-                           console.log(onet);
+                           // console.log(onet);
                            return ono.week === onet});
                    return(<TableCell>{
                                 employeeScore.map((oni)=> {
@@ -78,6 +95,26 @@ const Scores = (props)=> {
            }
        </OneRow>)
     });
+
+    const summary = employees.map((employee)=> {
+                const employeeScore = scoresAll
+                    .filter(ons=>ons.employee === employee.id)
+                    .filter(ont => {
+                        const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
+                        return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
+                    });
+                console.log(employeeScore);
+
+                // const summ = employeeScore ? employeeScore.reduce((a,b)=> {return a + b ? a : b}) : 0;
+        return(<td>siema</td>)
+
+            });
+
+
+
+
+
+
 
 
 
@@ -93,6 +130,7 @@ const Scores = (props)=> {
 
     return(<React.Fragment>
       {newScores}
+        <OneRow> {summary} </OneRow>
 
 
     </React.Fragment>)
