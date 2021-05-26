@@ -49,10 +49,8 @@ const Employees = ()=> {
     });
 
     return(<React.Fragment>
+        <tr>{AllEmployees}</tr>
 
-       <tr>
-        {AllEmployees}
-       </tr>
         {/*<button onClick={()=> getEmployeeScores(4)}>pokaż</button>*/}
        {/*<AddEmployee/>*/}
 

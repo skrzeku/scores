@@ -28,9 +28,9 @@ class Dashboar  extends Component {
     render() {
 
         const MyTable = Styled.table`
-    min-height: 300px;
-    border-spacing: 0;
-    border-collapse: collapse;
+    // min-height: 300px;
+    // border-spacing: 0;
+    // border-collapse: collapse;
   `;
 
         const MonthObject = [
@@ -122,9 +122,9 @@ class Dashboar  extends Component {
             <Flatpickr onChange={event=> startDay(event)}/>
             <Flatpickr onChange={event=> endDate(event)}/>
 
-            <MyTable >
+            <MyTable className="table table-striped table-bordered">
 
-                    <Employees/>
+                   <thead><Employees/></thead>
                     <Scores scores={[]}/>
 
             </MyTable>

@@ -61,9 +61,10 @@ const Employee = (props)=> {
 
 
   return(<th>
-      Imię: {props.name}<br/>
-      Nazwisko: {props.lastName}<br/>
-      Wyniki: {AllScores}
+      {/*Imię: {props.name}<br/>*/}
+      {/*Nazwisko: {props.lastName}<br/>*/}
+      {props.name + ' ' + props.lastName}
+      {/*Wyniki: {AllScores}*/}
 
       {/*<Scores scores = {employeeScore} />*/}
 

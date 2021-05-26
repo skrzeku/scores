@@ -43,12 +43,14 @@ const AddScore = () => {
 
         const newScore = {
           score: score,
-          type: type,
+          type: options[type],
           mailing: mailing,
           employee: +employee,
           date: new Date(startDate),
           client: client,
-            week: new Date(startDate).getWeek()
+            week: new Date(startDate).getWeek(),
+            short: shorts[type]
+
         };
 
         console.log(new Date(startDate).getWeek());
@@ -59,15 +61,16 @@ const AddScore = () => {
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];
+    const shorts = ['P', 'S', 'Fb', 'Rem', 'www'];
     return(<div>
         <h3>Dodawanie wyniku:</h3>
         <form>
             <input type={'number'} value={score} onChange={event => setScore(event.target.value)}/>
             <select onChange={event => setType(event.target.value)}>
                 {
-                    options.map(option => {
+                    options.map((option, index) => {
                         return (
-                            <option key={option} value={option}>{option}</option>
+                            <option key={option} value={index}>{option}</option>
                         )
                     })
                 }

@@ -46,18 +46,18 @@ const Scores = (props)=> {
         // console.log(scoresAll);
 
     const OneRow = Styled.tr`
-    min-height: 300px;
-    border: solid 1px red; `;
+    // min-height: 300px;
+    // border: solid 1px red; `;
 
     const TableCell = Styled.td`
-     padding: 0px; 
-   margin: 0;
-    border: solid 1px red;
-     vertical-align: top;`;
+   //   padding: 0px; 
+   // margin: 0;
+   //  border: solid 1px red;
+   //   vertical-align: top;`;
 
     const TableScore = Styled.p`
     margin: 0;
-    border-bottom: solid 1px red; `;
+    // border-bottom: solid 1px red; `;
 
 
 
@@ -74,8 +74,7 @@ const Scores = (props)=> {
 
     const newScores = correctweeks.map((onet) => {
         console.log(onet);
-       return (<OneRow>
-           {
+       return (<OneRow>{
                employees.map((one, index)=> {
                    const employeeScore = scoresAll
                        .filter(ons=>ons.employee === one.id)
@@ -84,16 +83,15 @@ const Scores = (props)=> {
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
                        })
                        .filter(ono => {
-                           // console.log(onet);
                            return ono.week === onet});
                    return(<TableCell>{
                                 employeeScore.map((oni)=> {
-                                    return (<TableScore>{oni.score}</TableScore>)
+
+                                    return (<TableScore>{oni.score} <span>{oni.mailing? 'M' : ''}</span></TableScore>)
                                 })
                    }</TableCell>)
                })
-           }
-       </OneRow>)
+           }</OneRow>)
     });
 
     const summary = employees.map((employee)=> {
@@ -105,8 +103,15 @@ const Scores = (props)=> {
                     });
                 console.log(employeeScore);
 
-                // const summ = employeeScore ? employeeScore.reduce((a,b)=> {return a + b ? a : b}) : 0;
-        return(<td>siema</td>)
+                const summ = employeeScore
+                    .map(obj => +obj.score)
+                    .reduce((a,b)=>  a + b, 0);
+                console.log(summ);
+                const mailingLength = employeeScore.map(ob => {
+                    return ob.mailing ? 1 : 0
+                }).reduce((a,b)=> a + b, 0);
+                console.log(mailingLength);
+        return(<td>{summ} <span>M {mailingLength}</span></td>)
 
             });
 
@@ -129,7 +134,7 @@ const Scores = (props)=> {
 
 
     return(<React.Fragment>
-      {newScores}
+        <tbody>{newScores}</tbody>
         <OneRow> {summary} </OneRow>
 
 
