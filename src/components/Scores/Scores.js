@@ -26,12 +26,10 @@ const Scores = (props)=> {
 
 
 
-    console.log(calendar?.startDate);
     let correctweeks = [];
 
     if (calendar?.startDate) {
         correctweeks = sequential(calendar?.endDate.toDate().getWeek(), calendar?.startDate.toDate().getWeek());
-        console.log(correctweeks);
 
     }
 
@@ -73,7 +71,6 @@ const Scores = (props)=> {
 
 
     const newScores = correctweeks.map((onet) => {
-        console.log(onet);
        return (<OneRow>{
                employees.map((one, index)=> {
                    const employeeScore = scoresAll
@@ -101,16 +98,16 @@ const Scores = (props)=> {
                         const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
                         return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
                     });
-                console.log(employeeScore);
+
 
                 const summ = employeeScore
                     .map(obj => +obj.score)
                     .reduce((a,b)=>  a + b, 0);
-                console.log(summ);
+
                 const mailingLength = employeeScore.map(ob => {
                     return ob.mailing ? 1 : 0
                 }).reduce((a,b)=> a + b, 0);
-                console.log(mailingLength);
+
         return(<td>{summ} <span>M {mailingLength}</span></td>)
 
             });
