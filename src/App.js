@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { employeesFetched, fetchCalendar } from "./actions";
 import {fetchScores} from "./actions";
 import firebase from './firebase';
+import Login from './components/Login/Login';
+import {Router} from '@reach/router';
+
 
 class App extends Component{
 
@@ -13,6 +16,7 @@ class App extends Component{
 
 
   componentDidMount() {
+
 
       //get employees
       let CurrentEmployees = [];
@@ -62,7 +66,11 @@ class App extends Component{
 
       return (
           <div className="App">
-              <Dashboard />
+
+              <Router>
+                  <Dashboard path={'/'}/>
+              <Login path={'/login'}/>
+              </Router>
           </div>
       );
   }
