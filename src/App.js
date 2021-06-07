@@ -2,9 +2,9 @@ import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { employeesFetched, fetchCalendar } from "./actions";
+import { employeesFetched, fetchCalendar, fetchUser } from "./actions";
 import {fetchScores} from "./actions";
-import firebase from './firebase';
+import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
 import {Router} from '@reach/router';
 
@@ -16,6 +16,10 @@ class App extends Component{
 
 
   componentDidMount() {
+
+      auth.onAuthStateChanged((user)=> {
+          this.props.fetchUser(user);
+      });
 
 
       //get employees
@@ -64,6 +68,8 @@ class App extends Component{
 
 
 
+
+
       return (
           <div className="App">
 
@@ -79,9 +85,10 @@ class App extends Component{
 const mapStateToProps = (state) => {
     return {
         employees: state.employees,
-        scores: state.scores
+        scores: state.scores,
+        user: state.user
     }
 };
-const mapDispatchToProps = { employeesFetched, fetchScores, fetchCalendar };
+const mapDispatchToProps = { employeesFetched, fetchScores, fetchCalendar, fetchUser };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

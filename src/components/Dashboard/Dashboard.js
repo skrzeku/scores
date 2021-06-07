@@ -11,6 +11,7 @@ import firebase from "../../firebase";
 import Styled from "styled-components";
 import Total from '../Total/Total';
 import {month} from "../../reducers/month";
+import Ranking from '../../components/Ranking/Ranking';
 
 
 
@@ -62,7 +63,7 @@ class Dashboar  extends Component {
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
         const db = firebase.firestore();
-
+        console.log(this.props.user);
 
 
 
@@ -89,6 +90,7 @@ class Dashboar  extends Component {
 
         return(<div>
             <h1>Tablica wyników </h1>
+            <h3>Obecnie zalogowany {this.props.user.email}</h3>
 
             <Total/>
             <AddScore/>
@@ -108,6 +110,8 @@ class Dashboar  extends Component {
 
             </MyTable>
 
+            <Ranking/>
+
 
 
 
@@ -121,7 +125,8 @@ const mapStateToProps = state => {
     return {
         employees: state.employees,
         month: state.month,
-        calendar: state.calendar
+        calendar: state.calendar,
+        user: state.user
     }
 };
 

@@ -15,6 +15,7 @@ const AddScore = () => {
         //get states
     const employees = useSelector(state => state.employees);
     const allScores = useSelector(state => state.scores);
+    const user = useSelector(state => state.user);
 
     //set local states
     const[score, setScore] = useState("");
@@ -41,6 +42,9 @@ const AddScore = () => {
     const addScoreHandler = (e) => {
         e.preventDefault();
 
+        const people = user.email === 'admin@wp.pl' ? "Paweł" : "Wojtek";
+        console.log(people);
+
         const newScore = {
           score: score,
           type: options[type],
@@ -49,7 +53,9 @@ const AddScore = () => {
           date: new Date(startDate),
           client: client,
             week: new Date(startDate).getWeek(),
-            short: shorts[type]
+            short: shorts[type],
+            user: people
+
 
         };
 
