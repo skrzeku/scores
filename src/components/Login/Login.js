@@ -44,7 +44,7 @@ const Login = ()=> {
             // setUser(user);
             dispatch({type:'FETCH_USER', user: user});
 
-            // navigate('/');
+            navigate('/');
         }).catch(err => {
             // navigate('/');
             console.log(err)

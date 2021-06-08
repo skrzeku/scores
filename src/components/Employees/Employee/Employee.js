@@ -60,7 +60,7 @@ const Employee = (props)=> {
   return(<th>
       {/*Imię: {props.name}<br/>*/}
       {/*Nazwisko: {props.lastName}<br/>*/}
-      {props.name + ' ' + props.lastName}
+      {props.name + ' ' + props.lastName[0] + '.'}
       {/*Wyniki: {AllScores}*/}
 
       {/*<Scores scores = {employeeScore} />*/}

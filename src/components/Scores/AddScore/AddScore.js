@@ -55,8 +55,6 @@ const AddScore = () => {
             week: new Date(startDate).getWeek(),
             short: shorts[type],
             user: people
-
-
         };
 
         console.log(new Date(startDate).getWeek());

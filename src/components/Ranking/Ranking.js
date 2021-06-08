@@ -8,13 +8,10 @@ import {useSelector} from "react-redux";
 
 const Ranking = ()=> {
 
-
+            //Getting from redux store
     const scoresAll = useSelector(state => state.scores);
-
     const month = useSelector(state => state.month);
-
     const employees = useSelector(state => state.employees);
-
     const calendar = useSelector(state => state.calendar[month]);
 
 
@@ -26,43 +23,20 @@ const Ranking = ()=> {
                 return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
             })
             .reduce((a,b)=> {
-                return {id: one.id, sum: +a.sum + +b.score}
-            }, {id: one.id, sum: 0})
-            // .reduce((n, {score}) => {
-            //     return +n + +score
-            // }, 0)
-            // .reduce((a, b)=> {
-            //         // const obj = {
-            //         //     id: one.id,
-            //         //     sum: {...a.score} + +b.score
-            //         // };
-            //     a[b.id] = one.id;
-            //     a[b.sum] = +a.sum + +b.score;
-            //         return a;
-            //     }, {})
-
-            // .map((oni, index)=> oni.score)
-            // .reduce((a, b)=> {
-            //     return +a + +b
-            //
-            // }, 0)
-            // .map((obj)=> {
-            //     return {
-            //         score: obj,
-            //         id: one.id
-            //     }
-            // })
-
+                return {id: one.id, sum: +a.sum + +b.score, name: one.name + ' ' + one.lastname}
+            }, {id: one.id, sum: 0, name: one.name + one.lastname})
     });
 
 
-
     console.log(monthScores);
+    const sortedScores =  monthScores.sort((a, b) => (a.sum < b.sum) ? 1 : -1);
+    console.log(sortedScores);
 
-    // const sortedScores =  monthScores.sort();
-    // console.log(sortedScores);
-
-    return(<div>Siema</div>)
+    return(<div><h3>Najlepsi w miesiącu</h3>
+    <div>Pierwszy : {sortedScores[0]?.name} {sortedScores[0]?.sum} </div>
+    <div>Drugi : {sortedScores[1]?.name} {sortedScores[1]?.sum} </div>
+    <div>Trzeci : {sortedScores[2]?.name} {sortedScores[2]?.sum} </div>
+    </div>)
 };
 
 

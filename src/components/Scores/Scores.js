@@ -7,7 +7,7 @@ import Score from './Score/Score';
 
 
 
-const Scores = (props)=> {
+const Scores = ()=> {
 
     const scoresAll = useSelector(state => state.scores);
     const employees = useSelector(state => state.employees);
@@ -131,8 +131,10 @@ const Scores = (props)=> {
 
 
     return(<React.Fragment>
-        <tbody>{newScores}</tbody>
+        <tbody>{newScores}
         <OneRow> {summary} </OneRow>
+        </tbody>
+
 
 
     </React.Fragment>)

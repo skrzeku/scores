@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Employees from "../Employees/Employees";
 import AddScore from '../Scores/AddScore/AddScore';
 import {changeMonth} from '../../actions/index';
+import AddEmployee from "../Employees/AddEmployee/AddEmployee";
 
 import Scores from '../Scores/Scores';
 
@@ -90,7 +91,7 @@ class Dashboar  extends Component {
 
         return(<div>
             <h1>Tablica wyników </h1>
-            <h3>Obecnie zalogowany {this.props.user.email}</h3>
+            <h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>
 
             <Total/>
             <AddScore/>
@@ -106,11 +107,12 @@ class Dashboar  extends Component {
             <MyTable className="table table-striped table-bordered">
 
                    <thead><Employees/></thead>
-                    <Scores scores={[]}/>
+                    <Scores/>
 
             </MyTable>
 
             <Ranking/>
+            <AddEmployee/>
 
 
 
