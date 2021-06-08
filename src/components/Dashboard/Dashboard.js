@@ -13,6 +13,7 @@ import Styled from "styled-components";
 import Total from '../Total/Total';
 import {month} from "../../reducers/month";
 import Ranking from '../../components/Ranking/Ranking';
+import *  as colors from '../../variables';
 
 
 
@@ -55,6 +56,10 @@ class Dashboar  extends Component {
     // min-height: 300px;
     // border-spacing: 0;
     // border-collapse: collapse;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 0 auto;
+    width: 95%;
+    background-color: ${colors.colorPrimary};
   `;
 
 
@@ -65,6 +70,7 @@ class Dashboar  extends Component {
 
         const db = firebase.firestore();
         console.log(this.props.user);
+        console.log(colors.colorPrimary);
 
 
 

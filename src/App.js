@@ -7,6 +7,8 @@ import {fetchScores} from "./actions";
 import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
 import {Router} from '@reach/router';
+import Navigation from './components/Navigation/Navigation';
+
 
 
 class App extends Component{
@@ -72,7 +74,7 @@ class App extends Component{
 
       return (
           <div className="App">
-
+                <Navigation/>
               <Router>
                   <Dashboard path={'/'}/>
               <Login path={'/login'}/>
