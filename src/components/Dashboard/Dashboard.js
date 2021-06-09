@@ -27,9 +27,14 @@ class Dashboar  extends Component {
 
     }
 
+    state = {
+        shownform: false
+    };
+
    MonthChangeHandler (event) {
         this.props.changeMonth(+event);
     };
+
 
 
 
@@ -46,6 +51,7 @@ class Dashboar  extends Component {
 
     render() {
 
+
         console.log(this.props.month);
 
 
@@ -60,6 +66,8 @@ class Dashboar  extends Component {
     margin: 0 auto;
     width: 95%;
     background-color: ${colors.colorPrimary};
+    border-radius: 15px;
+    overflow: hidden;
   `;
 
 
@@ -71,6 +79,12 @@ class Dashboar  extends Component {
         const db = firebase.firestore();
         console.log(this.props.user);
         console.log(colors.colorPrimary);
+
+
+
+        const showFormBtn = this.props.user ? (!this.state.shownform && <button >+</button>) : null;
+        const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
+
 
 
 
@@ -100,7 +114,7 @@ class Dashboar  extends Component {
             <h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>
 
             <Total/>
-            <AddScore/>
+
             <select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
                 {
                     months.map((one, index) => {
@@ -116,9 +130,12 @@ class Dashboar  extends Component {
                     <Scores/>
 
             </MyTable>
+            {showFormBtn}
+            {addScoreWrapper}
 
             <Ranking/>
             <AddEmployee/>
+            <i className="lab la-accessible-icon"/>
 
 
 
