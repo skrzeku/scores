@@ -55,9 +55,10 @@ const Login = ()=> {
 
     const signOut =()=> {
         auth.signOut().then(()=> {
+            navigate('/');
             console.log('wylogowano');
         })
-    }
+    };
 
 return(<div>
     <h3>Zaloguj</h3>

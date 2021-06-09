@@ -23,13 +23,17 @@ class Dashboar  extends Component {
         super();
         const today = new Date().getTime();
         const currentWeek = this.props?.calendar;
-        console.log(currentWeek);
+        this.state = {date: new Date(),
+            shownform: false};
+
+    }
+    shnowFormHandler() {
+        this.setState({shownform: !this.state.shownform});
 
     }
 
-    state = {
-        shownform: false
-    };
+
+
 
    MonthChangeHandler (event) {
         this.props.changeMonth(+event);
@@ -42,14 +46,19 @@ class Dashboar  extends Component {
     componentDidMount() {
         const today = new Date().getTime();
         const currentWeek = this.props?.calendar;
-
-
-
     }
 
 
 
+
+
+
     render() {
+
+
+
+
+
 
 
         console.log(this.props.month);
@@ -82,7 +91,7 @@ class Dashboar  extends Component {
 
 
 
-        const showFormBtn = this.props.user ? (!this.state.shownform && <button >+</button>) : null;
+        const showFormBtn = this.props.user ? (!this.state.shownform && <button onClick={this.shnowFormHandler.bind(this)}>+</button>) : null;
         const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
 
 
@@ -134,7 +143,7 @@ class Dashboar  extends Component {
             {addScoreWrapper}
 
             <Ranking/>
-            <AddEmployee/>
+            {this.props.user ? <AddEmployee/> : null}
             <i className="lab la-accessible-icon"/>
 
 
