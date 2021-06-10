@@ -23,13 +23,18 @@ class Dashboar  extends Component {
         super();
         const today = new Date().getTime();
         const currentWeek = this.props?.calendar;
-        this.state = {date: new Date(),
-            shownform: false};
+        this.state = {
+            shownform: false,
+            showAddEmployeeForm: false
+
+        };
 
     }
     shnowFormHandler() {
         this.setState({shownform: !this.state.shownform});
-
+    }
+    showAddEmployeeHandler() {
+        this.setState({showAddEmployeeForm: !this.state.showAddEmployeeForm});
     }
 
 
@@ -50,34 +55,42 @@ class Dashboar  extends Component {
 
 
 
-
-
-
     render() {
 
-
-
-
-
-
-
-        console.log(this.props.month);
-
-
-
-
-
         const MyTable = Styled.table`
-    // min-height: 300px;
-    // border-spacing: 0;
-    // border-collapse: collapse;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
     margin: 0 auto;
     width: 95%;
-    background-color: ${colors.colorPrimary};
     border-radius: 15px;
-    overflow: hidden;
   `;
+        const AddBtns = `
+          background-color: ${colors.colorPrimary};
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        text-decoration: none;
+           position: absolute;
+           right: 0;
+        `;
+
+        const AddEmployeeBtn = Styled.a`
+     
+        
+        top: -10px;
+        ${AddBtns}
+        `;
+
+        const AddScoreBtn = Styled.a`
+        bottom: -10px;
+        ${AddBtns}
+        `;
 
 
 
@@ -91,7 +104,7 @@ class Dashboar  extends Component {
 
 
 
-        const showFormBtn = this.props.user ? (!this.state.shownform && <button onClick={this.shnowFormHandler.bind(this)}>+</button>) : null;
+        const showFormBtn = this.props.user ?  <AddScoreBtn onClick={this.shnowFormHandler.bind(this)}><i className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
         const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
 
 
@@ -132,19 +145,19 @@ class Dashboar  extends Component {
                 }
             </select>
 
-
+            {this.props.user ? (this.state.showAddEmployeeForm && <AddEmployee/>) : null}
             <MyTable className="table table-striped table-bordered">
-
+                    <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i className="las la-user-plus"></i></AddEmployeeBtn>
                    <thead><Employees/></thead>
                     <Scores/>
+                {showFormBtn}
+
 
             </MyTable>
-            {showFormBtn}
             {addScoreWrapper}
 
             <Ranking/>
-            {this.props.user ? <AddEmployee/> : null}
-            <i className="lab la-accessible-icon"/>
+
 
 
 
