@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Styled from 'styled-components';
 
 import Score from './Score/Score';
+import {colorPrimary} from "../../variables";
 
 
 
@@ -44,18 +45,41 @@ const Scores = ()=> {
         // console.log(scoresAll);
 
     const OneRow = Styled.tr`
-    // min-height: 300px;
     // border: solid 1px red; `;
 
     const TableCell = Styled.td`
-   //   padding: 0px; 
+     padding: 0px !important;
+    
    // margin: 0;
    //  border: solid 1px red;
    //   vertical-align: top;`;
 
     const TableScore = Styled.p`
     margin: 0;
-    // border-bottom: solid 1px red; `;
+    border-bottom: solid 1px #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    min-height: 35px;
+     &:last-child {
+     border: none;
+     }
+     `;
+    const Mailing = Styled.span`
+    display: inline-block;
+    font-size: 13px;
+    color: ${colorPrimary};
+    `;
+
+    const SummaryCell = Styled.td`
+    font-weight: bold;
+    border-top: solid 2px ${colorPrimary};
+    border-top-width: 2px !important;
+    `;
+    const Summary = Styled.tr`
+    font-weight: bold;
+  
+    `;
 
 
 
@@ -82,10 +106,12 @@ const Scores = ()=> {
                        .filter(ono => {
                            return ono.week === onet});
                    return(<TableCell>{
+                            employeeScore.length > 0 ?
                                 employeeScore.map((oni)=> {
 
-                                    return (<TableScore>{oni.score} <span>{oni.mailing? 'M' : ''}</span></TableScore>)
+                                    return (<TableScore>{oni.score} {oni.short}<Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
+                                : (<TableScore></TableScore>)
                    }</TableCell>)
                })
            }</OneRow>)
@@ -108,7 +134,7 @@ const Scores = ()=> {
                     return ob.mailing ? 1 : 0
                 }).reduce((a,b)=> a + b, 0);
 
-        return(<td>{summ} <span>M {mailingLength}</span></td>)
+        return(<SummaryCell>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
 
             });
 
@@ -132,7 +158,7 @@ const Scores = ()=> {
 
     return(<React.Fragment>
         <tbody>{newScores}
-        <OneRow> {summary} </OneRow>
+        <Summary> {summary} </Summary>
         </tbody>
 
 

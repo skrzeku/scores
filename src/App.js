@@ -8,6 +8,7 @@ import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
 import {Router} from '@reach/router';
 import Navigation from './components/Navigation/Navigation';
+import History from './components/History/History';
 
 
 
@@ -38,7 +39,7 @@ class App extends Component{
       //get scores
       let CurrentScores = [];
 
-      db.collection('scores').get()
+      db.collection('scores').orderBy('date', 'desc').get()
           .then((result) => {
         CurrentScores = result.docs.map(one => one.data());
         this.props.fetchScores(CurrentScores);
@@ -78,6 +79,8 @@ class App extends Component{
               <Router>
                   <Dashboard path={'/'}/>
               <Login path={'/login'}/>
+              <History path={'/history'}/>
+
               </Router>
           </div>
       );

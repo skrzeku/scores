@@ -83,12 +83,12 @@ class Dashboar  extends Component {
         const AddEmployeeBtn = Styled.a`
      
         
-        top: -10px;
+        top: -50px;
         ${AddBtns}
         `;
 
         const AddScoreBtn = Styled.a`
-        bottom: -10px;
+        bottom: -50px;
         ${AddBtns}
         `;
 
@@ -137,13 +137,7 @@ class Dashboar  extends Component {
 
             <Total/>
 
-            <select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
-                {
-                    months.map((one, index) => {
-                        return (<option value={index} key={index}>{one}</option>)
-                    })
-                }
-            </select>
+
 
             {this.props.user ? (this.state.showAddEmployeeForm && <AddEmployee/>) : null}
             <MyTable className="table table-striped table-bordered">
@@ -154,6 +148,13 @@ class Dashboar  extends Component {
 
 
             </MyTable>
+            <select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
+                {
+                    months.map((one, index) => {
+                        return (<option value={index} key={index}>{one}</option>)
+                    })
+                }
+            </select>
             {addScoreWrapper}
 
             <Ranking/>

@@ -53,11 +53,12 @@ const AddScore = () => {
           date: new Date(startDate),
           client: client,
             week: new Date(startDate).getWeek(),
-            short: shorts[type],
-            user: people
+            user: people,
+            short: shorts[type]
+
         };
 
-        console.log(new Date(startDate).getWeek());
+        console.log(newScore);
 
         db.collection('scores').add(newScore).then(()=> {
             dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});

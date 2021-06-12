@@ -17,9 +17,10 @@ const Ranking = ()=> {
     const calendar = useSelector(state => state.calendar[month]);
 
 
-    const endDate = calendar?.endDate.toDate().getTime();
+    const endDate = calendar?.endDate.toDate();
     const today = new Date().getTime();
-    const leftDays = Math.floor((endDate - today)/ (1000*60*60*24));
+    const leftDays = Math.floor((endDate?.getTime() - today)/ (1000*60*60*24));
+    console.log(today);
 
     //Styles
     const Podium = Styled.div`
@@ -80,12 +81,12 @@ const Ranking = ()=> {
     console.log(sortedScores);
 
     return(<React.Fragment>
-        <h3>Do końca miesiąca pozostało: {leftDays} dni ()</h3>
+        <h3>{leftDays > 0 ? 'Do końca pozostało ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</h3>
         <Podium>
             <div><PodriumNumber>2</PodriumNumber>{sortedScores[0]?.name} {sortedScores[0]?.sum} </div>
             <div><PodriumNumber>1</PodriumNumber>{sortedScores[1]?.name} {sortedScores[1]?.sum} </div>
             <div> <PodriumNumber>3</PodriumNumber>{sortedScores[2]?.name} {sortedScores[2]?.sum} </div>
-        </Podium>)
+        </Podium>
         </React.Fragment>)
 
 };

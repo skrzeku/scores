@@ -33,10 +33,13 @@ const AddEmployee = ()=> {
 
         console.log(newEmployee);
 
-        // db.collection('employees').add(newEmployee)
-        //     .then(()=> {
-        //         dispatch({type: 'ADD_EMPLOYEE', employees: employees, employee: newEmployee});
-        //     });
+        db.collection('employees').add(newEmployee)
+            .then(()=> {
+                dispatch({type: 'ADD_EMPLOYEE', employees: employees, employee: newEmployee});
+            }).then(()=> {
+                setLastName("");
+                setName("")
+        });
     };
 
 
