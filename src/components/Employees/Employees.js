@@ -43,8 +43,6 @@ const Employees = ()=> {
     const AllEmployees = employees.map((one, index)=> {
         let employeeScore = [...scoresAll]
             .filter(ons=>ons.employee === one.id);
-
-
         return(<Employee name={one.name}  lastName={one.lastname} id={one.id} key={index}/>)
     });
 

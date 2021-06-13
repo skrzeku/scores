@@ -28,7 +28,7 @@ const History = ()=> {
 
 
     const tableHead = headArray.map((head)=> {
-        return (<td>{head}</td>)
+        return (<th>{head}</th>)
     });
 
     const allhistory = scoresAll.slice(0, 20).map((score, index)=> {

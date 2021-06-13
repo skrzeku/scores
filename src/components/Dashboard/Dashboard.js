@@ -21,8 +21,7 @@ import *  as colors from '../../variables';
 class Dashboar  extends Component {
     constructor() {
         super();
-        const today = new Date().getTime();
-        const currentWeek = this.props?.calendar;
+
         this.state = {
             shownform: false,
             showAddEmployeeForm: false
@@ -49,14 +48,12 @@ class Dashboar  extends Component {
 
 
     componentDidMount() {
-        const today = new Date().getTime();
-        const currentWeek = this.props?.calendar;
+
     }
 
 
 
     render() {
-
         const MyTable = Styled.table`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: relative;
@@ -102,6 +99,10 @@ class Dashboar  extends Component {
         console.log(this.props.user);
         console.log(colors.colorPrimary);
 
+        console.log(this.props.month);
+
+
+
 
 
         const showFormBtn = this.props.user ?  <AddScoreBtn onClick={this.shnowFormHandler.bind(this)}><i className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
@@ -132,7 +133,7 @@ class Dashboar  extends Component {
         };
 
         return(<div>
-            <h1>Tablica wyników </h1>
+            <h1>Tablica wyników {months[this.props.month] + ' ' + new Date().getFullYear()} </h1>
             <h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>
 
             <Total/>
@@ -141,7 +142,7 @@ class Dashboar  extends Component {
 
             {this.props.user ? (this.state.showAddEmployeeForm && <AddEmployee/>) : null}
             <MyTable className="table table-striped table-bordered">
-                    <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i className="las la-user-plus"></i></AddEmployeeBtn>
+                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i className="las la-user-plus"></i></AddEmployeeBtn>}
                    <thead><Employees/></thead>
                     <Scores/>
                 {showFormBtn}

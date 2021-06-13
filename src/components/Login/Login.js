@@ -56,6 +56,8 @@ const Login = ()=> {
     const signOut =()=> {
         auth.signOut().then(()=> {
             navigate('/');
+            dispatch({type:'FETCH_USER', user: []});
+
             console.log('wylogowano');
         })
     };

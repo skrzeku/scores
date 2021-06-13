@@ -23,6 +23,7 @@ const Navigation = ()=> {
 
     const Navi__img = Styled.img`
  
+    padding: 20px;
   
     
     `;

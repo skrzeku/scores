@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
+import {colorPrimary} from "../../variables";
 
 
 
@@ -21,6 +22,7 @@ const Ranking = ()=> {
     const today = new Date().getTime();
     const leftDays = Math.floor((endDate?.getTime() - today)/ (1000*60*60*24));
     console.log(today);
+    const podium = [2, 1, 3];
 
     //Styles
     const Podium = Styled.div`
@@ -28,22 +30,19 @@ const Ranking = ()=> {
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
     width: 500px;
     align-items: flex-end;
-  
+    margin: 50px auto;  
         div {
         flex: 1;
         position: relative;
         height: 80px;
           background-color: white;
-           color: #C0C0C0;
             &:nth-child(2) {
             height: 120px;
             border-left: solid 1px lightgray;
             border-right: solid 1px lightgray;
-            color: #FFD700;
             }
              &:nth-child(3) {
             height: 100px;
-            color: #cd7f32;
            
         }
     `;
@@ -58,6 +57,18 @@ const Ranking = ()=> {
      font-size: 50px;
      font-weight: bold;
       -webkit-text-stroke: 1px black;
+                 color: ${colorPrimary};
+
+    `;
+    const PodriumName = Styled.span`
+    display: block;
+    text-align: center;    
+     font-weight: bold;
+     position: absolute;
+     top: -25px;
+     left: 0;
+     width: 100%;
+     text-align: center;
     `;
 
 
@@ -83,9 +94,12 @@ const Ranking = ()=> {
     return(<React.Fragment>
         <h3>{leftDays > 0 ? 'Do końca pozostało ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</h3>
         <Podium>
-            <div><PodriumNumber>2</PodriumNumber>{sortedScores[0]?.name} {sortedScores[0]?.sum} </div>
-            <div><PodriumNumber>1</PodriumNumber>{sortedScores[1]?.name} {sortedScores[1]?.sum} </div>
-            <div> <PodriumNumber>3</PodriumNumber>{sortedScores[2]?.name} {sortedScores[2]?.sum} </div>
+            {
+                podium.map((place, index)=> {
+                    return(<div><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[index]?.name}</PodriumName> {sortedScores[index]?.sum} </div>)
+                })
+            }
+
         </Podium>
         </React.Fragment>)
 

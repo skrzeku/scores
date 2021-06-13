@@ -9,10 +9,19 @@ import Login from './components/Login/Login';
 import {Router} from '@reach/router';
 import Navigation from './components/Navigation/Navigation';
 import History from './components/History/History';
+import EmployeeDetails from './components/Employees/EmployeeDetails/EmployeeDetails';
+import Logo from './assets/images/logo.png';
 
 
 
 class App extends Component{
+
+   constructor() {
+       super();
+       this.state = {
+           loading: false
+   }
+   }
 
 
 
@@ -43,6 +52,7 @@ class App extends Component{
           .then((result) => {
         CurrentScores = result.docs.map(one => one.data());
         this.props.fetchScores(CurrentScores);
+        this.setState({loading: true});
       });
 
 
@@ -75,11 +85,19 @@ class App extends Component{
 
       return (
           <div className="App">
+              {
+                  !this.state.loading ?   <div className="Spinner">
+                      <img className="App-logo" src={Logo}/>
+                  </div> :
+                      null
+              }
+
                 <Navigation/>
               <Router>
                   <Dashboard path={'/'}/>
               <Login path={'/login'}/>
               <History path={'/history'}/>
+                  <EmployeeDetails path={'/employee/:id'}/>
 
               </Router>
           </div>

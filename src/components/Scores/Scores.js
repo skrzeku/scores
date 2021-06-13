@@ -57,17 +57,24 @@ const Scores = ()=> {
     const TableScore = Styled.p`
     margin: 0;
     border-bottom: solid 1px #dee2e6;
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
     padding: 5px;
     min-height: 35px;
+    position: relative;
      &:last-child {
      border: none;
      }
      `;
+    const ScoreType = Styled.span`
+    font-size: 14px;
+    `;
     const Mailing = Styled.span`
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
+    position: absolute;
+    right: 5px;
+    
     color: ${colorPrimary};
     `;
 
@@ -78,7 +85,7 @@ const Scores = ()=> {
     `;
     const Summary = Styled.tr`
     font-weight: bold;
-  
+ 
     `;
 
 
@@ -109,7 +116,7 @@ const Scores = ()=> {
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni)=> {
 
-                                    return (<TableScore>{oni.score} {oni.short}<Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore>{oni.score} <ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
