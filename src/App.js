@@ -2,7 +2,7 @@ import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { employeesFetched, fetchCalendar, fetchUser } from "./actions";
+import { employeesFetched, fetchCalendar, fetchUser, fetchMinuses } from "./actions";
 import {fetchScores} from "./actions";
 import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
@@ -57,8 +57,6 @@ class App extends Component{
 
 
       // get Calendar
-
-
       let CurrentCalendar = [];
 
       db.collection('calendar')
@@ -67,8 +65,16 @@ class App extends Component{
           .then((result)=> {
               CurrentCalendar = result.docs.map(one => one.data());
               this.props.fetchCalendar(CurrentCalendar);
+          });
 
-          })
+      //get Minuses
+      let Minuses = [];
+      db.collection('minuses')
+          .get()
+          .then((result) => {
+              Minuses = result.docs.map(one => one.data());
+              this.props.fetchMinuses(Minuses);
+          });
   }
 
 
@@ -112,6 +118,6 @@ const mapStateToProps = (state) => {
         user: state.user
     }
 };
-const mapDispatchToProps = { employeesFetched, fetchScores, fetchCalendar, fetchUser };
+const mapDispatchToProps = { employeesFetched, fetchScores, fetchCalendar, fetchUser, fetchMinuses };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

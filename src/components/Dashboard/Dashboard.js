@@ -4,6 +4,7 @@ import Employees from "../Employees/Employees";
 import AddScore from '../Scores/AddScore/AddScore';
 import {changeMonth} from '../../actions/index';
 import AddEmployee from "../Employees/AddEmployee/AddEmployee";
+import AddMinus from "../Minuses/AddMinus/AddMinus";
 
 import Scores from '../Scores/Scores';
 
@@ -107,6 +108,7 @@ class Dashboar  extends Component {
 
         const showFormBtn = this.props.user ?  <AddScoreBtn onClick={this.shnowFormHandler.bind(this)}><i className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
         const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
+        const addMinusWrapper = this.props.user ? ( <AddMinus/>) : null;
 
 
 
@@ -157,6 +159,7 @@ class Dashboar  extends Component {
                 }
             </select>
             {addScoreWrapper}
+            {addMinusWrapper}
 
             <Ranking/>
 

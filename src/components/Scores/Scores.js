@@ -4,6 +4,7 @@ import Styled from 'styled-components';
 
 import Score from './Score/Score';
 import {colorPrimary} from "../../variables";
+import Minuses from "../Minuses/Minuses";
 
 
 
@@ -142,30 +143,23 @@ const Scores = ()=> {
                 }).reduce((a,b)=> a + b, 0);
 
         return(<SummaryCell>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
-
             });
 
 
 
 
 
-
-
-
-
-
-
-    // const allScores = [990, 990, 1500];
-
-
-    // const mapScores = scores.map((one)=> {
-    //     return(<div><Score /></div>)
-    // });
-
-
     return(<React.Fragment>
         <tbody>{newScores}
         <Summary> {summary} </Summary>
+        <tr>
+            {
+                employees.map((emp)=> {
+                    return(<Minuses id={emp.id}/>)
+                })
+            }
+        </tr>
+
         </tbody>
 
 

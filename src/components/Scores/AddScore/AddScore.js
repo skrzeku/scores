@@ -65,8 +65,8 @@ const AddScore = () => {
         });
     };
 
-    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW'];
-    const shorts = ['P', 'S', 'Fb', 'Rem', 'www'];
+    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja'];
+    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o'];
     return(<div>
         <h3>Dodawanie wyniku:</h3>
         <form>

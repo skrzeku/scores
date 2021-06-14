@@ -52,3 +52,15 @@ export const addMonthCalendar = (calendar, month) => ({
    calendar,
    month
 });
+
+export const fetchMinuses = (minuses) => ({
+   type: "MINUSES_FETCHED",
+   minuses
+});
+
+
+export const addMinuse = (minuses, minuse) => ({
+   type: "ADD_MINUSES",
+   minuses,
+    minuse
+});

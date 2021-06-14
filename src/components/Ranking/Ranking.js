@@ -2,30 +2,8 @@ import React, {Fragment} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import {colorPrimary} from "../../variables";
-
-
-
-
-
-
-
-const Ranking = ()=> {
-
-            //Getting from redux store
-    const scoresAll = useSelector(state => state.scores);
-    const month = useSelector(state => state.month);
-    const employees = useSelector(state => state.employees);
-    const calendar = useSelector(state => state.calendar[month]);
-
-
-    const endDate = calendar?.endDate.toDate();
-    const today = new Date().getTime();
-    const leftDays = Math.floor((endDate?.getTime() - today)/ (1000*60*60*24));
-    console.log(today);
-    const podium = [2, 1, 3];
-
-    //Styles
-    const Podium = Styled.div`
+//Styles
+const Podium = Styled.div`
     display: flex;
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
     width: 500px;
@@ -47,7 +25,7 @@ const Ranking = ()=> {
         }
     `;
 
-    const PodriumNumber = Styled.span`
+const PodriumNumber = Styled.span`
     position: absolute;
     top: 50%;
     left: 0;
@@ -60,7 +38,7 @@ const Ranking = ()=> {
                  color: ${colorPrimary};
 
     `;
-    const PodriumName = Styled.span`
+const PodriumName = Styled.span`
     display: block;
     text-align: center;    
      font-weight: bold;
@@ -70,6 +48,28 @@ const Ranking = ()=> {
      width: 100%;
      text-align: center;
     `;
+
+
+
+
+
+
+const Ranking = ()=> {
+
+            //Getting from redux store
+    const scoresAll = useSelector(state => state.scores);
+    const month = useSelector(state => state.month);
+    const employees = useSelector(state => state.employees);
+    const calendar = useSelector(state => state.calendar[month]);
+
+
+    const endDate = calendar?.endDate.toDate();
+    const today = new Date().getTime();
+    const leftDays = Math.floor((endDate?.getTime() - today)/ (1000*60*60*24));
+    console.log(today);
+    const podium = [2, 1, 3];
+
+
 
 
 
