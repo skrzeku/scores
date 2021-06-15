@@ -1,5 +1,13 @@
 import React from 'react';
 import {useSelector} from "react-redux";
+import Styled from "styled-components";
+
+const OneMinus = Styled.span`
+display: inline-block;
+padding: 5px;
+font-size: 13px;
+`;
+
 
 
 
@@ -11,16 +19,14 @@ const Minuses = (props)=> {
 
 
   const MonthMinuses = minuses.filter((one)=> one.employee === props.id);
+  const min =  MonthMinuses.map((one)=> one.minus);
+  const lol = min.length >0 ? min[0] : [];
 
-  console.log(minuses);
+
   return(<td>{
-    MonthMinuses.map((one)=> {
-      console.log(one);
-      one.minus.map((min)=> {
-        return(<p>{min}</p>)
-      });
-
-    })
+        lol.map((min)=>{
+          return(<OneMinus>-{min}</OneMinus>)
+        })
   }</td>)
 };
 

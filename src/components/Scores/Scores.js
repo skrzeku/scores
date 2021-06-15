@@ -14,6 +14,8 @@ const Scores = ()=> {
     const scoresAll = useSelector(state => state.scores);
     const employees = useSelector(state => state.employees);
     const month = useSelector(state => state.month);
+    const minuses = useSelector(state => state.minuses);
+
 
     const calendar = useSelector(state => state.calendar[month]);
 
@@ -81,6 +83,7 @@ const Scores = ()=> {
 
     const SummaryCell = Styled.td`
     font-weight: bold;
+    position: relative;
     border-top: solid 2px ${colorPrimary};
     border-top-width: 2px !important;
     `;
@@ -142,10 +145,12 @@ const Scores = ()=> {
                     return ob.mailing ? 1 : 0
                 }).reduce((a,b)=> a + b, 0);
 
-        return(<SummaryCell>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
+        return(<SummaryCell key={employee.id}>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
             });
 
-
+    //
+    console.log(summary[2]?.props.children[0]);
+    console.log(summary[2]?.props);
 
 
 
@@ -159,7 +164,28 @@ const Scores = ()=> {
                 })
             }
         </tr>
+        <tr>
+            {
+                summary.map((sum)=> {
+                  const sumofPluses = sum?.props.children[0];
+                  const id = sum.key;
+                  // console.log(id);
+                    const MonthMinuses = minuses.filter((one)=> one.employee === +id)
+                        .map((one)=> one.minus);
+                    const lol = MonthMinuses.length >0 ? MonthMinuses[0] : [];
 
+                    const lol2 = lol.reduce((a,b)=> {
+                        return +a + +b
+                    }, 0);
+
+                    console.log(lol2);
+
+
+
+                  return(<td>{sumofPluses - lol2}</td>);
+                })
+            }
+        </tr>
         </tbody>
 
 
