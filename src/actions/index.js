@@ -22,6 +22,12 @@ export const addScore = (scores, score) => ({
    score
 });
 
+export const removeScore = (scores, score) => ({
+    type: 'REMOVE_SCORE',
+    scores,
+    score
+});
+
 
 
 

@@ -10,6 +10,10 @@ export const scores = (state = [], action) => {
             return [
                 ...action.scores, action.score
             ];
+        case 'REMOVE_SCORE':
+            return [
+                ...action.scores.splice(action.score.index, 1)
+            ];
         default: return state;
     }
 };

@@ -65,6 +65,8 @@ const Scores = ()=> {
     padding: 5px;
     min-height: 35px;
     position: relative;
+    
+    
      &:last-child {
      border: none;
      }
@@ -92,6 +94,10 @@ const Scores = ()=> {
  
     `;
 
+    const TotalSum = Styled.td`
+        color: ${(props)=> props.sum > 0 ? "blue" : "red"};
+    `;
+
 
 
     useEffect(()=> {
@@ -107,9 +113,9 @@ const Scores = ()=> {
 
     const newScores = correctweeks.map((onet) => {
        return (<OneRow>{
-               employees.map((one, index)=> {
+               employees.map((one)=> {
                    const employeeScore = scoresAll
-                       .filter(ons=>ons.employee === one.id)
+                       .filter((ons, index) => ons.employee === one.id)
                        .filter(ont => {
                            const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
@@ -119,8 +125,9 @@ const Scores = ()=> {
                    return(<TableCell>{
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni)=> {
+                                    const id = scoresAll.indexOf(oni);
 
-                                    return (<TableScore>{oni.score} <ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
@@ -171,6 +178,10 @@ const Scores = ()=> {
                   const id = sum.key;
                   // console.log(id);
                     const MonthMinuses = minuses.filter((one)=> one.employee === +id)
+                        .filter((oni)=> {
+                            const date = oni.date.seconds ? oni.date.toDate().getTime() : oni.date.getTime();
+                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
+                        })
                         .map((one)=> one.minus);
                     const lol = MonthMinuses.length >0 ? MonthMinuses[0] : [];
 
@@ -182,7 +193,7 @@ const Scores = ()=> {
 
 
 
-                  return(<td>{sumofPluses - lol2}</td>);
+                  return(<TotalSum sum={sumofPluses - lol2}>{sumofPluses - lol2}</TotalSum>);
                 })
             }
         </tr>
