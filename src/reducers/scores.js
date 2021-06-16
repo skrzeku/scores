@@ -11,8 +11,9 @@ export const scores = (state = [], action) => {
                 ...action.scores, action.score
             ];
         case 'REMOVE_SCORE':
+        action.scores.splice(action.index, 1);
             return [
-                ...action.scores.splice(action.score.index, 1)
+                ...action.scores
             ];
         default: return state;
     }

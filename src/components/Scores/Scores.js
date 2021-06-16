@@ -1,10 +1,13 @@
 import React, {useState, useEffect, Fragment} from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Styled from 'styled-components';
 
 import Score from './Score/Score';
 import {colorPrimary} from "../../variables";
 import Minuses from "../Minuses/Minuses";
+import {removeScore} from "../../actions";
+import firebase from "../../firebase";
+import ScoreDetails from "./ScoreDetails/ScoreDetails";
 
 
 
@@ -16,8 +19,12 @@ const Scores = ()=> {
     const month = useSelector(state => state.month);
     const minuses = useSelector(state => state.minuses);
 
+    const [currentScore, setScore] = useState(null);
+
 
     const calendar = useSelector(state => state.calendar[month]);
+    const dispatch = useDispatch();
+    const db = firebase.firestore();
 
 
     const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
@@ -110,6 +117,23 @@ const Scores = ()=> {
         // return(<Score score={one.score} scores={one} key={index}/>)
     });
 
+    // const RemoveScore = (score)=> {
+    //     // dispatch({type: 'REMOVE_SCORE', scoresAll, index});
+    //     const scores = [...scoresAll];
+    //     const index = scoresAll.indexOf(score);
+    //     // scores.splice(index, 1);
+    //     // console.log(scores);
+    //     // dispatch({type: 'REMOVE_SCORE', scores, index});
+    //     console.log(score.key);
+    //
+    //
+    //
+    //     // // console.log(id);
+    //     // const siema = [...scoresAll];
+    //     // siema.splice(index, 1);
+    //     // console.log(siema);
+    // };
+
 
     const newScores = correctweeks.map((onet) => {
        return (<OneRow>{
@@ -126,14 +150,33 @@ const Scores = ()=> {
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni)=> {
                                     const id = scoresAll.indexOf(oni);
-
-                                    return (<TableScore>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore onClick={()=> dynamicComponent(oni)}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
                })
            }</OneRow>)
     });
+
+    const removeData = (score)=> {
+        const key = score.key;
+        const scores = [...scoresAll];
+        const index = scoresAll.indexOf(score);
+
+        db.collection("scores").doc(key).delete().then(() => {
+            console.log("Document successfully deleted!");
+            dispatch({type: 'REMOVE_SCORE', scores, index});
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    };
+
+    const dynamicComponent = (score)=> {
+      setScore(score);
+      console.log(currentScore);
+    };
+
+
 
     const summary = employees.map((employee)=> {
                 const employeeScore = scoresAll
@@ -156,8 +199,11 @@ const Scores = ()=> {
             });
 
     //
-    console.log(summary[2]?.props.children[0]);
-    console.log(summary[2]?.props);
+    // console.log(summary[2]?.props.children[0]);
+    // console.log(summary[2]?.props);
+
+
+
 
 
 
@@ -189,7 +235,7 @@ const Scores = ()=> {
                         return +a + +b
                     }, 0);
 
-                    console.log(lol2);
+                    // console.log(lol2);
 
 
 
@@ -198,6 +244,8 @@ const Scores = ()=> {
             }
         </tr>
         </tbody>
+        {<ScoreDetails score={currentScore}/>}
+        <button onClick={removeData}>?usun dane</button>
 
 
 

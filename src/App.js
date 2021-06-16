@@ -17,6 +17,7 @@ import Logo from './assets/images/logo.png';
 class App extends Component{
 
    constructor() {
+
        super();
        this.state = {
            loading: false
@@ -27,16 +28,18 @@ class App extends Component{
 
 
 
+
   componentDidMount() {
 
       auth.onAuthStateChanged((user)=> {
           this.props.fetchUser(user);
       });
+      const db = firebase.firestore();
 
 
       //get employees
       let CurrentEmployees = [];
-      const db = firebase.firestore();
+
 
       db.collection('employees').get()
           .then((result) => {
@@ -50,10 +53,23 @@ class App extends Component{
 
       db.collection('scores').orderBy('date', 'desc').get()
           .then((result) => {
-        CurrentScores = result.docs.map(one => one.data());
+
+        CurrentScores = result.docs.map(one => {
+            const obj = Object.assign(one.data(), {key : one.id});
+            return obj
+        });
+
         this.props.fetchScores(CurrentScores);
         this.setState({loading: true});
       });
+
+
+
+
+
+
+
+
 
 
       // get Calendar
@@ -63,7 +79,10 @@ class App extends Component{
           .orderBy('id', 'asc')
           .get()
           .then((result)=> {
-              CurrentCalendar = result.docs.map(one => one.data());
+              CurrentCalendar = result.docs.map(one => {
+                  console.log(one.data());
+                  return one.data()
+              });
               this.props.fetchCalendar(CurrentCalendar);
           });
 

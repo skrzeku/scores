@@ -22,10 +22,10 @@ export const addScore = (scores, score) => ({
    score
 });
 
-export const removeScore = (scores, score) => ({
+export const removeScore = (scores, index) => ({
     type: 'REMOVE_SCORE',
     scores,
-    score
+    index
 });
 
 
