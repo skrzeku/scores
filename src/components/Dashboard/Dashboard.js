@@ -16,6 +16,40 @@ import {month} from "../../reducers/month";
 import Ranking from '../../components/Ranking/Ranking';
 import *  as colors from '../../variables';
 
+const MyTable = Styled.table`
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    margin: 0 auto;
+    width: 95%;
+    border-radius: 15px;
+  `;
+const AddBtns = `
+          background-color: ${colors.colorPrimary};
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        text-decoration: none;
+           position: absolute;
+           right: 0;
+        `;
+
+const AddEmployeeBtn = Styled.a`
+     
+        
+        top: -50px;
+        ${AddBtns}
+        `;
+
+const AddScoreBtn = Styled.a`
+        bottom: -50px;
+        ${AddBtns}
+        `;
 
 
 
@@ -55,40 +89,7 @@ class Dashboar  extends Component {
 
 
     render() {
-        const MyTable = Styled.table`
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    position: relative;
-    margin: 0 auto;
-    width: 95%;
-    border-radius: 15px;
-  `;
-        const AddBtns = `
-          background-color: ${colors.colorPrimary};
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 38px;
-        text-decoration: none;
-           position: absolute;
-           right: 0;
-        `;
 
-        const AddEmployeeBtn = Styled.a`
-     
-        
-        top: -50px;
-        ${AddBtns}
-        `;
-
-        const AddScoreBtn = Styled.a`
-        bottom: -50px;
-        ${AddBtns}
-        `;
 
 
 

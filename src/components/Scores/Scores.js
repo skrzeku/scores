@@ -1,12 +1,10 @@
-import React, {useState, useEffect, Fragment} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, {useState} from 'react';
+import {useSelector} from "react-redux";
 import Styled from 'styled-components';
 
-import Score from './Score/Score';
 import {colorPrimary} from "../../variables";
 import Minuses from "../Minuses/Minuses";
-import {removeScore} from "../../actions";
-import firebase from "../../firebase";
+
 import ScoreDetails from "./ScoreDetails/ScoreDetails";
 
 
@@ -23,12 +21,11 @@ const Scores = ()=> {
 
 
     const calendar = useSelector(state => state.calendar[month]);
-    const dispatch = useDispatch();
-    const db = firebase.firestore();
+
 
 
     const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
-        const setedWeeks = [...new Set(weeks)];
+
     console.log([...new Set(weeks)]);
 
          const sequential = (to, from = 0)=> {
@@ -51,8 +48,6 @@ const Scores = ()=> {
    // }
    //  console.log(calendar?.startDate.toDate().getWeek());
 
-    const Month = [1, 2, 3, 4];
-        // console.log(scoresAll);
 
     const OneRow = Styled.tr`
     // border: solid 1px red; `;
@@ -107,39 +102,14 @@ const Scores = ()=> {
 
 
 
-    useEffect(()=> {
 
-    }, []);
-
-    const AllScores = employees.map((one, index)=> {
-        // console.log(one);
-        return(<td>{one.lastname}</td>)
-        // return(<Score score={one.score} scores={one} key={index}/>)
-    });
-
-    // const RemoveScore = (score)=> {
-    //     // dispatch({type: 'REMOVE_SCORE', scoresAll, index});
-    //     const scores = [...scoresAll];
-    //     const index = scoresAll.indexOf(score);
-    //     // scores.splice(index, 1);
-    //     // console.log(scores);
-    //     // dispatch({type: 'REMOVE_SCORE', scores, index});
-    //     console.log(score.key);
-    //
-    //
-    //
-    //     // // console.log(id);
-    //     // const siema = [...scoresAll];
-    //     // siema.splice(index, 1);
-    //     // console.log(siema);
-    // };
 
 
     const newScores = correctweeks.map((onet) => {
        return (<OneRow>{
                employees.map((one)=> {
                    const employeeScore = scoresAll
-                       .filter((ons, index) => ons.employee === one.id)
+                       .filter((ons) => ons.employee === one.id)
                        .filter(ont => {
                            const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
@@ -149,8 +119,8 @@ const Scores = ()=> {
                    return(<TableCell>{
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni)=> {
-                                    const id = scoresAll.indexOf(oni);
-                                    return (<TableScore onClick={()=> dynamicComponent(oni)}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+
+                                    return (<TableScore onClick={()=> dynamicComponent(oni)} >{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
@@ -158,23 +128,12 @@ const Scores = ()=> {
            }</OneRow>)
     });
 
-    const removeData = (score)=> {
-        const key = score.key;
-        const scores = [...scoresAll];
-        const index = scoresAll.indexOf(score);
 
-        db.collection("scores").doc(key).delete().then(() => {
-            console.log("Document successfully deleted!");
-            dispatch({type: 'REMOVE_SCORE', scores, index});
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-        });
-    };
 
     const dynamicComponent = (score)=> {
       setScore(score);
-      console.log(currentScore);
     };
+
 
 
 
@@ -244,8 +203,10 @@ const Scores = ()=> {
             }
         </tr>
         </tbody>
-        {<ScoreDetails score={currentScore}/>}
-        <button onClick={removeData}>?usun dane</button>
+        {
+            currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
+
+        {/*<button onClick={removeData}>?usun dane</button>*/}
 
 
 
