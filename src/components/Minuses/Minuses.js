@@ -29,14 +29,16 @@ const Minuses = (props)=> {
             const date = oni.date.seconds ? oni.date.toDate().getTime() : oni.date.getTime();
             return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
         });
-  const min =  MonthMinuses.map((one)=> one.minus);
-  const lol = min.length >0 ? min[0] : [];
+  // const min =  MonthMinuses.map((one)=> one.minus);
+  // const lol = min.length >0 ? min[0] : [];
 
 
   return(<td>{
-        lol.map((min)=>{
-          return(<OneMinus>-{min}</OneMinus>)
+        MonthMinuses.map((one, index)=> {
+            console.log(one);
+            return(<OneMinus key={index}>-{one.minus}</OneMinus>)
         })
+       
   }</td>)
 };
 

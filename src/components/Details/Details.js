@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import firebase from "../../../firebase";
+import firebase from "firebase";
 import Styled from 'styled-components';
-import {colorPrimary} from "../../../variables";
-import { useTransition, animated } from 'react-spring';
+import {colorPrimary} from "../../variables";
 
+const db = firebase.firestore();
 
 //Styles
 const ScoreWrapper = Styled.div`
@@ -19,32 +19,22 @@ padding: 30px;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const ScoreDetails = (props)=> {
 
-    let score = props?.score;
-    console.log(score);
+
+
+const Details = (props)=> {
+    //Redux
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
-    const currentEmployee = employees?.find((one)=> one.id === score?.employee);
+    const currentEmployee = employees?.find((one)=> one.id === props.object.employee);
     const dispatch = useDispatch();
-    const db = firebase.firestore();
-
-    console.log(currentEmployee);
-    console.log(props);
-
-
-
-    const hideComponent = ()=> {
-      score = [];
-      console.log(props);
-    };
 
     const removeData = ()=> {
-        const key = score.key;
+        const key = props.object.key;
         const scores = [...scoresAll];
-        const index = scoresAll.indexOf(score);
+        const index = scoresAll.indexOf(props.object);
 
-        db.collection("scores").doc(key).delete().then(() => {
+        db.collection(props.dbName).doc(key).delete().then(() => {
             console.log("Document successfully deleted!");
             dispatch({type: 'REMOVE_SCORE', scores, index});
         }).catch((error) => {
@@ -52,16 +42,17 @@ const ScoreDetails = (props)=> {
         });
     };
 
+
     return(<ScoreWrapper>
         <h2>Wynik</h2>
         <div>
 
             <p>Pracownik: {currentEmployee?.name} {currentEmployee?.lastname}</p>
-                {
-                    score?.score ? <p>Wynik {score?.score}</p> : <p>Minus: {score?.minus}</p>
-                }
-            <p>Data: {score?.date.toDate().toLocaleDateString()}</p>
-            <p>Nr klienta: {score?.client}</p>
+            {
+                props.object?.score ? <p>Wynik {props.object?.score}</p> : <p>Minus: {props.object?.minus}</p>
+            }
+            <p>Data: {props.object.date.toDate().toLocaleDateString()}</p>
+            <p>Nr klienta: {props.object.client}</p>
             <button onClick={removeData}>Usuń Wynik</button>
             <button onClick={props.onClose}>Anuluj</button>
 
@@ -71,4 +62,6 @@ const ScoreDetails = (props)=> {
 
 
 
-export default ScoreDetails;
+
+
+export default Details;

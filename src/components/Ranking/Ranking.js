@@ -96,7 +96,7 @@ const Ranking = ()=> {
         <Podium>
             {
                 podium.map((place, index)=> {
-                    return(<div><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[index]?.name}</PodriumName> {sortedScores[index]?.sum} </div>)
+                    return(<div key={index}><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[index]?.name}</PodriumName> {sortedScores[index]?.sum} </div>)
                 })
             }
 

@@ -13,7 +13,8 @@ const AddMinus = ()=> {
     const employees = useSelector(state => state.employees);
     const myminuses = useSelector(state => state.minuses);
     const[employee, setEmployee] = useState(employees[0]?.id);
-    const [number, setNumber] = useState([]);
+    const [number, setNumber] = useState(0);
+    const [client, setClient] = useState('');
 
 
     const db = firebase.firestore();
@@ -25,6 +26,7 @@ const AddMinus = ()=> {
           minus: number,
           employee: +employee,
           date: new Date(),
+          client: client
       };
 
         db.collection('minuses').add(newMinuse).then(()=> {
@@ -50,7 +52,9 @@ const AddMinus = ()=> {
                     })
                 }
             </select>
-            <TagsInput value={number} onChange={handleChange}/>
+            {/*<TagsInput value={number} onChange={handleChange}/>*/}
+            <input type="number" onChange={event => setNumber(event.target.value)} value={number}/>
+            <input type="text" onChange={event => setClient(event.target.value)} value={client}/>
         </form>
         <button onClick={addMinuses}>Dodaj minusy</button>
 

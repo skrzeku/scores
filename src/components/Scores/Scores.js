@@ -6,6 +6,7 @@ import {colorPrimary} from "../../variables";
 import Minuses from "../Minuses/Minuses";
 
 import ScoreDetails from "./ScoreDetails/ScoreDetails";
+import Details from "../Details/Details";
 
 
 
@@ -16,6 +17,7 @@ const Scores = ()=> {
     const employees = useSelector(state => state.employees);
     const month = useSelector(state => state.month);
     const minuses = useSelector(state => state.minuses);
+
 
     const [currentScore, setScore] = useState(null);
 
@@ -31,6 +33,7 @@ const Scores = ()=> {
          const sequential = (to, from = 0)=> {
             return  Array.from(Array(to + 1).keys()).slice(from)
     };
+    console.log(minuses);
 
 
 
@@ -118,9 +121,9 @@ const Scores = ()=> {
                            return ono.week === onet});
                    return(<TableCell>{
                             employeeScore.length > 0 ?
-                                employeeScore.map((oni)=> {
+                                employeeScore.map((oni, index)=> {
 
-                                    return (<TableScore onClick={()=> dynamicComponent(oni)} >{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore onClick={()=> dynamicComponent(oni)} key={index}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
@@ -178,7 +181,7 @@ const Scores = ()=> {
         </tr>
         <tr>
             {
-                summary.map((sum)=> {
+                summary.map((sum, index)=> {
                   const sumofPluses = sum?.props.children[0];
                   const id = sum.key;
                   // console.log(id);
@@ -187,25 +190,31 @@ const Scores = ()=> {
                             const date = oni.date.seconds ? oni.date.toDate().getTime() : oni.date.getTime();
                             return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
                         })
-                        .map((one)=> one.minus);
-                    const lol = MonthMinuses.length >0 ? MonthMinuses[0] : [];
-
-                    const lol2 = lol.reduce((a,b)=> {
-                        return +a + +b
-                    }, 0);
+                        .map((one)=> one.minus)
+                        .reduce((a,b)=> {
+                            return +a + +b
+                        }, 0);
+                    // const lol = MonthMinuses.length >0 ? MonthMinuses[0] : [];
+                    //
+                    // const lol2 = lol.reduce((a,b)=> {
+                    //     return +a + +b
+                    // }, 0);
 
                     // console.log(lol2);
+                    console.log(MonthMinuses);
 
 
 
-                  return(<TotalSum sum={sumofPluses - lol2}>{sumofPluses - lol2}</TotalSum>);
+                  return(<TotalSum sum={ sumofPluses - MonthMinuses} key={index}>{
+                      sumofPluses - MonthMinuses
+                  }</TotalSum>);
                 })
             }
         </tr>
         </tbody>
         {
-            currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
-
+            // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
+            currentScore && <Details object={currentScore} onClose={()=> setScore(null)} dbName={"scores"}/> }
         {/*<button onClick={removeData}>?usun dane</button>*/}
 
 

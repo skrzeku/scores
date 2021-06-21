@@ -91,7 +91,10 @@ class App extends Component{
       db.collection('minuses')
           .get()
           .then((result) => {
-              Minuses = result.docs.map(one => one.data());
+              Minuses = result.docs.map(one => {
+                  const obj = Object.assign(one.data(), {key : one.id});
+                  return obj
+              });
               this.props.fetchMinuses(Minuses);
           });
   }
