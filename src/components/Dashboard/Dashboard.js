@@ -15,6 +15,7 @@ import Total from '../Total/Total';
 import {month} from "../../reducers/month";
 import Ranking from '../../components/Ranking/Ranking';
 import *  as colors from '../../variables';
+import Details from "../Details/Details";
 
 const MyTable = Styled.table`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -59,9 +60,12 @@ class Dashboar  extends Component {
 
         this.state = {
             shownform: false,
-            showAddEmployeeForm: false
-
+            showAddEmployeeForm: false,
+            currentMinus: null,
+            showselect: false
         };
+        this.setCurrentMinus = this.setCurrentMinus.bind(this);
+        this.MonthChangeHandler = this.MonthChangeHandler.bind(this);
 
     }
     shnowFormHandler() {
@@ -76,14 +80,23 @@ class Dashboar  extends Component {
 
    MonthChangeHandler (event) {
         this.props.changeMonth(+event);
+        console.log(this.props.month);
+        this.setState({showselect: true});
     };
+
+    setCurrentMinus(e) {
+        this.setState({currentMinus: e});
+        console.log('wykonano setCurrentMinus');
+        console.log(e);
+        console.log(this.state.currentMinus);
+    }
 
 
 
 
 
     componentDidMount() {
-
+        this.MonthChangeHandler(5);
     }
 
 
@@ -102,6 +115,7 @@ class Dashboar  extends Component {
         console.log(colors.colorPrimary);
 
         console.log(this.props.month);
+        // this.MonthChangeHandler(8);
 
 
 
@@ -142,12 +156,11 @@ class Dashboar  extends Component {
             <Total/>
 
 
-
             {this.props.user ? (this.state.showAddEmployeeForm && <AddEmployee/>) : null}
             <MyTable className="table table-striped table-bordered">
                 {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i className="las la-user-plus"></i></AddEmployeeBtn>}
                    <thead><Employees/></thead>
-                    <Scores/>
+                    <Scores setCurrenMinus={this.setCurrentMinus}/>
                 {showFormBtn}
 
 
@@ -161,6 +174,9 @@ class Dashboar  extends Component {
             </select>
             {addScoreWrapper}
             {addMinusWrapper}
+            {
+                // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
+                this.state.currentMinus && <Details object={this.state.currentMinus} onClose={()=> this.setState({currentMinus : null})} dbName={"minuses"}/> }
 
             <Ranking/>
 

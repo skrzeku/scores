@@ -28,6 +28,12 @@ export const removeScore = (scores, index) => ({
     index
 });
 
+export const removeMinus = (minuses, index) => ({
+    type: 'REMOVE_MINUS',
+    minuses,
+    index
+});
+
 
 
 

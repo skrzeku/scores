@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 
@@ -20,6 +20,8 @@ const Minuses = (props)=> {
     const month = useSelector(state => state.month);
     const calendar = useSelector(state => state.calendar[month]);
 
+    const[currentMinus, setMinus] = useState(null);
+
 
 
 
@@ -36,10 +38,10 @@ const Minuses = (props)=> {
   return(<td>{
         MonthMinuses.map((one, index)=> {
             console.log(one);
-            return(<OneMinus key={index}>-{one.minus}</OneMinus>)
+            return(<OneMinus key={index} onClick={()=> props.setCurrentMinus(one)}>-{one.minus}</OneMinus>)
         })
-       
-  }</td>)
+  } </td>)
+
 };
 
 

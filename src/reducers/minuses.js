@@ -8,6 +8,11 @@ export const minuses = (state = [], action) => {
             return [
                 ...action.minuses, action.minuse
             ];
+        case 'REMOVE_MINUS':
+            action.minuses.splice(action.index, 1);
+            return [
+                ...action.minuses
+            ];
         default: return state;
     }
 };

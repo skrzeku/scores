@@ -65,7 +65,7 @@ const Ranking = ()=> {
 
     const endDate = calendar?.endDate.toDate();
     const today = new Date().getTime();
-    const leftDays = Math.floor((endDate?.getTime() - today)/ (1000*60*60*24));
+    const leftDays = Math.ceil((endDate?.getTime() - today)/ (1000*60*60*24));
     console.log(today);
     const podium = [2, 1, 3];
 

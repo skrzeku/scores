@@ -11,7 +11,7 @@ import Details from "../Details/Details";
 
 
 
-const Scores = ()=> {
+const Scores = (props)=> {
 
     const scoresAll = useSelector(state => state.scores);
     const employees = useSelector(state => state.employees);
@@ -160,9 +160,6 @@ const Scores = ()=> {
         return(<SummaryCell key={employee.id}>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
             });
 
-    //
-    // console.log(summary[2]?.props.children[0]);
-    // console.log(summary[2]?.props);
 
 
 
@@ -175,7 +172,7 @@ const Scores = ()=> {
         <tr>
             {
                 employees.map((emp)=> {
-                    return(<Minuses id={emp.id}/>)
+                    return(<Minuses id={emp.id} setCurrentMinus={(prop)=> props.setCurrenMinus(prop)}/>)
                 })
             }
         </tr>

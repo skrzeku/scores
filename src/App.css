@@ -67,4 +67,21 @@
   }
 }
 
+@keyframes endroll {
+  0% {
+    left: 50%;
+    opacity: 1;
+  }
+  100% {
+    left: 20%;
+    opacity: 0;
+  }
+}
+
+
+.endRoll {
+  left: 20% !important;
+  opacity: 0 !important;
+  transition: 0.3s all ease !important;
+}
 
