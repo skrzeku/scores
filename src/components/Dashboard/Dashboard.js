@@ -5,6 +5,7 @@ import AddScore from '../Scores/AddScore/AddScore';
 import {changeMonth} from '../../actions/index';
 import AddEmployee from "../Employees/AddEmployee/AddEmployee";
 import AddMinus from "../Minuses/AddMinus/AddMinus";
+import NewScore from '../Scores/NewScore/NewScore';
 
 import Scores from '../Scores/Scores';
 
@@ -179,6 +180,7 @@ class Dashboar  extends Component {
                 this.state.currentMinus && <Details object={this.state.currentMinus} onClose={()=> this.setState({currentMinus : null})} dbName={"minuses"}/> }
 
             <Ranking/>
+            <NewScore/>
 
 
 

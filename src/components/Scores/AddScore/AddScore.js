@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import firebase from "../../../firebase";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {addScore} from '../../../actions/index';
 import {scores} from "../../../reducers/scores";
+import NewScore from "../NewScore/NewScore";
 
 
 
@@ -19,6 +20,8 @@ const AddScore = () => {
 
     //set local states
     const[score, setScore] = useState("");
+    // const score = useRef("");
+    const form = useRef(null);
     const[client, setClient] = useState("");
     const[type, setType] = useState("");
     const[mailing, setMailing] = useState(true);
@@ -60,16 +63,16 @@ const AddScore = () => {
 
         console.log(newScore);
 
-        db.collection('scores').add(newScore).then(()=> {
-            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-        });
+        // db.collection('scores').add(newScore).then(()=> {
+        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+        // });
     };
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja'];
     const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o'];
     return(<div>
         <h3>Dodawanie wyniku:</h3>
-        <form>
+        <form ref={form}>
             <input type={'number'} value={score} onChange={event => setScore(event.target.value)}/>
             <select onChange={event => setType(event.target.value)}>
                 {
@@ -91,6 +94,7 @@ const AddScore = () => {
                 }
             </select>
             <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+
             <input type={'number'} value={client} onChange={event => setClient(event.target.value)}/>
             <button onClick={addScoreHandler}>Dodaj wyniks</button>
         </form>
