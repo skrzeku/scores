@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useForm, Controller} from 'react-hook-form';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import Styled from 'styled-components';
 import {colorPrimary} from "../../../variables";
@@ -22,6 +22,7 @@ import {
     InputLabel,
     FormControl
 } from "@material-ui/core";
+import firebase from "../../../firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -85,7 +86,8 @@ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 
 
-const NewScore = ()=> {
+const NewScore = (props)=> {
+    console.log(props.shownNewScore);
 
     const classes = useStyles();
 
@@ -93,19 +95,43 @@ const NewScore = ()=> {
     const employees = useSelector(state => state.employees);
     const allScores = useSelector(state => state.scores);
 
+    //firebase
+    const db = firebase.firestore();
+    const dispatch = useDispatch();
+    console.log(allScores);
+
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja'];
     const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o'];
 
 
     const { register, handleSubmit, formState: {errors}, control, reset } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data, e) => {
+        const newScore = {
+            score: data.score,
+            type: options[data.type],
+            mailing: data.mailing,
+            employee: +data.employee,
+            date: data.date,
+            client: data.client,
+            week: data.date.getWeek(),
+            short: shorts[data.type]
+        };
+        console.log(newScore);
+        db.collection('scores').add(newScore).then(()=> {
+            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+            reset();
+            props.onClose();
+        });
+
+    };
     const [startDate, setStartDate] = useState(new Date());
 
 
 
     return(
         <ThemeProvider theme={theme}>
+            {props.shownNewScore &&
         <FormWrapper>
         <FormInner>
         <FormTitle>Dodaj wynik</FormTitle>
@@ -147,7 +173,7 @@ const NewScore = ()=> {
 
             <Controller
                 control={control}
-                name= "dates"
+                name= "date"
                 defaultValue={new Date()}
                 render={({ field: {onChange, value}})=> (
                     <KeyboardDatePicker
@@ -174,7 +200,7 @@ const NewScore = ()=> {
                         <InputLabel id="demo-simple-select-label">Typ umowy</InputLabel>
                         <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label">
                         {options.map((option, index) => (
-                            <MenuItem key={index} value={option}>
+                            <MenuItem key={index} value={index}>
                                 {option}
                             </MenuItem>
                         ))}
@@ -182,17 +208,27 @@ const NewScore = ()=> {
                     </FormControl>
                 )}
             />
-            <FormControl className={classes.formControl}>
-                <InputLabel id="employeelabel">Pracownik</InputLabel>
-            <Select id="trinity-select" {...register("test")} defaultValue={""} labelId="employeelabel">
 
-                {employees.map((option, index) => (
-                    <MenuItem key={index} value={option.id}>
-                        {option.name + ' ' + option.lastname}
-                    </MenuItem>
-                ))}
-            </Select>
-            </FormControl>
+            <Controller
+                control={control}
+                name= "employee"
+                defaultValue={""}
+                render={({ field: {onChange, value}})=> (
+                    <FormControl className={classes.formControl}>
+                        <InputLabel id="employeelabel">Pracownik</InputLabel>
+                        <Select id="trinity-select" labelId="employeelabel" onChange={onChange} value={value}>
+
+                            {employees.map((option, index) => (
+                                <MenuItem key={index} value={option.id}>
+                                    {option.name + ' ' + option.lastname}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                )}
+            />
+
+
 
 
 
@@ -230,6 +266,7 @@ const NewScore = ()=> {
                     <Checkbox
                         checked={value}
                         onChange={onChange}
+                        color="primary"
 
                     />
 
@@ -239,35 +276,10 @@ const NewScore = ()=> {
 
 
 
-            <TextField
-                id="outlined-number"
-                label="Number"
-                type="number"
-            />
-
-
-            {/*<Controller*/}
-                {/*control={control}*/}
-                {/*name= "dates"*/}
-                {/*defaultValue={false}*/}
-                {/*render={({ field: {onChange, value}})=> (*/}
-                    {/*<TextField*/}
-                        {/*label="Birthday"*/}
-                        {/*type="date"*/}
-                        {/*value={value}*/}
-                        {/*onChange={onChange}*/}
-                        {/*InputLabelProps={{*/}
-                            {/*shrink: true,*/}
-                        {/*}}*/}
-                    {/*/>*/}
-                {/*)}*/}
-            {/*/>*/}
-
-
             <input type="submit" value="Dodaj"/>
         </Form>
         </FormInner>
-    </FormWrapper>
+    </FormWrapper> }
         </ThemeProvider>)
 };
 
