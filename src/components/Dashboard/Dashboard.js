@@ -179,7 +179,7 @@ class Dashboar  extends Component {
                 // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
                 this.state.currentMinus && <Details object={this.state.currentMinus} onClose={()=> this.setState({currentMinus : null})} dbName={"minuses"}/> }
 
-            <Ranking/>
+            <Ranking showAll={false}/>
             <NewScore/>
 
 

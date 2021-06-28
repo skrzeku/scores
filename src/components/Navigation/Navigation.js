@@ -48,7 +48,9 @@ const Navigation = ()=> {
         <NavMenu>
             <Link to="/"><NavLink className="las la-home"></NavLink></Link>
             <Link to="/history"><NavLink className="las la-history"></NavLink></Link>
+            <Link to="/ranking"><NavLink className="las la-medal"></NavLink></Link>
             <Link to="/login"><NavLink className="las la-sign-in-alt"></NavLink></Link>
+
 
         </NavMenu>
     </Navi>)

@@ -11,6 +11,7 @@ import Navigation from './components/Navigation/Navigation';
 import History from './components/History/History';
 import EmployeeDetails from './components/Employees/EmployeeDetails/EmployeeDetails';
 import Logo from './assets/images/logo.png';
+import Ranking from './components/Ranking/Ranking';
 
 
 
@@ -49,18 +50,26 @@ class App extends Component{
 
 
       //get scores
-      let CurrentScores = [];
-
-      db.collection('scores').orderBy('date', 'desc').get()
-          .then((result) => {
-
-        CurrentScores = result.docs.map(one => {
-            const obj = Object.assign(one.data(), {key : one.id});
-            return obj
-        });
-
-        this.props.fetchScores(CurrentScores);
-        this.setState({loading: true});
+      // let CurrentScores = [];
+      //
+      // db.collection('scores').orderBy('date', 'desc').get()
+      //     .then((result) => {
+      //
+      //   CurrentScores = result.docs.map(one => {
+      //       const obj = Object.assign(one.data(), {key : one.id});
+      //       return obj
+      //   });
+      //
+      //   this.props.fetchScores(CurrentScores);
+      //   this.setState({loading: true});
+      // });
+      db.collection('scores').orderBy('date', 'desc').onSnapshot((snap)=> {
+          const data = snap.docs.map(doc => {
+              const obj = Object.assign(doc.data(), {key : doc.id});
+              return obj
+          });
+          this.props.fetchScores(data);
+          this.setState({loading: true});
       });
 
 
@@ -86,17 +95,25 @@ class App extends Component{
               this.props.fetchCalendar(CurrentCalendar);
           });
 
-      //get Minuses
-      let Minuses = [];
-      db.collection('minuses')
-          .get()
-          .then((result) => {
-              Minuses = result.docs.map(one => {
-                  const obj = Object.assign(one.data(), {key : one.id});
-                  return obj
-              });
-              this.props.fetchMinuses(Minuses);
+      db.collection('minuses').onSnapshot((snap)=> {
+          const data = snap.docs.map(doc => {
+              const obj = Object.assign(doc.data(), {key : doc.id});
+              return obj
           });
+          this.props.fetchMinuses(data);
+      });
+
+      // //get Minuses
+      // let Minuses = [];
+      // db.collection('minuses')
+      //     .get()
+      //     .then((result) => {
+      //         Minuses = result.docs.map(one => {
+      //             const obj = Object.assign(one.data(), {key : one.id});
+      //             return obj
+      //         });
+      //         this.props.fetchMinuses(Minuses);
+      //     });
   }
 
 
@@ -126,6 +143,7 @@ class App extends Component{
               <Login path={'/login'}/>
               <History path={'/history'}/>
                   <EmployeeDetails path={'/employee/:id'}/>
+                  <Ranking path={'/ranking'} showAll={true}/>
 
               </Router>
           </div>

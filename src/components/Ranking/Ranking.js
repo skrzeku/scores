@@ -54,9 +54,9 @@ const PodriumName = Styled.span`
 
 
 
-const Ranking = ()=> {
+const Ranking = (props)=> {
 
-            //Getting from redux store
+    //Getting from redux store
     const scoresAll = useSelector(state => state.scores);
     const month = useSelector(state => state.month);
     const employees = useSelector(state => state.employees);
@@ -101,7 +101,15 @@ const Ranking = ()=> {
             }
 
         </Podium>
-        </React.Fragment>)
+
+        {
+            props.showAll &&
+
+            sortedScores.map((one)=> {
+                return (<div>{one.name} <span>{one.sum}</span></div>)
+            })
+        }
+    </React.Fragment>)
 
 };
 
