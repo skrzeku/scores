@@ -5,8 +5,9 @@ import Styled from "styled-components";
 const OneMinus = Styled.span`
 display: inline-block;
 padding: 5px;
-font-size: 13px;
+font-size: 12px;
 color: red;
+max-width: 50%;
 `;
 
 

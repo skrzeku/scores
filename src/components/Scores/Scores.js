@@ -93,6 +93,7 @@ const Scores = (props)=> {
     position: relative;
     border-top: solid 2px ${colorPrimary};
     border-top-width: 2px !important;
+    font-size: 19px;
     `;
     const Summary = Styled.tr`
     font-weight: bold;
@@ -100,6 +101,7 @@ const Scores = (props)=> {
     `;
 
     const TotalSum = Styled.td`
+    font-size: 14px;
         color: ${(props)=> props.sum > 0 ? "blue" : "red"};
     `;
 

@@ -100,8 +100,9 @@ font-size: 30px;
 `;
 
 const Form = Styled.form`
-padding: 50px;
+padding: 50px 50px 80px;
 position: relative;
+
    
 `;
 
@@ -109,6 +110,8 @@ const FormInner = Styled.div`
 width: 600px;
 background-color: white;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+animation: .4s rollout;
+position: relative;
 `;
 
 
@@ -162,17 +165,18 @@ const NewScore = (props)=> {
         <FormWrapper>
         <FormInner>
         <FormTitle>Dodaj wynik</FormTitle>
-        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} noValidate autoComplete="off">
+        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off">
             <Controller
                 control={control}
                 name= "score"
                 defaultValue=""
-                rules={{ required: 'First name required' }}
+                rules={{ required: 'true' }}
                 render={({ field: {onChange, value}})=> (
                     <TextField
                         label="Wynik"
                         type="number"
-                        value={value}
+                        error={!!errors.score}
+                        value={errors?.score?.rules}
                         onChange={onChange}
                     />
                 )}
@@ -189,6 +193,7 @@ const NewScore = (props)=> {
                     <TextField
                         label="Nr klienta"
                         type="number"
+                        error={!!errors.client}
                         value={value}
                         onChange={onChange}
                     />
@@ -202,6 +207,7 @@ const NewScore = (props)=> {
                 control={control}
                 name= "date"
                 defaultValue={new Date()}
+                rules={{ required: 'true' }}
                 render={({ field: {onChange, value}})=> (
                     <KeyboardDatePicker
                         disableToolbar
@@ -222,10 +228,11 @@ const NewScore = (props)=> {
                 control={control}
                 name= "type"
                 defaultValue={""}
+                rules={{ required: 'true' }}
                 render={({ field: {onChange, value}})=> (
                     <FormControl className={classes.formControl}>
                         <InputLabel id="demo-simple-select-label">Typ umowy</InputLabel>
-                        <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label">
+                        <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label" error={!!errors.type}>
                         {options.map((option, index) => (
                             <MenuItem key={index} value={index}>
                                 {option}
@@ -240,10 +247,12 @@ const NewScore = (props)=> {
                 control={control}
                 name= "employee"
                 defaultValue={""}
+                rules={{ required: 'true' }}
+
                 render={({ field: {onChange, value}})=> (
                     <FormControl className={classes.formControl}>
                         <InputLabel id="employeelabel">Pracownik</InputLabel>
-                        <Select id="trinity-select" labelId="employeelabel" onChange={onChange} value={value}>
+                        <Select id="trinity-select" labelId="employeelabel" onChange={onChange} value={value} error={!!errors.employee}>
 
                             {employees.map((option, index) => (
                                 <MenuItem key={index} value={option.id}>
@@ -267,8 +276,10 @@ const NewScore = (props)=> {
             control={control}
             name= "mailing"
             defaultValue={false}
+            rules={{ required: 'true' }}
 
-                render={({ field: {onChange, value}})=> (
+
+            render={({ field: {onChange, value}})=> (
                     <Checkbox
                         checked={value}
                         onChange={onChange}

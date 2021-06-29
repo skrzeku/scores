@@ -23,7 +23,7 @@ const History = ()=> {
   `;
 
 
-    const headArray = ['l.p.', 'Wynik', 'Typ', 'Sprzedawca', 'Dodane przez', 'nr klienta', 'data'];
+    const headArray = ['l.p.', 'Wynik', 'Typ', 'Sprzedawca', 'nr klienta', 'data'];
 
 
 
@@ -31,11 +31,11 @@ const History = ()=> {
         return (<th>{head}</th>)
     });
 
-    const allhistory = scoresAll.slice(0, 20).map((score, index)=> {
+    const allhistory = scoresAll.slice(0, 30).map((score, index)=> {
         const employee = employees.find((one)=> {
             return one.id === score.employee
         });
-        return(<tr><td>{index + 1}</td> <td>{score.score}<span>{score.mailing ? ' M' : ''}</span></td><td>{score.type}</td> <td>{employee.name}</td><td>{score.user}</td><td>{score.client}</td><td>{score.date.toDate().toLocaleDateString()}</td></tr>)
+        return(<tr><td>{index + 1}</td> <td>{score.score}<span>{score.mailing ? ' M' : ''}</span></td><td>{score.type}</td> <td>{employee?.name} {employee?.lastname}</td><td>{score.client}</td><td>{score.date.toDate().toLocaleDateString()}</td></tr>)
     });
     return(<div><h2>Oststnio dodane wyniki:</h2>
         <MyTable className="table table-striped table-bordered">
