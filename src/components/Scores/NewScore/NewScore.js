@@ -69,12 +69,39 @@ color: white;
 font-weight: 700;
 padding: 5px 30px;
 text-transform: uppercase;
+`;
 
+const SendBtn = Styled.input`
+-webkit-appearance: none;
+display: inline-block;
+background-color: ${colorPrimary};
+color: white;
+padding: 10px 35px;
+border: none;
+position: absolute;
+right: 0;
+bottom: 0;
+z-index: 2;
+`;
 
+const CancelBtn = Styled.a`
+
+position: absolute;
+padding: 20px;
+border: none;
+position: absolute;
+right: 0;
+top: -40px;
+z-index: 2;
+color: black;
+text-decoration: none;
+cursor: pointer;
+font-size: 30px;
 `;
 
 const Form = Styled.form`
 padding: 50px;
+position: relative;
    
 `;
 
@@ -157,7 +184,7 @@ const NewScore = (props)=> {
                 control={control}
                 name= "client"
                 defaultValue=""
-                rules={{ required: 'Pole wymagane' }}
+                rules={{ required: 'true' }}
                 render={({ field: {onChange, value}})=> (
                     <TextField
                         label="Nr klienta"
@@ -234,27 +261,6 @@ const NewScore = (props)=> {
 
 
 
-            {/*<select {...register("type")}>*/}
-                {/*{*/}
-                    {/*options.map((option, index) => {*/}
-                        {/*return (*/}
-                            {/*<option key={index} value={option}>{option}</option>*/}
-                        {/*)*/}
-                    {/*})*/}
-                {/*}*/}
-            {/*</select>*/}
-            {/*<select {...register("employee", { required: true})} defaultValue={""}>*/}
-                {/*<option value='' disabled>Wybierz pracownika</option>*/}
-
-
-                {/*{*/}
-                    {/*employees.map((one, index) => {*/}
-                        {/*return (<option value={one.id} key={one.id}>{one.name + ' ' + one.lastname}</option> )*/}
-                    {/*})*/}
-                {/*}*/}
-            {/*</select>*/}
-            {/*<input type={"checkbox"} {...register("mailing")}/>*/}
-
             <FormControlLabel className={classes.formControl}
                 control={
             <Controller
@@ -276,7 +282,8 @@ const NewScore = (props)=> {
 
 
 
-            <input type="submit" value="Dodaj"/>
+            <SendBtn type="submit" value="Dodaj"/>
+            <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
         </Form>
         </FormInner>
     </FormWrapper> }

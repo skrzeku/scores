@@ -173,7 +173,6 @@ class Dashboar  extends Component {
                     })
                 }
             </select>
-            {addScoreWrapper}
             {addMinusWrapper}
             {
                 // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
