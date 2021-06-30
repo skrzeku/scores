@@ -17,6 +17,10 @@ import {month} from "../../reducers/month";
 import Ranking from '../../components/Ranking/Ranking';
 import *  as colors from '../../variables';
 import Details from "../Details/Details";
+import {
+    Select,
+    MenuItem,
+} from "@material-ui/core";
 
 const MyTable = Styled.table`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -24,6 +28,7 @@ const MyTable = Styled.table`
     margin: 0 auto;
     width: 95%;
     border-radius: 15px;
+    table-layout: fixed;
   `;
 const AddBtns = `
           background-color: ${colors.colorPrimary};
@@ -151,10 +156,32 @@ class Dashboar  extends Component {
         };
 
         return(<div>
-            <h1>Tablica wyników {months[this.props.month] + ' ' + new Date().getFullYear()} </h1>
-            <h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>
+            {/*<h1>Tablica wyników {months[this.props.month] + ' ' + new Date().getFullYear()} </h1>*/}
+            {/*<h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>*/}
 
             <Total/>
+            <div>
+            {/*<select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>*/}
+                {/*{*/}
+                    {/*months.map((one, index) => {*/}
+                        {/*return (<option value={index} key={index}>{one}</option>)*/}
+                    {/*})*/}
+                {/*}*/}
+            {/*</select>*/}
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    defaultValue={this.props.month}
+                    value={this.props.month}
+                    onChange={event => this.MonthChangeHandler(event.target.value)}
+                >
+                    {months.map((option, index) => (
+                        <MenuItem key={index} value={index}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </div>
 
 
             {this.props.user ? (this.state.showAddEmployeeForm && <AddEmployee/>) : null}
@@ -166,13 +193,7 @@ class Dashboar  extends Component {
 
 
             </MyTable>
-            <select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>
-                {
-                    months.map((one, index) => {
-                        return (<option value={index} key={index}>{one}</option>)
-                    })
-                }
-            </select>
+
             {addMinusWrapper}
             {
                 // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }

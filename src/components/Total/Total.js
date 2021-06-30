@@ -1,13 +1,45 @@
 import React from 'react';
 import {useSelector} from "react-redux";
+import Styled from 'styled-components';
+import {colorPrimary} from "../../variables";
 
+const TotalWrapper = Styled.div`
+display: flex;
+justify-content: space-between;
+width: 95%;
+margin: 0 auto;
+align-items: flex-end;
+padding: 10px
+`;
 
+const TotalTitle = Styled.h2`
+font-size: 50px;
+color: ${colorPrimary};
+font-weight: bold;
+margin-bottom: 0
+`;
+const TotalMonth = Styled.h3`
+font-weight: bold;
+`;
+
+const TotalSmall = Styled.div`
+font-weight: bold;
+tex-align: left;
+span { 
+display: block;
+text-align: left;
+}
+
+`;
 
  const Total = () => {
         //Get states
     const Scores = useSelector(state => state.scores);
      const month = useSelector(state => state.month);
      const calendar = useSelector(state => state.calendar[month]);
+
+     const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+
 
 
      const currentWeek = new Date().getWeek();
@@ -40,7 +72,11 @@ import {useSelector} from "react-redux";
         .reduce((a,b)=> a + b, 0);
 
 
-    return(<div>{MonthScore} W tym tygodniu: {countScores('week')} Dziś sprzedano: {countScores('day')}</div>)
+     return(<TotalWrapper>
+         <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
+         <TotalTitle>{MonthScore}</TotalTitle>
+         <TotalSmall><span>Dziś: {countScores('day')}</span><span>W tym tygodniu: {countScores('week')}</span> </TotalSmall>
+         </TotalWrapper>)
 };
 
 
