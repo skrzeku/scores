@@ -38,6 +38,11 @@ text-align: left;
      const month = useSelector(state => state.month);
      const calendar = useSelector(state => state.calendar[month]);
 
+
+     const endDate = calendar?.endDate.toDate();
+     const today = new Date().getTime();
+     const leftDays = Math.ceil((endDate?.getTime() - today)/ (1000*60*60*24));
+
      const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
 
@@ -74,6 +79,12 @@ text-align: left;
 
      return(<TotalWrapper>
          <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
+         <div>
+             <hp>{leftDays > 0 ? 'Do końca pozostało ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</hp>
+
+         </div>
+
+
          <TotalTitle>{MonthScore}</TotalTitle>
          <TotalSmall><span>Dziś: {countScores('day')}</span><span>W tym tygodniu: {countScores('week')}</span> </TotalSmall>
          </TotalWrapper>)

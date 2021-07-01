@@ -276,7 +276,6 @@ const NewScore = (props)=> {
             control={control}
             name= "mailing"
             defaultValue={false}
-            rules={{ required: 'true' }}
 
 
             render={({ field: {onChange, value}})=> (

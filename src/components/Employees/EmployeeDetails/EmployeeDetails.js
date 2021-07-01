@@ -13,7 +13,7 @@ const EmployeeDetails = (props)=> {
     const storeMonth = useSelector(state => state.month);
 
     //local state
-    const [month, setMonth] = useState(5);
+    const [month, setMonth] = useState(storeMonth);
     const calendar = useSelector(state => state.calendar[month]);
     const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
     const headArray = ['l.p.', 'Wynik', 'Typ','nr klienta', 'data'];

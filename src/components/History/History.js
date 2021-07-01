@@ -35,7 +35,7 @@ const History = ()=> {
         const employee = employees.find((one)=> {
             return one.id === score.employee
         });
-        return(<tr><td>{index + 1}</td> <td>{score.score}<span>{score.mailing ? ' M' : ''}</span></td><td>{score.type}</td> <td>{employee?.name} {employee?.lastname}</td><td>{score.client}</td><td>{score.date.toDate().toLocaleDateString()}</td></tr>)
+        return(<tr><td>{index + 1}</td> <td>{score.score}<span>{score.mailing ? ' M' : ''}</span></td><td>{score.type}</td> <td>{employee?.name} {employee?.lastname}</td><td>{score.client}</td><td>{score.date.seconds ? score.date.toDate().toLocaleDateString() : score.date.toLocaleDateString()}</td></tr>)
     });
     return(<div><h2>Oststnio dodane wyniki:</h2>
         <MyTable className="table table-striped table-bordered">
