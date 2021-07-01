@@ -59,6 +59,16 @@ const AddScoreBtn = Styled.a`
         `;
 
 
+const SelectWrapper = Styled.div`
+text-align: left;
+width: 95%;
+margin: 0 auto;
+input, div {
+min-width: 130px;
+}
+`;
+
+
 
 class Dashboar  extends Component {
     constructor() {
@@ -102,7 +112,20 @@ class Dashboar  extends Component {
 
 
     componentDidMount() {
-        this.MonthChangeHandler(5);
+        // const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
+        //         // return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
+        //
+        //
+        //
+        //         this.MonthChangeHandler(5);
+        const today = new Date();
+        const currMonth = this.props.calendar?.find((one)=> {
+            const date = today.getTime() >= one.startDate.toDate().getTime() && today.getTime() <= one.endDate.toDate().getTime();
+            console.log(date);
+            return date;
+        });
+        console.log(currMonth);
+
     }
 
 
@@ -113,6 +136,7 @@ class Dashboar  extends Component {
 
 
 
+        // this.MonthChangeHandler(currMonth.id);
 
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
@@ -158,16 +182,7 @@ class Dashboar  extends Component {
         return(<div>
             {/*<h1>Tablica wyników {months[this.props.month] + ' ' + new Date().getFullYear()} </h1>*/}
             {/*<h3>Obecnie zalogowany {this.props.user? this.props.user.email : 'niezalogowany'}</h3>*/}
-
-            <Total/>
-            <div>
-            {/*<select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>*/}
-                {/*{*/}
-                    {/*months.map((one, index) => {*/}
-                        {/*return (<option value={index} key={index}>{one}</option>)*/}
-                    {/*})*/}
-                {/*}*/}
-            {/*</select>*/}
+            <SelectWrapper>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -181,6 +196,18 @@ class Dashboar  extends Component {
                         </MenuItem>
                     ))}
                 </Select>
+            </SelectWrapper>
+
+            <Total/>
+            <div>
+            {/*<select onChange={event => this.MonthChangeHandler(event.target.value)} defaultValue={this.props.month}>*/}
+                {/*{*/}
+                    {/*months.map((one, index) => {*/}
+                        {/*return (<option value={index} key={index}>{one}</option>)*/}
+                    {/*})*/}
+                {/*}*/}
+            {/*</select>*/}
+
             </div>
 
 

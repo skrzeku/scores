@@ -9,7 +9,7 @@ justify-content: space-between;
 width: 95%;
 margin: 0 auto;
 align-items: flex-end;
-padding: 10px
+padding: 0 10px 10px;
 `;
 
 const TotalTitle = Styled.h2`
