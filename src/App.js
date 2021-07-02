@@ -12,6 +12,9 @@ import History from './components/History/History';
 import EmployeeDetails from './components/Employees/EmployeeDetails/EmployeeDetails';
 import Logo from './assets/images/logo.png';
 import Ranking from './components/Ranking/Ranking';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import {colorPrimary} from "./variables";
+
 
 
 
@@ -23,7 +26,9 @@ class App extends Component{
        this.state = {
            loading: false
    }
+
    }
+
 
 
 
@@ -123,6 +128,14 @@ class App extends Component{
             return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
         };
 
+        const theme = createMuiTheme({
+            palette: {
+                primary: {
+                    main: colorPrimary
+                }
+            },
+        });
+
 
 
 
@@ -130,6 +143,7 @@ class App extends Component{
 
       return (
           <div className="App">
+              <ThemeProvider theme={theme}>
               {
                   !this.state.loading ?   <div className="Spinner">
                       <img className="App-logo" src={Logo}/>
@@ -146,6 +160,7 @@ class App extends Component{
                   <Ranking path={'/ranking'} showAll={true}/>
 
               </Router>
+              </ThemeProvider>
           </div>
       );
   }

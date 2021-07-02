@@ -20,6 +20,7 @@ margin-bottom: 0
 `;
 const TotalMonth = Styled.h3`
 font-weight: bold;
+display: inline-block;
 `;
 
 const TotalSmall = Styled.div`
@@ -31,6 +32,14 @@ text-align: left;
 }
 
 `;
+
+const LeftDays = Styled.span`
+display: inline;
+font-size: 15px;
+margin-left: 10px;
+
+`;
+
 
  const Total = () => {
         //Get states
@@ -78,9 +87,10 @@ text-align: left;
 
 
      return(<TotalWrapper>
-         <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
+
          <div>
-             <hp>{leftDays > 0 ? 'Do końca pozostało ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</hp>
+             <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
+             <LeftDays>{leftDays > 0 ? 'Pozostały ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
 
          </div>
 
