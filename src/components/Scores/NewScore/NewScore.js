@@ -3,7 +3,7 @@ import {useForm, Controller} from 'react-hook-form';
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import Styled from 'styled-components';
-import {colorPrimary} from "../../../variables";
+import {cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
 import TextField from '@material-ui/core/TextField';
 // import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -48,18 +48,7 @@ const theme = createMuiTheme({
 
 
 const FormWrapper = Styled.div`
-position: fixed;
-width: 100%;
-height: 100%;
-left: 0;
-top: 0;
-background-color: rgba(0,0,0, 0.3);
-transition: 0.3s all ease;
-display: flex;
-align-items: center;
-justify-content: center;
-
-
+${formWrapper}
 `;
 
 const FormTitle = Styled.div`
@@ -72,46 +61,28 @@ text-transform: uppercase;
 `;
 
 const SendBtn = Styled.input`
--webkit-appearance: none;
-display: inline-block;
-background-color: ${colorPrimary};
-color: white;
-padding: 10px 35px;
-border: none;
-position: absolute;
-right: 0;
-bottom: 0;
-z-index: 2;
+${sendBtn}
 `;
 
 const CancelBtn = Styled.a`
 
-position: absolute;
-padding: 20px;
-border: none;
-position: absolute;
-right: 0;
-top: -40px;
-z-index: 2;
-color: black;
-text-decoration: none;
-cursor: pointer;
-font-size: 30px;
+${cancelBtn}
 `;
 
 const Form = Styled.form`
 padding: 50px 50px 80px;
 position: relative;
+    > div { 
+    min-width: 220px;
+    margin-right: 10px;
+    vertical-align: middle;
+    }
 
    
 `;
 
 const FormInner = Styled.div`
-width: 600px;
-background-color: white;
-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-animation: .4s rollout;
-position: relative;
+${formInner}
 `;
 
 
@@ -164,8 +135,10 @@ const NewScore = (props)=> {
             {props.shownNewScore &&
         <FormWrapper>
         <FormInner>
-        <FormTitle>Dodaj wynik</FormTitle>
-        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off">
+            <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
+
+            <FormTitle>Dodaj wynik</FormTitle>
+        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off" noValidate>
             <Controller
                 control={control}
                 name= "score"
@@ -188,7 +161,7 @@ const NewScore = (props)=> {
                 control={control}
                 name= "client"
                 defaultValue=""
-                rules={{ required: 'true' }}
+                rules={{ required: 'true', maxLength: 4 }}
                 render={({ field: {onChange, value}})=> (
                     <TextField
                         label="Nr klienta"
@@ -293,7 +266,6 @@ const NewScore = (props)=> {
 
 
             <SendBtn type="submit" value="Dodaj"/>
-            <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
         </Form>
         </FormInner>
     </FormWrapper> }

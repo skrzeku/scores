@@ -8,6 +8,10 @@ padding: 5px;
 font-size: 12px;
 color: red;
 max-width: 50%;
+    &:hover {
+    cursor: pointer;
+        opacity: 0.7;
+    }
 `;
 
 

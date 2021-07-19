@@ -70,6 +70,10 @@ const Scores = (props)=> {
     padding: 5px;
     min-height: 35px;
     position: relative;
+        &:hover {
+        cursor: pointer;
+        color: ${colorPrimary}
+        }
     
     
      &:last-child {
@@ -125,7 +129,7 @@ const Scores = (props)=> {
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni, index)=> {
 
-                                    return (<TableScore onClick={()=> dynamicComponent(oni)} key={index}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore onClick={()=> props.setCurrentScore(oni)} key={index}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
@@ -159,7 +163,7 @@ const Scores = (props)=> {
                     return ob.mailing ? 1 : 0
                 }).reduce((a,b)=> a + b, 0);
 
-        return(<SummaryCell key={employee.id}>{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
+        return(<SummaryCell key={employee.id} >{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
             });
 
 
@@ -193,13 +197,7 @@ const Scores = (props)=> {
                         .reduce((a,b)=> {
                             return +a + +b
                         }, 0);
-                    // const lol = MonthMinuses.length >0 ? MonthMinuses[0] : [];
-                    //
-                    // const lol2 = lol.reduce((a,b)=> {
-                    //     return +a + +b
-                    // }, 0);
 
-                    // console.log(lol2);
                     console.log(MonthMinuses);
 
 
@@ -211,10 +209,8 @@ const Scores = (props)=> {
             }
         </tr>
         </tbody>
-        {
-            // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
-            currentScore && <Details object={currentScore} onClose={()=> setScore(null)} dbName={"scores"}/> }
-        {/*<button onClick={removeData}>?usun dane</button>*/}
+        {/*{*/}
+            {/*currentScore && <Details object={currentScore} onClose={()=> setScore(null)} dbName={"scores"}/> }*/}
 
 
 

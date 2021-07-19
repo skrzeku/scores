@@ -4,7 +4,7 @@ import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 import firebase from "../../../firebase";
 import Styled from "styled-components";
-import {colorPrimary} from "../../../variables";
+import {cancelBtn, colorPrimary, formWrapper} from "../../../variables";
 import {Controller, useForm} from "react-hook-form";
 import TextField from "@material-ui/core/TextField/TextField";
 import {FormControl, InputLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
@@ -26,16 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormWrapper = Styled.div`
-position: fixed;
-width: 100%;
-height: 100%;
-left: 0;
-top: 0;
-background-color: rgba(0,0,0, 0.3);
-transition: 0.3s all ease;
-display: flex;
-align-items: center;
-justify-content: center;
+${formWrapper}
 
 
 `;
@@ -63,23 +54,17 @@ z-index: 2;
 `;
 
 const CancelBtn = Styled.a`
-
-position: absolute;
-padding: 20px;
-border: none;
-position: absolute;
-right: 0;
-top: -40px;
-z-index: 2;
-color: black;
-text-decoration: none;
-cursor: pointer;
-font-size: 30px;
+${cancelBtn}
 `;
 
 const Form = Styled.form`
 padding: 50px 50px 80px;
 position: relative;
+  > div { 
+    min-width: 220px;
+    margin-right: 10px;
+    vertical-align: middle;
+    }
 
    
 `;
@@ -95,7 +80,8 @@ position: relative;
 
 
 
-const AddMinus = ()=> {
+const AddMinus = (props)=> {
+    console.log(props);
 
     //get states
     const employees = useSelector(state => state.employees);
@@ -119,12 +105,13 @@ const AddMinus = ()=> {
             date: new Date(),
             client: data.client
         };
-        console.log(newMinuse);
-        // db.collection('scores').add(newScore).then(()=> {
-        //     dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-        //     reset();
-        //     props.onClose();
-        // });
+        console.log(data);
+        // console.log(newMinuse);
+        db.collection('minuses').add(newMinuse).then(()=> {
+            dispatch({type:'ADD_MINUSES', minuses: myminuses, minuse: newMinuse});
+            reset();
+            props.onClose();
+        });
 
     };
 
@@ -145,8 +132,16 @@ const AddMinus = ()=> {
     console.log(number);
 
 
-    return(<FormWrapper>
-        <FormInner>
+    return(
+        <React.Fragment>
+        {props.showminusForm &&
+        <FormWrapper>
+
+
+
+                <FormInner>
+                    <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
+
             <FormTitle>Dodaj minusa</FormTitle>
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
@@ -170,7 +165,7 @@ const AddMinus = ()=> {
                 control={control}
                 name= "client"
                 defaultValue=""
-                rules={{ required: 'true' }}
+                rules={{ required: 'true', maxLength: 4}}
                 render={({ field: {onChange, value}})=> (
                     <TextField
                         label="Nr klienta"
@@ -204,21 +199,27 @@ const AddMinus = ()=> {
             />
 
 
-            <select onChange={event => setEmployee(event.target.value)}>
 
-                {
-                    employees.map((one, index) => {
-                        return (<option value={one.id} key={one.id}>{one.name + ' ' + one.lastname}</option> )
-                    })
-                }
-            </select>
-            {/*<TagsInput value={number} onChange={handleChange}/>*/}
-            <input type="number" onChange={event => setNumber(event.target.value)} value={number}/>
-            <input type="text" onChange={event => setClient(event.target.value)} value={client}/>
-        </Form>
+
+            {/*<select onChange={event => setEmployee(event.target.value)}>*/}
+
+                {/*{*/}
+                    {/*employees.map((one, index) => {*/}
+                        {/*return (<option value={one.id} key={one.id}>{one.name + ' ' + one.lastname}</option> )*/}
+                    {/*})*/}
+                {/*}*/}
+            {/*</select>*/}
+            {/*/!*<TagsInput value={number} onChange={handleChange}/>*!/*/}
+            {/*<input type="number" onChange={event => setNumber(event.target.value)} value={number}/>*/}
+            {/*<input type="text" onChange={event => setClient(event.target.value)} value={client}/>*/}
             <SendBtn type="submit" value="Dodaj"/>
+
+        </Form>
+
+
         </FormInner>
-    </FormWrapper>)
+    </FormWrapper> }
+        </React.Fragment>)
 };
 
 

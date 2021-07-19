@@ -64,9 +64,7 @@ const Ranking = (props)=> {
 
 
     const endDate = calendar?.endDate.toDate();
-    const today = new Date().getTime();
-    const leftDays = Math.ceil((endDate?.getTime() - today)/ (1000*60*60*24));
-    console.log(today);
+
     const podium = [2, 1, 3];
 
 
@@ -82,8 +80,8 @@ const Ranking = (props)=> {
                 return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
             })
             .reduce((a,b)=> {
-                return {id: one.id, sum: +a.sum + +b.score, name: one.name + ' ' + one.lastname}
-            }, {id: one.id, sum: 0, name: one.name + one.lastname})
+                return {id: one.id, sum: +a.sum + +b.score, name: one.name + ' ' + one.lastname[0] + '.'}
+            }, {id: one.id, sum: 0, name: one.name + one.lastname[0] + '.'})
     });
 
 
@@ -92,11 +90,10 @@ const Ranking = (props)=> {
     console.log(sortedScores);
 
     return(<React.Fragment>
-        <h3>{leftDays > 0 ? 'Do końca pozostało ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</h3>
         <Podium>
             {
                 podium.map((place, index)=> {
-                    return(<div key={index}><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[index]?.name}</PodriumName> {sortedScores[index]?.sum} </div>)
+                    return(<div key={index}><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[place - 1]?.name}</PodriumName> {sortedScores[place - 1]?.sum} </div>)
                 })
             }
 

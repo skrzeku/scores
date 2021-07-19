@@ -90,7 +90,7 @@ margin-left: 10px;
 
          <div>
              <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
-             <LeftDays>{leftDays > 0 ? 'Pozostały ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
+             <LeftDays>{leftDays > 0 ? 'Pozostało: ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
 
          </div>
 

@@ -2,22 +2,34 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import firebase from "firebase";
 import Styled from 'styled-components';
-import {colorPrimary} from "../../variables";
+import {cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn} from "../../variables";
 
 const db = firebase.firestore();
 
 //Styles
+const ScoreInner = Styled.div`
+${formInner}
+`;
+
 const ScoreWrapper = Styled.div`
-border: solid 2px ${colorPrimary};
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-animation: .4s rollout;
-background-color: white;
-padding: 30px;
-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  
+${formWrapper}
+`;
+
+const RemoveBtn = Styled.button`
+${sendBtn}
+`;
+
+const CancelBtn = Styled.a`
+${cancelBtn}
+`;
+
+const DetailInside = Styled.div`
+padding: 30px 50px 40px;
+position: relative;
+`;
+
+const Title = Styled.div`
+${globalTitle}
 `;
 
 
@@ -64,18 +76,28 @@ const Details = (props)=> {
     };
 
 
-    return(<ScoreWrapper className={endi ? 'endRoll' : ''}>
-        <h2>Wynik</h2>
-        <div>
-            <p>Pracownik: {currentEmployee?.name} {currentEmployee?.lastname}</p>
+    return(<ScoreWrapper>
+        <ScoreInner>
+            <CancelBtn onClick={Closeit}><i className="las la-times"></i></CancelBtn>
             {
-                props.object?.score ? <p>Wynik {props.object?.score}</p> : <p>Minus: {props.object?.minus}</p>
+                props.object?.score ?  <Title>Wynik</Title> : <Title>Minus</Title>
             }
-            <p>Data: {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}</p>
-            <p>Nr klienta: {props.object.client}</p>
-            <button onClick={removeData}>Usuń Wynik</button>
-            <button onClick={Closeit}>Anuluj</button>
-        </div>
+
+        <DetailInside>
+            <p><strong>Pracownik:</strong> {currentEmployee?.name} {currentEmployee?.lastname}</p>
+            {
+                props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p> : <p><strong>Minus:</strong> {props.object?.minus}</p>
+            }
+            <p><strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}</p>
+            <p><strong>Nr klienta:</strong> {props.object.client}</p>
+            {
+                props.object?.score ? <RemoveBtn onClick={removeData}>Usuń Wynik</RemoveBtn> : <RemoveBtn onClick={removeData}>Usuń Minus</RemoveBtn>
+
+            }
+
+
+        </DetailInside>
+        </ScoreInner>
     </ScoreWrapper>)
 };
 

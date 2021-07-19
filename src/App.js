@@ -24,7 +24,7 @@ class App extends Component{
 
        super();
        this.state = {
-           loading: false
+           loading: true
    }
 
    }
@@ -46,12 +46,21 @@ class App extends Component{
       //get employees
       let CurrentEmployees = [];
 
+      //
+      // db.collection('employees').get()
+      //     .then((result) => {
+      //        CurrentEmployees = result.docs.map(one => one.data());
+      //         this.props.employeesFetched(CurrentEmployees)
+      //     });
 
-      db.collection('employees').get()
-          .then((result) => {
-             CurrentEmployees = result.docs.map(one => one.data());
-              this.props.employeesFetched(CurrentEmployees)
+      db.collection('employees').onSnapshot((snap)=> {
+          const data = snap.docs.map(doc => {
+              const obj = Object.assign(doc.data(), {key : doc.id});
+              return obj
           });
+          this.props.employeesFetched(data);
+          // this.setState({loading: true});
+      });
 
 
       //get scores
@@ -93,6 +102,7 @@ class App extends Component{
           .orderBy('id', 'asc')
           .get()
           .then((result)=> {
+              console.log(result);
               CurrentCalendar = result.docs.map(one => {
                   console.log(one.data());
                   return one.data()

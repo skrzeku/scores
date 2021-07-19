@@ -1,6 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
+import {MenuItem, Select} from "@material-ui/core";
+
+
+//styles
+const MyTable = Styled.table`
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    margin: 0 auto;
+    width: 65%;
+    border-radius: 15px;
+  `;
+
+const SelectWrapper = Styled.div`
+text-align: center;
+width: 95%;
+margin: 0 auto;
+input, div {
+min-width: 130px;
+}
+`;
 
 
 
@@ -19,14 +39,7 @@ const EmployeeDetails = (props)=> {
     const headArray = ['l.p.', 'Wynik', 'Typ','nr klienta', 'data'];
 
 
-    //styles
-    const MyTable = Styled.table`
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    position: relative;
-    margin: 0 auto;
-    width: 65%;
-    border-radius: 15px;
-  `;
+
 
 
     console.log(calendar);
@@ -63,14 +76,22 @@ const EmployeeDetails = (props)=> {
 
 
     return(<div>
-        <select onChange={event => setMonth(event.target.value)} defaultValue={month}>
-            {
-                months.map((one, index) => {
-                    return (<option value={index} key={index}>{one}</option>)
-                })
-            }
-        </select>
-        <h3>{currentEmployee?.lastname} {calendar?.name} {new Date().getFullYear()}</h3>
+        <SelectWrapper>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                defaultValue={month}
+                value={month}
+                onChange={event => setMonth(event.target.value)}
+            >
+                {months.map((option, index) => (
+                    <MenuItem key={index} value={index}>
+                        {option}
+                    </MenuItem>
+                ))}
+            </Select>
+        </SelectWrapper>
+        <h3>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</h3>
         <h2>Wyniki</h2>
         {scoreTable.length > 0 ?
             <MyTable>
