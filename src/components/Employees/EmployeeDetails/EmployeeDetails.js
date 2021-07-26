@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import {MenuItem, Select} from "@material-ui/core";
+import {globalTitle, tabName} from "../../../variables";
 
 
 //styles
@@ -15,11 +16,24 @@ const MyTable = Styled.table`
 
 const SelectWrapper = Styled.div`
 text-align: center;
-width: 95%;
-margin: 0 auto;
 input, div {
 min-width: 130px;
 }
+`;
+const Title = Styled.div`
+${globalTitle}
+margin-bottom: 20px;
+`;
+
+const TabName = Styled.h2`
+${tabName}
+`;
+
+const NameWrapper = Styled.div`
+display: flex;
+width: 65%;
+margin: 0 auto;
+justify-content: space-between;
 `;
 
 
@@ -76,23 +90,30 @@ const EmployeeDetails = (props)=> {
 
 
     return(<div>
-        <SelectWrapper>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                defaultValue={month}
-                value={month}
-                onChange={event => setMonth(event.target.value)}
-            >
-                {months.map((option, index) => (
-                    <MenuItem key={index} value={index}>
-                        {option}
-                    </MenuItem>
-                ))}
-            </Select>
-        </SelectWrapper>
-        <h3>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</h3>
-        <h2>Wyniki</h2>
+        <TabName><span>Wyniki pracownika</span></TabName>
+        <NameWrapper>
+            <Title>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</Title>
+            <SelectWrapper>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    defaultValue={month}
+                    value={month}
+                    onChange={event => setMonth(event.target.value)}
+                >
+                    {months.map((option, index) => (
+                        <MenuItem key={index} value={index}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </SelectWrapper>
+        </NameWrapper>
+
+
+
+
+
         {scoreTable.length > 0 ?
             <MyTable>
                 <thead>
@@ -110,6 +131,7 @@ const EmployeeDetails = (props)=> {
             </MyTable> :
             <h3>Brak wyników w tym miesiącu</h3>
         }
+
 
     </div>)
 };

@@ -5,8 +5,11 @@ import TextField from "@material-ui/core/TextField/TextField";
 
 import Styled from 'styled-components';
 import {FormControl, InputLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
-import {cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
+import {buttonWrapper, cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn} from "../../../variables";
 import {Controller, useForm} from "react-hook-form";
+import Button from "@material-ui/core/Button/Button";
+import SaveIcon from '@material-ui/icons/Save';
+
 
 
 
@@ -19,40 +22,28 @@ const FormInner = Styled.div`
 ${formInner}
 `;
 const SendBtn = Styled.input`
--webkit-appearance: none;
-display: inline-block;
-background-color: ${colorPrimary};
-color: white;
-padding: 10px 35px;
-border: none;
-position: absolute;
-right: 0;
-bottom: 0;
-z-index: 2;
+
 `;
 
 const CancelBtn = Styled.a`
 ${cancelBtn}
 `;
 const FormTitle = Styled.div`
-width: 200px;
-background-color: ${colorPrimary};
-color: white;
-font-weight: 700;
-padding: 5px 30px;
-text-transform: uppercase;
+${globalTitle}
 `;
 
 const Form = Styled.form`
-padding: 50px 50px 80px;
+padding: 50px;
 position: relative;
     > div { 
     min-width: 220px;
     margin-right: 10px;
     vertical-align: middle;
     }
+`;
 
-   
+const ButtonWrapper = Styled.div`
+${buttonWrapper}
 `;
 
 
@@ -152,22 +143,18 @@ const AddEmployee = (props)=> {
                                 />
                             )}
                         />
-                        {/*<TextField*/}
-                        {/*onChange={event => setName(event.target.value)}*/}
-                        {/*value={name}*/}
-                        {/*label="Imię"*/}
-                        {/*required={true}*/}
-                        {/*error={name.length < 1}*/}
 
-                        {/*/>*/}
 
-                        {/*<TextField*/}
-                        {/*onChange={event => setLastName(event.target.value)}*/}
-                        {/*value={lastName}*/}
-                        {/*label="Nazwisko"*/}
-                        {/*/>*/}
-                        {/*<input type={"text"} placeholder={"Imię"} onChange={event => setName(event.target.value)}/>*/}
-                        <SendBtn type="submit" value="Dodaj"/>
+                        <ButtonWrapper>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                startIcon={<SaveIcon />}
+                            >
+                                Dodaj
+                            </Button>
+                        </ButtonWrapper>
                     </Form>
 
                 </FormInner>

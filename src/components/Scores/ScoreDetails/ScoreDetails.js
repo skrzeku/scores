@@ -22,21 +22,18 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 const ScoreDetails = (props)=> {
 
     let score = props?.score;
-    console.log(score);
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
     const currentEmployee = employees?.find((one)=> one.id === score?.employee);
     const dispatch = useDispatch();
     const db = firebase.firestore();
 
-    console.log(currentEmployee);
-    console.log(props);
+
 
 
 
     const hideComponent = ()=> {
       score = [];
-      console.log(props);
     };
 
     const removeData = ()=> {
@@ -45,7 +42,6 @@ const ScoreDetails = (props)=> {
         const index = scoresAll.indexOf(score);
 
         db.collection("scores").doc(key).delete().then(() => {
-            console.log("Document successfully deleted!");
             dispatch({type: 'REMOVE_SCORE', scores, index});
         }).catch((error) => {
             console.error("Error removing document: ", error);

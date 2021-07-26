@@ -28,12 +28,11 @@ const Scores = (props)=> {
 
     const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
 
-    console.log([...new Set(weeks)]);
 
          const sequential = (to, from = 0)=> {
             return  Array.from(Array(to + 1).keys()).slice(from)
     };
-    console.log(minuses);
+
 
 
 
@@ -41,15 +40,10 @@ const Scores = (props)=> {
 
     if (calendar?.startDate) {
         correctweeks = sequential(calendar?.endDate.toDate().getWeek(), calendar?.startDate.toDate().getWeek());
-
     }
 
 
-   //  const range = (min, max) => [...Array(max - min + 1).keys()].map(i => i + min);
-   //  for (let i of range(20,25)) {
-   //     console.log(i);
-   // }
-   //  console.log(calendar?.startDate.toDate().getWeek());
+
 
 
     const OneRow = Styled.tr`
@@ -118,7 +112,9 @@ const Scores = (props)=> {
        return (<OneRow>{
                employees.map((one)=> {
                    const employeeScore = scoresAll
-                       .filter((ons) => ons.employee === one.id)
+                       .filter((ons) => {
+                           return ons.employee === one.id
+                       })
                        .filter(ont => {
                            const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
                            return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
@@ -187,7 +183,6 @@ const Scores = (props)=> {
                 summary.map((sum, index)=> {
                   const sumofPluses = sum?.props.children[0];
                   const id = sum.key;
-                  // console.log(id);
                     const MonthMinuses = minuses.filter((one)=> one.employee === +id)
                         .filter((oni)=> {
                             const date = oni.date.seconds ? oni.date.toDate().getTime() : oni.date.getTime();
@@ -198,7 +193,6 @@ const Scores = (props)=> {
                             return +a + +b
                         }, 0);
 
-                    console.log(MonthMinuses);
 
 
 

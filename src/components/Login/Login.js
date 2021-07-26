@@ -3,6 +3,33 @@ import { auth } from "../../firebase";
 import {Router, navigate} from '@reach/router';
 import {useDispatch, useSelector} from 'react-redux'
 import {user} from "../../reducers/user";
+import {Controller, useForm} from "react-hook-form";
+import Button from "@material-ui/core/Button/Button";
+import SaveIcon from '@material-ui/icons/Save';
+import TextField from "@material-ui/core/TextField/TextField";
+import Styled from "styled-components";
+import {buttonWrapper, tabName} from "../../variables";
+
+
+const Form = Styled.form`
+padding: 50px;
+position: relative;
+    > div { 
+    min-width: 220px;
+    margin-right: 10px;
+    vertical-align: middle;
+    }
+`;
+
+const TabName = Styled.h2`
+${tabName}
+`;
+
+
+const ButtonWrapper = Styled.div`
+${buttonWrapper}
+`;
+
 
 
 const Login = ()=> {
@@ -10,26 +37,20 @@ const Login = ()=> {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [user, setUser] = useState('');
+    const Loggeduser = useSelector(state => state.user);
+
+    const { register, handleSubmit, formState: {errors}, control, reset } = useForm();
+
+
+
 
     const dispatch = useDispatch();
-    // console.log(user.email);
 
     auth.onAuthStateChanged((use)=> {
        setUser(use);
     });
 
-    console.log(user);
 
-
-    // auth.onAuthStateChanged(authUser => {
-    //     authUser
-    //         ? localStorage.setItem('authUser', JSON.stringify(authUser))
-    //         : localStorage.removeItem('authUser')
-    // });
-
-    //
-    // const CurrentUser = JSON.parse(localStorage.getItem('authUser'));
-    // console.log(JSON.parse(localStorage.getItem('authUser')));
 
 
 
@@ -63,17 +84,56 @@ const Login = ()=> {
     };
 
 return(<div>
-    <h3>Zaloguj</h3>
+    <TabName><span>Logowanie</span></TabName>
     {/*<h4>Obecnie zalogowany: {CurrentUser? CurrentUser.email : ''}</h4>*/}
-    <form>
+    {
+        Loggeduser ?
+            <div><h5>Obecnie zalogowany: {Loggeduser.email}</h5>
+                <ButtonWrapper>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="secondary"
+                        onClick={signOut}
+                        startIcon={<SaveIcon />}
+                    >
+                        Wyloguj
+                    </Button>
+                </ButtonWrapper>
+            </div>
+
+            : <Form>
+
+            <TextField
+                label="adres email"
+                type="email"
+                inputRef={emailRef}
+            />
+
+            <TextField
+                label="hasło"
+                type="password"
+                inputRef={passwordRef}
+            />
 
 
-        <input ref={emailRef} type={"email"} placeholder={"adres email"}/>
-        <input ref={passwordRef} type={"password"} placeholder={"hasło"}/>
-        <button onClick={signIn}>Zaloguj</button>
-        <button onClick={signOut}>Wyloguj</button>
+            <ButtonWrapper>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    onClick={signIn}
+                    startIcon={<SaveIcon />}
+                >
+                    Zaloguj
+                </Button>
+            </ButtonWrapper>
+        </Form>
+    }
 
-    </form>
+
+
+
 </div>)
 };
 

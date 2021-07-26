@@ -21,6 +21,8 @@ import {
     Select,
     MenuItem,
 } from "@material-ui/core";
+import {colorPrimary} from "../../variables";
+import {tabName} from "../../variables";
 
 const MyTable = Styled.table`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -44,12 +46,17 @@ const AddBtns = `
         text-decoration: none;
            position: absolute;
            right: 0;
+           transition: 0.2s all ease;
+            &:hover {
+            color: ${colorPrimary};
+            background-color: white;
+            }
         `;
 
 const AddEmployeeBtn = Styled.a`
      
         
-        top: -50px;
+        top: 0px;
         ${AddBtns}
         `;
 
@@ -72,6 +79,10 @@ margin: 0 auto;
 input, div {
 min-width: 130px;
 }
+`;
+
+const TabName = Styled.h2`
+${tabName}
 `;
 
 
@@ -99,7 +110,6 @@ class Dashboar  extends Component {
     }
     showMinusFormHandler() {
         this.setState({showminusform: !this.state.showminusform});
-        console.log(this.state.showminusform);
     }
 
     showAddEmployeeHandler() {
@@ -111,7 +121,6 @@ class Dashboar  extends Component {
 
    MonthChangeHandler (event) {
         this.props.changeMonth(+event);
-        console.log(this.props.month);
         this.setState({showselect: true});
     };
 
@@ -128,19 +137,12 @@ class Dashboar  extends Component {
 
 
     componentDidMount() {
-        // const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
-        //         // return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
-        //
-        //
-        //
-        //         this.MonthChangeHandler(5);
+
         const today = new Date();
         const currMonth = this.props.calendar?.find((one)=> {
             const date = today.getTime() >= one.startDate.toDate().getTime() && today.getTime() <= one.endDate.toDate().getTime();
-            console.log(date);
             return date;
         });
-        // console.log(this.props.calendar);
 
     }
 
@@ -157,12 +159,7 @@ class Dashboar  extends Component {
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
         const db = firebase.firestore();
-        console.log(this.props.user);
-        console.log(colors.colorPrimary);
 
-        console.log(this.props.month);
-        console.log(this.props.calendar);
-        // this.MonthChangeHandler(8);
 
 
 
@@ -174,30 +171,8 @@ class Dashboar  extends Component {
         const addMinusWrapper = this.props.user ? (this.state.showminusform && <AddMinus/>) : null;
 
 
-
-
-
-
-
-        const addNewScore = ()=> {
-            // // shownComponent = !shownComponent;
-            // // console.log(shownComponent);
-            // console.log(this.state.startdates);
-            // console.log(this.state.endDatess);
-            //
-            // const monthObject =  {
-            //         id: 11,
-            //         name: "Grudzień",
-            //         startDate: this.state.startdates,
-            //         endDate: this.state.endDatess
-            //     };
-            //
-            // db.collection('calendar').add(monthObject).then(()=> {
-            //     // dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-            // });
-        };
-
         return(<div>
+            <TabName><span>Wyniki</span></TabName>
             <SelectWrapper>
                 <Select
                     labelId="demo-simple-select-label"

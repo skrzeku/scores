@@ -13,6 +13,7 @@ animation: .3s showBg;
 display: flex;
 align-items: center;
 justify-content: center;
+
 `;
 
 
@@ -22,6 +23,7 @@ background-color: white;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 animation: .5s rollout;
 position: relative;
+border-radius: 10px;
 `;
 
 
@@ -59,6 +61,44 @@ width: 200px;
 background-color: ${colorPrimary} !important;
 color: white;
 font-weight: 700;
-padding: 5px 30px;
+padding: 7px 30px 7px 15px;
 text-transform: uppercase;
+border-bottom-right-radius: 10px;
+`;
+
+export const buttonWrapper = `
+margin-top: 30px;
+`;
+
+
+export const tabName = `
+position: absolute;
+top:0;
+left: 50%;
+transform: translateX(-50%);
+font-weight: 400;
+text-transform: uppercase;
+line-height: 80px;
+padding: 0 10px;
+            span {
+            position: relative;
+            
+            &:before, &:after {
+                content: '';
+                top: 48%;
+                position: absolute;
+                width: 50px;
+                height: 2px;
+                background-color: ${colorPrimary}
+            
+                }
+                    &:before {
+                   left: -70px;
+                   }
+                    &:after {
+                    right: -70px;
+                    }
+            }
+
+    
 `;

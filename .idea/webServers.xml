@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="200d123d-0bac-4bce-87ec-69786ed926c9" name="ftp" url="http://internet-media.home.pl">
+        <fileTransfer host="internet-media.home.pl" port="21" rootFolder="/tablica.inet-media.pl">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -4,10 +4,15 @@ import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 import firebase from "../../../firebase";
 import Styled from "styled-components";
-import {cancelBtn, colorPrimary, formWrapper} from "../../../variables";
+import {buttonWrapper, cancelBtn, colorPrimary, formWrapper, globalTitle} from "../../../variables";
 import {Controller, useForm} from "react-hook-form";
 import TextField from "@material-ui/core/TextField/TextField";
-import {FormControl, InputLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
+import {Checkbox, FormControl, FormControlLabel, InputLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import SaveIcon from '@material-ui/icons/Save';
+
+
 
 
 
@@ -32,12 +37,7 @@ ${formWrapper}
 `;
 
 const FormTitle = Styled.div`
-width: 200px;
-background-color: ${colorPrimary};
-color: white;
-font-weight: 700;
-padding: 5px 30px;
-text-transform: uppercase;
+${globalTitle}
 `;
 
 const SendBtn = Styled.input`
@@ -58,15 +58,13 @@ ${cancelBtn}
 `;
 
 const Form = Styled.form`
-padding: 50px 50px 80px;
+padding: 50px;
 position: relative;
-  > div { 
+    > div { 
     min-width: 220px;
     margin-right: 10px;
     vertical-align: middle;
     }
-
-   
 `;
 
 const FormInner = Styled.div`
@@ -75,6 +73,10 @@ background-color: white;
 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 animation: .4s rollout;
 position: relative;
+`;
+
+const ButtonWrapper = Styled.div`
+${buttonWrapper}
 `;
 
 
@@ -92,20 +94,22 @@ const AddMinus = (props)=> {
     const classes = useStyles();
 
 
-    const { register, handleSubmit, formState: {errors}, control, reset } = useForm();
+    const { register, handleSubmit, formState: {errors}, control, watch, reset } = useForm();
 
 
 
     const db = firebase.firestore();
     const dispatch = useDispatch();
+
+    const lostMonthWatcher = watch('lastMonth');
     const onSubmit = (data, e) => {
         const newMinuse = {
             minus: data.number,
             employee: +data.employee,
             date: new Date(),
-            client: data.client
+            client: data.lastMonth ? data.client = 9999 : data.client
         };
-        console.log(data);
+        // console.log(newMinuse);
         // console.log(newMinuse);
         db.collection('minuses').add(newMinuse).then(()=> {
             dispatch({type:'ADD_MINUSES', minuses: myminuses, minuse: newMinuse});
@@ -160,22 +164,41 @@ const AddMinus = (props)=> {
                     />
                 )}
             />
+            <FormControlLabel
+                              control={
+                                  <Controller
+                                      control={control}
+                                      name= "lastMonth"
+                                      defaultValue={false}
+                                      render={({ field: {onChange, value}})=> (
+                                          <Checkbox
+                                              checked={value}
+                                              onChange={onChange}
+                                              color="primary"
+                                          />
 
-            <Controller
-                control={control}
-                name= "client"
-                defaultValue=""
-                rules={{ required: 'true', maxLength: 4}}
-                render={({ field: {onChange, value}})=> (
-                    <TextField
-                        label="Nr klienta"
-                        type="number"
-                        error={!!errors.client}
-                        value={value}
-                        onChange={onChange}
-                    />
-                )}
-            />
+                                      )}
+                                  /> }
+                              label="Z poprzedniego miesiąca"/>
+
+            {
+                !lostMonthWatcher &&  <Controller
+                    control={control}
+                    name= "client"
+                    defaultValue=""
+                    rules={{ required: 'true', maxLength: 4}}
+                    render={({ field: {onChange, value}})=> (
+                        <TextField
+                            label="Nr klienta"
+                            type="number"
+                            error={!!errors.client}
+                            value={value}
+                            onChange={onChange}
+                        />
+                    )}
+                />
+            }
+
 
             <Controller
                 control={control}
@@ -200,19 +223,17 @@ const AddMinus = (props)=> {
 
 
 
-
-            {/*<select onChange={event => setEmployee(event.target.value)}>*/}
-
-                {/*{*/}
-                    {/*employees.map((one, index) => {*/}
-                        {/*return (<option value={one.id} key={one.id}>{one.name + ' ' + one.lastname}</option> )*/}
-                    {/*})*/}
-                {/*}*/}
-            {/*</select>*/}
-            {/*/!*<TagsInput value={number} onChange={handleChange}/>*!/*/}
-            {/*<input type="number" onChange={event => setNumber(event.target.value)} value={number}/>*/}
-            {/*<input type="text" onChange={event => setClient(event.target.value)} value={client}/>*/}
-            <SendBtn type="submit" value="Dodaj"/>
+            {/*<SendBtn type="submit" value="Dodaj"/>*/}
+            <ButtonWrapper>
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                startIcon={<SaveIcon />}
+            >
+                Dodaj
+            </Button>
+            </ButtonWrapper>
 
         </Form>
 

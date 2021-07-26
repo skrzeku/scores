@@ -24,7 +24,7 @@ class App extends Component{
 
        super();
        this.state = {
-           loading: true
+           loading: false
    }
 
    }
@@ -102,9 +102,7 @@ class App extends Component{
           .orderBy('id', 'asc')
           .get()
           .then((result)=> {
-              console.log(result);
               CurrentCalendar = result.docs.map(one => {
-                  console.log(one.data());
                   return one.data()
               });
               this.props.fetchCalendar(CurrentCalendar);
@@ -133,6 +131,7 @@ class App extends Component{
 
 
     render() {
+
         Date.prototype.getWeek = function() {
             var onejan = new Date(this.getFullYear(),0,1);
             return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
@@ -160,6 +159,7 @@ class App extends Component{
                   </div> :
                       null
               }
+                  <div></div>
 
                 <Navigation/>
               <Router>

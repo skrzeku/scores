@@ -3,6 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import firebase from "firebase";
 import Styled from 'styled-components';
 import {cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn} from "../../variables";
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
 
 const db = firebase.firestore();
 
@@ -17,16 +21,42 @@ ${formWrapper}
 
 const RemoveBtn = Styled.button`
 ${sendBtn}
+background-color: #FF0000;
+    i {
+    font-size: 24px;
+    margin-left: 10px;
+    }
 `;
 
 const CancelBtn = Styled.a`
 ${cancelBtn}
+
 `;
 
 const DetailInside = Styled.div`
 padding: 30px 50px 40px;
 position: relative;
 `;
+//
+// const Title = Styled.div`
+//
+//     font-weight: bold;
+//     text-align: left;
+//     font-size: 22px;
+//     padding: 10px 15px;
+//     position: relative;
+//         &:after {
+//         position: absolute;
+//         height: 2px;
+//         width: 150px;
+//         left: 0;
+//         bottom: 0;
+//         content: '';
+//         background-color: ${colorPrimary}
+//         }
+//
+//
+// `;
 
 const Title = Styled.div`
 ${globalTitle}
@@ -40,6 +70,7 @@ const Details = (props)=> {
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
     const minuses = useSelector(state => state.minuses);
+    const user = useSelector(state => state.user);
     const currentEmployee = employees?.find((one)=> one.id === props.object.employee);
     const dispatch = useDispatch();
     const [endi, setEnd] = useState(false);
@@ -89,11 +120,24 @@ const Details = (props)=> {
                 props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p> : <p><strong>Minus:</strong> {props.object?.minus}</p>
             }
             <p><strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}</p>
-            <p><strong>Nr klienta:</strong> {props.object.client}</p>
-            {
-                props.object?.score ? <RemoveBtn onClick={removeData}>Usuń Wynik</RemoveBtn> : <RemoveBtn onClick={removeData}>Usuń Minus</RemoveBtn>
+            <p><strong>Nr klienta:</strong> {props.object.client == 9999 ? 'Za poprzedni miesiąc' : props.object.client}</p>
 
+            {
+                user &&
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={removeData}
+                    startIcon={<DeleteIcon/>}
+                >
+                    Usuń
+                </Button>
             }
+
+         {/*<RemoveBtn onClick={removeData}>Usuń<i className="las la-trash-alt"></i></RemoveBtn>*/}
+            {/*}*/}
+
+
 
 
         </DetailInside>

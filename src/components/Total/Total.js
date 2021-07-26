@@ -69,12 +69,10 @@ margin-left: 10px;
 
      };
 
-     console.log(countScores(true));
 
 
 
      const todayScore = new Date();
-     console.log(todayScore);
 
 
     const MonthScore = Scores

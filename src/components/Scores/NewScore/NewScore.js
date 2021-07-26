@@ -3,7 +3,7 @@ import {useForm, Controller} from 'react-hook-form';
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import Styled from 'styled-components';
-import {cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
+import {buttonWrapper, cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
 import TextField from '@material-ui/core/TextField';
 // import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -23,6 +23,9 @@ import {
     FormControl
 } from "@material-ui/core";
 import firebase from "../../../firebase";
+import Button from "@material-ui/core/Button/Button";
+import SaveIcon from '@material-ui/icons/Save';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,6 +62,9 @@ font-weight: 700;
 padding: 5px 30px;
 text-transform: uppercase;
 `;
+const ButtonWrapper = Styled.div`
+${buttonWrapper}
+`;
 
 const SendBtn = Styled.input`
 ${sendBtn}
@@ -70,7 +76,7 @@ ${cancelBtn}
 `;
 
 const Form = Styled.form`
-padding: 50px 50px 80px;
+padding: 50px;
 position: relative;
     > div { 
     min-width: 220px;
@@ -88,7 +94,6 @@ ${formInner}
 
 
 const NewScore = (props)=> {
-    console.log(props.shownNewScore);
 
     const classes = useStyles();
 
@@ -99,7 +104,6 @@ const NewScore = (props)=> {
     //firebase
     const db = firebase.firestore();
     const dispatch = useDispatch();
-    console.log(allScores);
 
 
     const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja'];
@@ -118,7 +122,6 @@ const NewScore = (props)=> {
             week: data.date.getWeek(),
             short: shorts[data.type]
         };
-        console.log(newScore);
         db.collection('scores').add(newScore).then(()=> {
             dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
             reset();
@@ -265,7 +268,18 @@ const NewScore = (props)=> {
 
 
 
-            <SendBtn type="submit" value="Dodaj"/>
+            {/*<SendBtn type="submit" value="Dodaj"/>*/}
+
+            <ButtonWrapper>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    startIcon={<SaveIcon />}
+                >
+                    Dodaj
+                </Button>
+            </ButtonWrapper>
         </Form>
         </FormInner>
     </FormWrapper> }

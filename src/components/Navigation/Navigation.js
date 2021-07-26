@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../../assets/images/logo.png';
 import Styled from "styled-components";
-import {Link} from "@reach/router";
+import {Link, useLocation} from "@reach/router";
 import {colorPrimary} from "../../variables";
 
 
@@ -10,20 +10,28 @@ import {colorPrimary} from "../../variables";
 
 
 
-const Navigation = ()=> {
+const Navigation = (props)=> {
+
+
+
 
     const Navi = Styled.div`
             text-align: left;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            
-           
         `;
+    const NaviTitle = Styled.div`
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    `;
 
     const Navi__img = Styled.img`
  
     padding: 20px;
+    height: 140px;
+    width: auto;
   
     
     `;
@@ -31,7 +39,11 @@ const Navigation = ()=> {
     const NavLink = Styled.i`
     font-size: 40px;
     color: white;
-    margin-right: 20px
+    margin-right: 20px;
+    transition: 0.2s all ease;
+        &:hover {
+        opacity: 0.6;
+        }
     `;
 
     const NavMenu = Styled.ul`
@@ -45,6 +57,8 @@ const Navigation = ()=> {
 
     return(<Navi>
         <Navi__img src={Logo}/>
+        <NaviTitle></NaviTitle>
+
         <NavMenu>
             <Link to="/"><NavLink className="las la-home"></NavLink></Link>
             <Link to="/history"><NavLink className="las la-history"></NavLink></Link>

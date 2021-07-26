@@ -42,7 +42,6 @@ const Minuses = (props)=> {
 
   return(<td>{
         MonthMinuses.map((one, index)=> {
-            console.log(one);
             return(<OneMinus key={index} onClick={()=> props.setCurrentMinus(one)}>-{one.minus}</OneMinus>)
         })
   } </td>)
