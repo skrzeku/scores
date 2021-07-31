@@ -86,8 +86,7 @@ ${tabName}
 `;
 
 
-
-class Dashboar  extends Component {
+class Dashboar extends Component {
     constructor() {
         super();
 
@@ -99,47 +98,39 @@ class Dashboar  extends Component {
             showselect: false,
             showminusform: false
         };
-        this.setCurrentMinus = this.setCurrentMinus.bind(this);
-        this.setCurrentScore = this.setCurrentScore.bind(this);
-        this.MonthChangeHandler = this.MonthChangeHandler.bind(this);
-        this.showMinusFormHandler = this.showMinusFormHandler.bind(this);
 
     }
-    shnowFormHandler() {
+
+    shnowFormHandler = () => {
         this.setState({shownform: !this.state.shownform});
-    }
-    showMinusFormHandler() {
+    };
+
+    showMinusFormHandler = () => {
         this.setState({showminusform: !this.state.showminusform});
-    }
+    };
 
     showAddEmployeeHandler() {
         this.setState({showAddEmployeeForm: !this.state.showAddEmployeeForm});
     }
 
 
-
-
-   MonthChangeHandler (event) {
+    MonthChangeHandler = (event) => {
         this.props.changeMonth(+event);
         this.setState({showselect: true});
     };
 
-    setCurrentMinus(e) {
+    setCurrentMinus = (e) => {
         this.setState({currentMinus: e});
-    }
+    };
 
-    setCurrentScore(e) {
+    setCurrentScore = (e) => {
         this.setState({currentScore: e});
-    }
-
-
-
+    };
 
 
     componentDidMount() {
-
         const today = new Date();
-        const currMonth = this.props.calendar?.find((one)=> {
+        const currMonth = this.props.calendar?.find((one) => {
             const date = today.getTime() >= one.startDate.toDate().getTime() && today.getTime() <= one.endDate.toDate().getTime();
             return date;
         });
@@ -147,31 +138,20 @@ class Dashboar  extends Component {
     }
 
 
-
     render() {
 
-
-
-
-
-        // this.MonthChangeHandler(currMonth.id);
-
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
-
         const db = firebase.firestore();
 
-
-
-
-
-
-        const showFormBtn = this.props.user ?  <AddScoreBtn onClick={this.shnowFormHandler.bind(this)}><i className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
-        const showMinusFormBtn = this.props.user ?  <AddMinuBtn onClick={this.showMinusFormHandler.bind(this)}><i className="las la-minus-circle"></i></AddMinuBtn> : null;
+        const showFormBtn = this.props.user ? <AddScoreBtn onClick={this.shnowFormHandler}><i
+            className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
+        const showMinusFormBtn = this.props.user ?
+            <AddMinuBtn onClick={this.showMinusFormHandler}><i className="las la-minus-circle"></i></AddMinuBtn> : null;
         const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
         const addMinusWrapper = this.props.user ? (this.state.showminusform && <AddMinus/>) : null;
 
 
-        return(<div>
+        return (<div>
             <TabName><span>Wyniki</span></TabName>
             <SelectWrapper>
                 <Select
@@ -188,43 +168,33 @@ class Dashboar  extends Component {
                     ))}
                 </Select>
             </SelectWrapper>
-
             <Total/>
             <div>
-
             </div>
-
-
             <MyTable className="table table-striped table-bordered">
-                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i className="las la-user-plus"></i></AddEmployeeBtn>}
-                   <thead><Employees/></thead>
-                    <Scores setCurrenMinus={this.setCurrentMinus} setCurrentScore={this.setCurrentScore}/>
+                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i
+                    className="las la-user-plus"></i></AddEmployeeBtn>}
+                <thead><Employees/></thead>
+                <Scores setCurrenMinus={this.setCurrentMinus} setCurrentScore={this.setCurrentScore}/>
                 {showFormBtn}
                 {showMinusFormBtn}
-
-
-
             </MyTable>
 
             {
-                // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
-                this.state.currentMinus && <Details object={this.state.currentMinus} onClose={()=> this.setState({currentMinus : null})} dbName={"minuses"}/> }
+                this.state.currentMinus &&
+                <Details object={this.state.currentMinus} onClose={() => this.setState({currentMinus: null})}
+                         dbName={"minuses"}/>}
 
             {
-                // currentScore && <ScoreDetails score={currentScore} onClose={()=> setScore(null)}/> }
-                this.state.currentScore && <Details object={this.state.currentScore} onClose={()=> this.setState({currentScore : null})} dbName={"scores"}/> }
+                this.state.currentScore &&
+                <Details object={this.state.currentScore} onClose={() => this.setState({currentScore: null})}
+                         dbName={"scores"}/>}
 
             <Ranking showAll={false}/>
-            <NewScore shownNewScore={this.state.shownform} onClose={()=> this.shnowFormHandler()}/>
-            <AddMinus showminusForm={this.state.showminusform} onClose={()=> this.showMinusFormHandler() }/>
-            <AddEmployee showemployeeform={this.state.showAddEmployeeForm} onClose={()=> this.showAddEmployeeHandler()}/>
-
-
-
-
-
-
-
+            <NewScore shownNewScore={this.state.shownform} onClose={() => this.shnowFormHandler()}/>
+            <AddMinus showminusForm={this.state.showminusform} onClose={() => this.showMinusFormHandler()}/>
+            <AddEmployee showemployeeform={this.state.showAddEmployeeForm}
+                         onClose={() => this.showAddEmployeeHandler()}/>
         </div>)
     }
 }
