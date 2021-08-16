@@ -94,8 +94,12 @@ const Details = (props) => {
             <DetailInside>
                 <p><strong>Pracownik:</strong> {currentEmployee?.name} {currentEmployee?.lastname}</p>
                 {
-                    props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p> :
+                    props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p>:
                         <p><strong>Minus:</strong> {props.object?.minus}</p>
+
+                }
+                {
+                    props.object?.score && <p><strong>Typ</strong> {props.object?.type}</p>
                 }
                 <p>
                     <strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}

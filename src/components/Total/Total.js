@@ -26,10 +26,16 @@ display: inline-block;
 const TotalSmall = Styled.div`
 font-weight: bold;
 tex-align: left;
-span { 
+p { 
 display: block;
 text-align: left;
+margin-bottom: 0;
 }
+
+`;
+const TotalSmallScore = Styled.span`
+color: ${colorPrimary}
+
 
 `;
 
@@ -88,13 +94,13 @@ margin-left: 10px;
 
          <div>
              <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
-             <LeftDays>{leftDays > 0 ? 'Pozostało: ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
+             <LeftDays>{leftDays > 0 ? 'Pozostało: ' + leftDays+ ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
 
          </div>
 
 
          <TotalTitle>{MonthScore}</TotalTitle>
-         <TotalSmall><span>Dziś: {countScores('day')}</span><span>W tym tygodniu: {countScores('week')}</span> </TotalSmall>
+         <TotalSmall><p>Dziś: <TotalSmallScore>{countScores('day')}</TotalSmallScore></p><p>W tym tygodniu: <TotalSmallScore>{countScores('week')}</TotalSmallScore></p> </TotalSmall>
          </TotalWrapper>)
 };
 

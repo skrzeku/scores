@@ -61,8 +61,9 @@ const Scores = (props)=> {
     border-bottom: solid 1px #dee2e6;
     // display: flex;
     // justify-content: space-between;
-    padding: 5px;
-    min-height: 35px;
+    padding: 0px;
+    min-height: 25px;
+    
     position: relative;
         &:hover {
         cursor: pointer;
@@ -75,7 +76,7 @@ const Scores = (props)=> {
      }
      `;
     const ScoreType = Styled.span`
-    font-size: 14px;
+    font-size: 13px;
     `;
     const Mailing = Styled.span`
     display: inline-block;
@@ -95,6 +96,7 @@ const Scores = (props)=> {
     `;
     const Summary = Styled.tr`
     font-weight: bold;
+    background-color: #f7f7f7;
  
     `;
 
@@ -125,7 +127,7 @@ const Scores = (props)=> {
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni, index)=> {
 
-                                    return (<TableScore onClick={()=> props.setCurrentScore(oni)} key={index}>{oni.score}<ScoreType>{oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore onClick={()=> props.setCurrentScore(oni)} key={index}>{oni.score}<ScoreType> {oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)

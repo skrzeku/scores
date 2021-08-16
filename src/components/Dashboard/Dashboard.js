@@ -24,6 +24,11 @@ import {
 import {colorPrimary} from "../../variables";
 import {tabName} from "../../variables";
 
+const TableWrapper = Styled.div`
+// height: 600px;
+// overflow: auto;
+`;
+
 const MyTable = Styled.table`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: relative;
@@ -31,6 +36,21 @@ const MyTable = Styled.table`
     width: 95%;
     border-radius: 15px;
     table-layout: fixed;
+    overflow: auto;
+  
+    thead {
+    // position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: white;
+    box-shadow: inset 0 -2px ${colorPrimary};
+     tr{
+     box-shadow: inset 0px 1px 0px 0px #dee2e6;
+     border-width: 0 !important;
+
+     }
+    }
+   
   `;
 const AddBtns = `
           background-color: ${colors.colorPrimary};
@@ -44,7 +64,8 @@ const AddBtns = `
         justify-content: center;
         font-size: 38px;
         text-decoration: none;
-           position: absolute;
+           position: relative;
+           z-index: 10;
            right: 0;
            transition: 0.2s all ease;
             &:hover {
@@ -61,14 +82,14 @@ const AddEmployeeBtn = Styled.a`
         `;
 
 const AddScoreBtn = Styled.a`
-        bottom: -50px;
+        // bottom: -50px;
         ${AddBtns}
         `;
 
 const AddMinuBtn = Styled.a`
 ${AddBtns}
         left: 0;
-        bottom: -50px;
+        // bottom: -50px;
 `;
 
 
@@ -79,6 +100,14 @@ margin: 0 auto;
 input, div {
 min-width: 130px;
 }
+`;
+
+const BtnsWrapper = Styled.div`
+display: flex;
+justify-content: center;
+    a {
+    margin: 10px;
+    }
 `;
 
 const TabName = Styled.h2`
@@ -169,16 +198,23 @@ class Dashboar extends Component {
                 </Select>
             </SelectWrapper>
             <Total/>
-            <div>
-            </div>
+            <TableWrapper>
+
             <MyTable className="table table-striped table-bordered">
-                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i
-                    className="las la-user-plus"></i></AddEmployeeBtn>}
+
                 <thead><Employees/></thead>
                 <Scores setCurrenMinus={this.setCurrentMinus} setCurrentScore={this.setCurrentScore}/>
+
+            </MyTable>
+
+            </TableWrapper>
+            <BtnsWrapper>
+                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i
+                    className="las la-user-plus"></i></AddEmployeeBtn>}
                 {showFormBtn}
                 {showMinusFormBtn}
-            </MyTable>
+            </BtnsWrapper>
+
 
             {
                 this.state.currentMinus &&

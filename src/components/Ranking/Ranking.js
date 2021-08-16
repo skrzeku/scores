@@ -4,27 +4,7 @@ import Styled from "styled-components";
 import {colorPrimary, globalTitle, tabName} from "../../variables";
 import {MenuItem, Select} from "@material-ui/core";
 //Styles
-const Podium = Styled.div`
-    display: flex;
-    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
-    width: 500px;
-    align-items: flex-end;
-    margin: 80px auto 50px;  
-        div {
-        flex: 1;
-        position: relative;
-        height: 80px;
-          background-color: white;
-            &:nth-child(2) {
-            height: 120px;
-            border-left: solid 1px lightgray;
-            border-right: solid 1px lightgray;
-            }
-             &:nth-child(3) {
-            height: 100px;
-           
-        }
-    `;
+
 
 const PodriumNumber = Styled.span`
     position: absolute;
@@ -106,6 +86,34 @@ min-width: 130px;
 
 
 const Ranking = (props)=> {
+
+    const Podium = Styled.div`
+    // position: ${!props.showAll && 'absolute'};
+    // left: ${!props.showAll && '50%'};
+    // transform: ${!props.showAll && 'translateX(-50%)'};
+    // bottom: ${!props.showAll && '0px'};
+  
+    
+    display: flex;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
+    width: 500px;
+    align-items: flex-end;
+    margin: 100px auto 50px;  
+        div {
+        flex: 1;
+        position: relative;
+        height: 100px;
+          background-color: white;
+            &:nth-child(2) {
+            height: 120px;
+            border-left: solid 1px lightgray;
+            border-right: solid 1px lightgray;
+            }
+             &:nth-child(3) {
+            height: 80px;
+           
+        }
+    `;
 
     //Getting from redux store
     const scoresAll = useSelector(state => state.scores);
