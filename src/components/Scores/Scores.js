@@ -62,7 +62,8 @@ const Scores = (props)=> {
     // display: flex;
     // justify-content: space-between;
     padding: 0px;
-    min-height: 25px;
+    min-height: 20px;
+    font-size: 15px;
     
     position: relative;
         &:hover {
@@ -92,7 +93,8 @@ const Scores = (props)=> {
     position: relative;
     border-top: solid 2px ${colorPrimary};
     border-top-width: 2px !important;
-    font-size: 19px;
+    font-size: 18px;
+    padding: 5px !important;
     `;
     const Summary = Styled.tr`
     font-weight: bold;
@@ -103,6 +105,7 @@ const Scores = (props)=> {
     const TotalSum = Styled.td`
     font-size: 14px;
         color: ${(props)=> props.sum > 0 ? "blue" : "red"};
+        padding 5px !important;
     `;
 
 

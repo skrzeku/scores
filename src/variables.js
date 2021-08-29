@@ -75,7 +75,8 @@ margin-top: 30px;
 export const tabName = `
 position: absolute;
 top:0;
-left: 50%;
+left: 35%;
+display: none;
 transform: translateX(-50%);
 font-weight: 400;
 text-transform: uppercase;

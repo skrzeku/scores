@@ -20,6 +20,11 @@ const Navigation = (props)=> {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            position: absolute;
+            top: 0;
+            width: auto;
+            z-index: 20;
+           right: 0;
         `;
     const NaviTitle = Styled.div`
     font-size: 30px;
@@ -56,7 +61,7 @@ const Navigation = (props)=> {
 
 
     return(<Navi>
-        <Navi__img src={Logo}/>
+        {/*<Navi__img src={Logo}/>*/}
         <NaviTitle></NaviTitle>
 
         <NavMenu>

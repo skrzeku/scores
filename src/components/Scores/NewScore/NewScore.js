@@ -131,7 +131,7 @@ const NewScore = (props)=> {
         db.collection('scores').add(newScore).then(()=> {
             console.log(newScore);
             console.log(data);
-            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+            // dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
             // reset();
             props.onClose();
         });

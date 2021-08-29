@@ -97,8 +97,12 @@ const SelectWrapper = Styled.div`
 text-align: left;
 width: 95%;
 margin: 0 auto;
+position: absolute;
+line-height: 70px;
+left: 15px;
+z-index: 10;
 input, div {
-min-width: 130px;
+min-width: 120px;
 }
 `;
 
@@ -226,7 +230,7 @@ class Dashboar extends Component {
                 <Details object={this.state.currentScore} onClose={() => this.setState({currentScore: null})}
                          dbName={"scores"}/>}
 
-            <Ranking showAll={false}/>
+            <Ranking month={this.props.month} showAll={false}/>
             <NewScore shownNewScore={this.state.shownform} onClose={() => this.shnowFormHandler()}/>
             <AddMinus showminusForm={this.state.showminusform} onClose={() => this.showMinusFormHandler()}/>
             <AddEmployee showemployeeform={this.state.showAddEmployeeForm}

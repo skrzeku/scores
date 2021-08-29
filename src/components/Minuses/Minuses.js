@@ -4,7 +4,7 @@ import Styled from "styled-components";
 
 const OneMinus = Styled.span`
 display: inline-block;
-padding: 5px;
+padding: 1px 3px; 
 font-size: 12px;
 color: red;
 max-width: 50%;
@@ -14,6 +14,12 @@ max-width: 50%;
     }
 `;
 
+const TableCell = Styled.td`
+     padding: 0px !important;
+    
+   // margin: 0;
+   //  border: solid 1px red;
+   //   vertical-align: top;`;
 
 
 
@@ -40,11 +46,11 @@ const Minuses = (props)=> {
   // const lol = min.length >0 ? min[0] : [];
 
 
-  return(<td>{
+  return(<TableCell>{
         MonthMinuses.map((one, index)=> {
             return(<OneMinus key={index} onClick={()=> props.setCurrentMinus(one)}>-{one.minus}</OneMinus>)
         })
-  } </td>)
+  } </TableCell>)
 
 };
 

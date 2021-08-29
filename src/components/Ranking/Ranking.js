@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import {colorPrimary, globalTitle, tabName} from "../../variables";
@@ -87,6 +87,10 @@ min-width: 130px;
 
 const Ranking = (props)=> {
 
+    useEffect(()=> {
+        setMonth(props.month);
+    }, [props.month]);
+
     const Podium = Styled.div`
     // position: ${!props.showAll && 'absolute'};
     // left: ${!props.showAll && '50%'};
@@ -98,7 +102,7 @@ const Ranking = (props)=> {
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
     width: 500px;
     align-items: flex-end;
-    margin: 100px auto 50px;  
+    margin: 60px auto 50px;  
         div {
         flex: 1;
         position: relative;
