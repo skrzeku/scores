@@ -88,6 +88,14 @@ const Scores = (props)=> {
     color: ${colorPrimary};
     `;
 
+    const NewClients = Styled.span`
+    position: absolute;
+    display: inline-block;
+    left: 5px;
+    color:#00CC00;
+    font-size: 12px;
+    `;
+
     const SummaryCell = Styled.td`
     font-weight: bold;
     position: relative;
@@ -130,7 +138,7 @@ const Scores = (props)=> {
                             employeeScore.length > 0 ?
                                 employeeScore.map((oni, index)=> {
 
-                                    return (<TableScore onClick={()=> props.setCurrentScore(oni)} key={index}>{oni.score}<ScoreType> {oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing></TableScore>)
+                                    return (<TableScore onClick={()=> props.setCurrentScore(oni)} key={index}>{oni.score}<ScoreType> {oni.short}</ScoreType><Mailing>{oni.mailing? 'M' : ''}</Mailing><NewClients>{oni.newClient? 'N' : ''}</NewClients></TableScore>)
                                 })
                                 : (<TableScore></TableScore>)
                    }</TableCell>)
@@ -164,7 +172,11 @@ const Scores = (props)=> {
                     return ob.mailing ? 1 : 0
                 }).reduce((a,b)=> a + b, 0);
 
-        return(<SummaryCell key={employee.id} >{summ} <Mailing> {mailingLength}</Mailing></SummaryCell>)
+        const newLength = employeeScore.map(ob => {
+            return ob.newClient ? 1 : 0
+        }).reduce((a,b)=> a + b, 0);
+
+        return(<SummaryCell key={employee.id} >{summ} <Mailing> {mailingLength}</Mailing><NewClients>{newLength}</NewClients></SummaryCell>)
             });
 
 

@@ -36,9 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
     },
     formControl: {
-        margin: theme.spacing(1),
+        // margin: theme.spacing(1),
         minWidth: 220,
     },
+
+    checkbox: {
+        width: 100,
+        minWidth: 100
+    }
 }));
 
 const theme = createMuiTheme({
@@ -81,6 +86,7 @@ position: relative;
     > div { 
     min-width: 220px;
     margin-right: 10px;
+    margin-bottom: 10px;
     vertical-align: middle;
     }
 
@@ -126,8 +132,10 @@ const NewScore = (props)=> {
             date: data.date ? data.date : new Date(),
             client: data.client,
             week: data.date.getWeek(),
-            short: shorts[data.type]
+            short: shorts[data.type],
+            newClient: data.newClient
         };
+        // console.log(newScore);
         db.collection('scores').add(newScore).then(()=> {
             console.log(newScore);
             console.log(data);
@@ -267,13 +275,27 @@ const NewScore = (props)=> {
             control={control}
             name= "mailing"
             render={({ field: {onChange, value}})=> (
-                <FormControlLabel className={classes.formControl}
+                <FormControlLabel
                                   control={
                     <Checkbox
                         onChange={onChange} value={value}
                         color="primary"
                     />}
                                   label="mailing"/>
+
+                )}
+            />
+            <Controller
+                control={control}
+                name= "newClient"
+                render={({ field: {onChange, value}})=> (
+                    <FormControlLabel
+                                      control={
+                                          <Checkbox
+                                              onChange={onChange} value={value}
+                                              color="primary"
+                                          />}
+                                      label="Nowy klient"/>
 
                 )}
             />
