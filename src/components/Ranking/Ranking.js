@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import {colorPrimary, globalTitle, tabName} from "../../variables";
 import {MenuItem, Select} from "@material-ui/core";
+import Crown from '../../assets/images/pobrane.gif';
 //Styles
 
 
@@ -91,6 +92,16 @@ const Ranking = (props)=> {
         setMonth(props.month);
     }, [props.month]);
 
+    const CrownImg = Styled.img`
+    position: absolute;
+    top: -100px;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    left: 0;
+    mix-blend-mode: darken;
+    `;
+
     const Podium = Styled.div`
     // position: ${!props.showAll && 'absolute'};
     // left: ${!props.showAll && '50%'};
@@ -102,7 +113,7 @@ const Ranking = (props)=> {
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
     width: 500px;
     align-items: flex-end;
-    margin: 60px auto 50px;  
+    margin: 100px auto 50px;  
         div {
         flex: 1;
         position: relative;
@@ -182,7 +193,7 @@ const Ranking = (props)=> {
         <Podium>
             {
                 podium.map((place, index)=> {
-                    return(<div key={index}><PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[place - 1]?.name}</PodriumName> {sortedScores[place - 1]?.sum} </div>)
+                    return(<div key={index}>{index === 1 ? <CrownImg src={Crown}/> : ''}<PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[place - 1]?.name}</PodriumName> {sortedScores[place - 1]?.sum} </div>)
                 })
             }
 

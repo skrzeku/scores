@@ -133,7 +133,7 @@ const NewScore = (props)=> {
             client: data.client,
             week: data.date.getWeek(),
             short: shorts[data.type],
-            newClient: data.newClient
+            newClient: data.newClient ? data.newClient : false
         };
         // console.log(newScore);
         db.collection('scores').add(newScore).then(()=> {
