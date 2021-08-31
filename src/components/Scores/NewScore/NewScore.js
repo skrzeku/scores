@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useForm, Controller} from 'react-hook-form';
+import React, {useState, useEffect} from 'react';
+import {useForm, Controller, useFieldArray} from 'react-hook-form';
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import Styled from 'styled-components';
@@ -36,9 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
     },
     formControl: {
-        margin: theme.spacing(1),
+        // margin: theme.spacing(1),
         minWidth: 220,
     },
+
+    checkbox: {
+        width: 100,
+        minWidth: 100
+    }
 }));
 
 const theme = createMuiTheme({
@@ -81,6 +86,7 @@ position: relative;
     > div { 
     min-width: 220px;
     margin-right: 10px;
+    margin-bottom: 10px;
     vertical-align: middle;
     }
 
@@ -96,6 +102,7 @@ ${formInner}
 const NewScore = (props)=> {
 
     const classes = useStyles();
+    console.log(props);
 
             //Redux
     const employees = useSelector(state => state.employees);
@@ -104,32 +111,55 @@ const NewScore = (props)=> {
     //firebase
     const db = firebase.firestore();
     const dispatch = useDispatch();
+    const { register, handleSubmit, formState, formState: {errors, isSubmitSuccessful}, control, reset } = useForm();
 
 
-    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja'];
-    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o'];
 
 
-    const { register, handleSubmit, formState: {errors}, control, reset } = useForm();
+
+
+    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'inny'];
+    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o', 'rc', ' '];
+
+
     const onSubmit = (data, e) => {
+        console.log(e);
         const newScore = {
             score: data.score,
             type: options[data.type],
-            mailing: data.mailing,
+            mailing: data.mailing ? data.mailing : false,
             employee: +data.employee,
-            date: data.date,
+            date: data.date ? data.date : new Date(),
             client: data.client,
             week: data.date.getWeek(),
-            short: shorts[data.type]
+            short: shorts[data.type],
+            newClient: data.newClient
         };
+        // console.log(newScore);
         db.collection('scores').add(newScore).then(()=> {
-            dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
-            reset();
+            console.log(newScore);
+            console.log(data);
+            // dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
+            // reset();
             props.onClose();
         });
 
     };
     const [startDate, setStartDate] = useState(new Date());
+
+    useEffect(()=> {
+        if (formState.isSubmitSuccessful) {
+            reset({
+                score: '',
+                client: '',
+                date: new Date(),
+                type: '',
+                employee: '',
+                mailing: false,
+            });
+        }
+
+    }, [formState, reset]);
 
 
 
@@ -141,7 +171,7 @@ const NewScore = (props)=> {
             <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
 
             <FormTitle>Dodaj wynik</FormTitle>
-        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off" noValidate>
+        <Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off" >
             <Controller
                 control={control}
                 name= "score"
@@ -189,6 +219,7 @@ const NewScore = (props)=> {
                         disableToolbar
                         variant="inline"
                         autoOk
+                        error={!!errors.date}
                         label={"Data"}
                         format="dd/MM/yyyy"
                         value={value}
@@ -240,31 +271,35 @@ const NewScore = (props)=> {
                 )}
             />
 
-
-
-
-
-
-
-            <FormControlLabel className={classes.formControl}
-                control={
             <Controller
             control={control}
             name= "mailing"
-            defaultValue={false}
-
-
             render={({ field: {onChange, value}})=> (
+                <FormControlLabel
+                                  control={
                     <Checkbox
-                        checked={value}
-                        onChange={onChange}
+                        onChange={onChange} value={value}
                         color="primary"
-
-                    />
+                    />}
+                                  label="mailing"/>
 
                 )}
-            /> }
-                label="mailing"/>
+            />
+            <Controller
+                control={control}
+                name= "newClient"
+                render={({ field: {onChange, value}})=> (
+                    <FormControlLabel
+                                      control={
+                                          <Checkbox
+                                              onChange={onChange} value={value}
+                                              color="primary"
+                                          />}
+                                      label="Nowy klient"/>
+
+                )}
+            />
+
 
 
 

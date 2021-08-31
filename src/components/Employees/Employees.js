@@ -7,11 +7,7 @@ import firebase from "../../firebase";
 import {fetchScores} from "../../actions/index";
 
 
-
-
-
-
-const Employees = ()=> {
+const Employees = () => {
 
     const db = firebase.firestore();
 
@@ -22,41 +18,34 @@ const Employees = ()=> {
 `;
 
 
-
     let allScores = [];
 
 
+    const getEmployeeScores = (id) => {
 
-  const getEmployeeScores = (id)=> {
-
-      console.log(allScores.filter(ons=>ons.employee === id));
-      return  allScores?.filter(one => one.employee === id);
-  };
-
-
+        console.log(allScores.filter(ons => ons.employee === id));
+        return allScores?.filter(one => one.employee === id);
+    };
 
 
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
 
 
-    const AllEmployees = employees.map((one, index)=> {
+    const AllEmployees = employees.map((one, index) => {
         let employeeScore = [...scoresAll]
-            .filter(ons=>ons.employee === one.id);
-        return(<Employee name={one.name}  lastName={one.lastname} id={one.id} key={index}/>)
+            .filter(ons => ons.employee === one.id);
+        return (<Employee name={one.name} lastName={one.lastname} id={one.id} key={index}/>)
     });
 
-    return(<React.Fragment>
+    return (<React.Fragment>
         <tr>{AllEmployees}</tr>
 
         {/*<button onClick={()=> getEmployeeScores(4)}>pokaż</button>*/}
-       {/*<AddEmployee/>*/}
+        {/*<AddEmployee/>*/}
 
     </React.Fragment>)
 };
-
-
-
 
 
 export default Employees;

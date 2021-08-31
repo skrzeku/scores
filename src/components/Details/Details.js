@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-
 const db = firebase.firestore();
 
 //Styles
@@ -37,46 +36,25 @@ const DetailInside = Styled.div`
 padding: 30px 50px 40px;
 position: relative;
 `;
-//
-// const Title = Styled.div`
-//
-//     font-weight: bold;
-//     text-align: left;
-//     font-size: 22px;
-//     padding: 10px 15px;
-//     position: relative;
-//         &:after {
-//         position: absolute;
-//         height: 2px;
-//         width: 150px;
-//         left: 0;
-//         bottom: 0;
-//         content: '';
-//         background-color: ${colorPrimary}
-//         }
-//
-//
-// `;
+
 
 const Title = Styled.div`
 ${globalTitle}
 `;
 
 
-
-
-const Details = (props)=> {
+const Details = (props) => {
     //Redux
     const employees = useSelector(state => state.employees);
     const scoresAll = useSelector(state => state.scores);
     const minuses = useSelector(state => state.minuses);
     const user = useSelector(state => state.user);
-    const currentEmployee = employees?.find((one)=> one.id === props.object.employee);
+    const currentEmployee = employees?.find((one) => one.id === props.object.employee);
     const dispatch = useDispatch();
     const [endi, setEnd] = useState(false);
 
 
-    const removeData = ()=> {
+    const removeData = () => {
         const key = props.object.key;
         const scores = [...scoresAll];
         const index = props.object?.score ? scoresAll.indexOf(props.object) : minuses.indexOf(props.object);
@@ -85,12 +63,11 @@ const Details = (props)=> {
             console.log("Document successfully deleted!");
             if (props.object?.score) {
                 dispatch({type: 'REMOVE_SCORE', scores, index});
-            }
-            else {
+            } else {
                 dispatch({type: 'REMOVE_MINUS', minuses, index});
             }
             setEnd(true);
-            setTimeout(()=> {
+            setTimeout(() => {
                 props.onClose();
             }, 400)
         }).catch((error) => {
@@ -99,54 +76,57 @@ const Details = (props)=> {
     };
 
 
-    const Closeit = ()=> {
+    const Closeit = () => {
         setEnd(true);
-        setTimeout(()=> {
+        setTimeout(() => {
             props.onClose();
         }, 400)
     };
 
 
-    return(<ScoreWrapper>
+    return (<ScoreWrapper>
         <ScoreInner>
             <CancelBtn onClick={Closeit}><i className="las la-times"></i></CancelBtn>
             {
-                props.object?.score ?  <Title>Wynik</Title> : <Title>Minus</Title>
+                props.object?.score ? <Title>Wynik</Title> : <Title>Minus</Title>
             }
 
-        <DetailInside>
-            <p><strong>Pracownik:</strong> {currentEmployee?.name} {currentEmployee?.lastname}</p>
-            {
-                props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p> : <p><strong>Minus:</strong> {props.object?.minus}</p>
-            }
-            <p><strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}</p>
-            <p><strong>Nr klienta:</strong> {props.object.client == 9999 ? 'Za poprzedni miesiąc' : props.object.client}</p>
+            <DetailInside>
+                <p><strong>Pracownik:</strong> {currentEmployee?.name} {currentEmployee?.lastname}</p>
+                {
+                    props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p>:
+                        <p><strong>Minus:</strong> {props.object?.minus}</p>
 
-            {
-                user &&
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={removeData}
-                    startIcon={<DeleteIcon/>}
-                >
-                    Usuń
-                </Button>
-            }
+                }
+                {
+                    props.object?.score && <p><strong>Typ</strong> {props.object?.type}</p>
+                }
+                <p>
+                    <strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}
+                </p>
+                <p><strong>Nr
+                    klienta:</strong> {props.object.client == 9999 ? 'Za poprzedni miesiąc' : props.object.client}</p>
 
-         {/*<RemoveBtn onClick={removeData}>Usuń<i className="las la-trash-alt"></i></RemoveBtn>*/}
-            {/*}*/}
+                {
+                    user &&
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={removeData}
+                        startIcon={<DeleteIcon/>}
+                    >
+                        Usuń
+                    </Button>
+                }
+
+                {/*<RemoveBtn onClick={removeData}>Usuń<i className="las la-trash-alt"></i></RemoveBtn>*/}
+                {/*}*/}
 
 
-
-
-        </DetailInside>
+            </DetailInside>
         </ScoreInner>
     </ScoreWrapper>)
 };
-
-
-
 
 
 export default Details;

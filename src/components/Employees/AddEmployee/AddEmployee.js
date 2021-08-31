@@ -61,10 +61,14 @@ const AddEmployee = (props)=> {
         const maxID = employees
             .map(one => one.id)
             .reduce((a, b) => {return (a > b) ? a: b }, 0);
+        const maxSeat = employees
+            .map(one => one.seat)
+            .reduce((a, b) => {return (a > b) ? a: b }, 0);
         const newEmployee = {
             name: data.name,
             lastname: data.lastName,
-            id: maxID + 1
+            id: maxID + 1,
+            seat: maxSeat + 1,
         };
         console.log(data);
         db.collection('employees').add(newEmployee).then(()=> {

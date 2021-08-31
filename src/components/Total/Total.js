@@ -6,8 +6,9 @@ import {colorPrimary} from "../../variables";
 const TotalWrapper = Styled.div`
 display: flex;
 justify-content: space-between;
-width: 95%;
-margin: 0 auto;
+width: calc(100% - 500px);
+margin-right: auto;
+margin-left: 180px;
 align-items: flex-end;
 padding: 0 10px 10px;
 `;
@@ -18,6 +19,9 @@ color: ${colorPrimary};
 font-weight: bold;
 margin-bottom: 0
 `;
+const MonthWrapper = Styled.div`
+
+`;
 const TotalMonth = Styled.h3`
 font-weight: bold;
 display: inline-block;
@@ -26,10 +30,16 @@ display: inline-block;
 const TotalSmall = Styled.div`
 font-weight: bold;
 tex-align: left;
-span { 
+p { 
 display: block;
 text-align: left;
+margin-bottom: 0;
 }
+
+`;
+const TotalSmallScore = Styled.span`
+color: ${colorPrimary}
+
 
 `;
 
@@ -70,6 +80,20 @@ margin-left: 10px;
      };
 
 
+     const getBusinessDatesCount = (start, endDate)=> {
+         let count = 0;
+         const curDate = new Date(start);
+         while (curDate <= endDate) {
+             const dayOfWeek = curDate.getDay();
+             if(!(dayOfWeek in [0, 6])) count++;
+             curDate.setDate(curDate.getDate() + 1);
+         }
+         return count;
+     };
+
+     const leftBussyDays = getBusinessDatesCount(today, endDate);
+
+
 
 
      const todayScore = new Date();
@@ -88,13 +112,13 @@ margin-left: 10px;
 
          <div>
              <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
-             <LeftDays>{leftDays > 0 ? 'Pozostało: ' + leftDays + ' dni (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
+             <LeftDays>{leftBussyDays > 0 ? '' + leftBussyDays+ ' dni robocze (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
 
          </div>
 
 
          <TotalTitle>{MonthScore}</TotalTitle>
-         <TotalSmall><span>Dziś: {countScores('day')}</span><span>W tym tygodniu: {countScores('week')}</span> </TotalSmall>
+         <TotalSmall><p>Dziś: <TotalSmallScore>{countScores('day')}</TotalSmallScore></p><p>W tym tygodniu: <TotalSmallScore>{countScores('week')}</TotalSmallScore></p> </TotalSmall>
          </TotalWrapper>)
 };
 

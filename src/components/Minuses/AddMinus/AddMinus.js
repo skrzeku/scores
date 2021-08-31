@@ -149,37 +149,6 @@ const AddMinus = (props)=> {
             <FormTitle>Dodaj minusa</FormTitle>
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
-            <Controller
-                control={control}
-                name= "number"
-                defaultValue=""
-                rules={{ required: 'true' }}
-                render={({ field: {onChange, value}})=> (
-                    <TextField
-                        label="Minus"
-                        type="number"
-                        error={!!errors.number}
-                        value={errors?.number?.rules}
-                        onChange={onChange}
-                    />
-                )}
-            />
-            <FormControlLabel
-                              control={
-                                  <Controller
-                                      control={control}
-                                      name= "lastMonth"
-                                      defaultValue={false}
-                                      render={({ field: {onChange, value}})=> (
-                                          <Checkbox
-                                              checked={value}
-                                              onChange={onChange}
-                                              color="primary"
-                                          />
-
-                                      )}
-                                  /> }
-                              label="Z poprzedniego miesiąca"/>
 
             {
                 !lostMonthWatcher &&  <Controller
@@ -198,6 +167,40 @@ const AddMinus = (props)=> {
                     )}
                 />
             }
+            <FormControlLabel
+                              control={
+                                  <Controller
+                                      control={control}
+                                      name= "lastMonth"
+                                      defaultValue={false}
+                                      render={({ field: {onChange, value}})=> (
+                                          <Checkbox
+                                              checked={value}
+                                              onChange={onChange}
+                                              color="primary"
+                                          />
+
+                                      )}
+                                  /> }
+                              label="Z poprzedniego miesiąca"/>
+
+            <Controller
+                control={control}
+                name= "number"
+                defaultValue=""
+                rules={{ required: 'true' }}
+                render={({ field: {onChange, value}})=> (
+                    <TextField
+                        label="Minus"
+                        type="number"
+                        error={!!errors.number}
+                        value={errors?.number?.rules}
+                        onChange={onChange}
+                    />
+                )}
+            />
+
+
 
 
             <Controller
