@@ -70,8 +70,6 @@ const Scores = (props)=> {
         cursor: pointer;
         color: ${colorPrimary}
         }
-    
-    
      &:last-child {
      border: none;
      }
@@ -91,7 +89,7 @@ const Scores = (props)=> {
     const NewClients = Styled.span`
     position: absolute;
     display: inline-block;
-    left: 5px;
+    right: 20px;
     color:#00CC00;
     font-size: 12px;
     `;
