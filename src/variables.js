@@ -104,3 +104,24 @@ padding: 0 10px;
 
     
 `;
+
+export const Table = `
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    margin: 0 auto;
+    width: 95%;
+    border-radius: 15px;
+    table-layout: fixed;
+    overflow: auto;
+  
+    thead {
+    top: 0;
+    z-index: 3;
+    background-color: white;
+    box-shadow: inset 0 -2px ${colorPrimary};
+     tr{
+     box-shadow: inset 0px 1px 0px 0px #dee2e6;
+     border-width: 0 !important;
+     }
+    }
+  `;

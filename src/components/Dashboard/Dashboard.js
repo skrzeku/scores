@@ -23,6 +23,7 @@ import {
 } from "@material-ui/core";
 import {colorPrimary} from "../../variables";
 import {tabName} from "../../variables";
+import {Table} from "../../variables";
 
 const TableWrapper = Styled.div`
 // height: 600px;
@@ -30,27 +31,7 @@ const TableWrapper = Styled.div`
 `;
 
 const MyTable = Styled.table`
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    position: relative;
-    margin: 0 auto;
-    width: 95%;
-    border-radius: 15px;
-    table-layout: fixed;
-    overflow: auto;
-  
-    thead {
-    // position: sticky;
-    top: 0;
-    z-index: 3;
-    background-color: white;
-    box-shadow: inset 0 -2px ${colorPrimary};
-     tr{
-     box-shadow: inset 0px 1px 0px 0px #dee2e6;
-     border-width: 0 !important;
-
-     }
-    }
-   
+   ${Table};
   `;
 const AddBtns = `
           background-color: ${colors.colorPrimary};
@@ -75,7 +56,6 @@ const AddBtns = `
         `;
 
 const AddEmployeeBtn = Styled.a`
-     
         
         top: 0px;
         ${AddBtns}
@@ -206,7 +186,9 @@ class Dashboar extends Component {
 
             <MyTable className="table table-striped table-bordered">
 
-                <thead><Employees/></thead>
+                <thead>
+                    <tr><Employees/></tr>
+               </thead>
                 <Scores setCurrenMinus={this.setCurrentMinus} setCurrentScore={this.setCurrentScore}/>
 
             </MyTable>

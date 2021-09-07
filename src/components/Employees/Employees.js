@@ -39,7 +39,7 @@ const Employees = () => {
     });
 
     return (<React.Fragment>
-        <tr>{AllEmployees}</tr>
+        {AllEmployees}
 
         {/*<button onClick={()=> getEmployeeScores(4)}>pokaż</button>*/}
         {/*<AddEmployee/>*/}

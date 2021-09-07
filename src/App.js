@@ -14,6 +14,7 @@ import Logo from './assets/images/logo.png';
 import Ranking from './components/Ranking/Ranking';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import {colorPrimary} from "./variables";
+import Stats from "./components/Stats/Stats";
 
 
 class App extends Component {
@@ -116,6 +117,7 @@ class App extends Component {
                         <History path={'/history'}/>
                         <EmployeeDetails path={'/employee/:id'}/>
                         <Ranking path={'/ranking'} showAll={true}/>
+                        <Stats path={'/stats'}/>
 
                     </Router>
                 </ThemeProvider>
