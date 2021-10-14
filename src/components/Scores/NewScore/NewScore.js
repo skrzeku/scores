@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import Styled from 'styled-components';
 import {buttonWrapper, cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
 import TextField from '@material-ui/core/TextField';
+import FormScore from "../FormScore/FormScore";
 // import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
@@ -89,8 +90,6 @@ position: relative;
     margin-bottom: 10px;
     vertical-align: middle;
     }
-
-   
 `;
 
 const FormInner = Styled.div`
@@ -118,8 +117,8 @@ const NewScore = (props)=> {
 
 
 
-    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'inny'];
-    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o', 'rc', ' '];
+    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'GMF', 'GMF + Opinie', 'Opinie','Instagram', 'inny'];
+    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o', 'rc', 'gmf', 'gmf+o', 'opi', 'ins', ''];
 
 
     const onSubmit = (data, e) => {
@@ -270,7 +269,6 @@ const NewScore = (props)=> {
                     </FormControl>
                 )}
             />
-
             <Controller
             control={control}
             name= "mailing"
@@ -299,10 +297,6 @@ const NewScore = (props)=> {
 
                 )}
             />
-
-
-
-
             {/*<SendBtn type="submit" value="Dodaj"/>*/}
 
             <ButtonWrapper>
@@ -316,6 +310,7 @@ const NewScore = (props)=> {
                 </Button>
             </ButtonWrapper>
         </Form>
+        {/*    <FormScore onClose={()=>props.onClose()}/>*/}
         </FormInner>
     </FormWrapper> }
         </ThemeProvider>)

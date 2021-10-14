@@ -87,6 +87,18 @@
   }
 }
 
+@keyframes showform {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 600px;
+  }
+
+}
+
 
 .endRoll {
   left: 20% !important;

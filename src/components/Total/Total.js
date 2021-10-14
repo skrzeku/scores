@@ -59,6 +59,7 @@ margin-left: 10px;
 
 
      const endDate = calendar?.endDate.toDate();
+     console.log(endDate);
      const today = new Date().getTime();
      const leftDays = Math.ceil((endDate?.getTime() - today)/ (1000*60*60*24));
 
@@ -81,7 +82,7 @@ margin-left: 10px;
 
 
      const getBusinessDatesCount = (start, endDate)=> {
-         let count = 0;
+         let count = 1;
          const curDate = new Date(start);
          while (curDate <= endDate) {
              const dayOfWeek = curDate.getDay();
@@ -93,10 +94,10 @@ margin-left: 10px;
 
      const leftBussyDays = getBusinessDatesCount(today, endDate);
 
+     console.log(leftBussyDays);
 
 
 
-     const todayScore = new Date();
 
 
     const MonthScore = Scores
@@ -112,8 +113,7 @@ margin-left: 10px;
 
          <div>
              <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
-             <LeftDays>{leftBussyDays > 0 ? '' + leftBussyDays+ ' dni robocze (' + endDate.toLocaleDateString() + ')': 'Miesiąc zakończony' }</LeftDays>
-
+             <LeftDays>{leftBussyDays > 1 ? '' + leftBussyDays+ ' dni robocze (' + endDate?.toLocaleDateString()  + ')': 'Miesiąc zakończony' }</LeftDays>
          </div>
 
 

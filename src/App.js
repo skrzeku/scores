@@ -113,12 +113,11 @@ class App extends Component {
                     <Navigation/>
                     <Router>
                         <Dashboard path={'/'}/>
-                        <Login path={'/login'}/>
-                        <History path={'/history'}/>
-                        <EmployeeDetails path={'/employee/:id'}/>
-                        <Ranking path={'/ranking'} showAll={true}/>
-                        <Stats path={'/stats'}/>
-
+                        <Login path={'/login'} component={Login}/>
+                        <History path={'/history'} component={History}/>
+                        <EmployeeDetails path={'/employee/:id'} />
+                        <Ranking path={'/ranking'} showAll={true} component={Ranking}/>
+                        <Stats path={'/stats'} component={Stats}/>
                     </Router>
                 </ThemeProvider>
             </div>

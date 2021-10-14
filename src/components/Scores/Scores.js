@@ -97,14 +97,22 @@ const Scores = (props)=> {
     const SummaryCell = Styled.td`
     font-weight: bold;
     position: relative;
-    border-top: solid 2px ${colorPrimary};
+   
     border-top-width: 2px !important;
     font-size: 18px;
     padding: 5px !important;
+
     `;
     const Summary = Styled.tr`
     font-weight: bold;
     background-color: #f7f7f7;
+        // position: sticky;
+         border-top: solid 2px ${colorPrimary};
+         // box-shadow: inset 0px 2px 0px 0px ${colorPrimary};
+
+    bottom: 0;
+    background-color: white;
+    z-index: 2;
  
     `;
 

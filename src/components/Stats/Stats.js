@@ -3,6 +3,9 @@ import {useSelector} from "react-redux";
 import Employees from "../Employees/Employees";
 import Styled from "styled-components";
 import {Table, tabName} from "../../variables";
+import StatsTable from "./StatsTable/StatsTable";
+import Charts from "./Charts/Charts";
+import {MenuItem, Select} from "@material-ui/core";
 
 const MyTable = Styled.table`
    ${Table};
@@ -13,11 +16,14 @@ ${tabName};
 display: block;
 `;
 
-const TableScore = Styled.td`
-font-size: 14px;
-    &.plan {
-    color: blue;
-    }
+const SelectWrapper = Styled.div`
+text-align: left;
+max-width: 90%;
+margin: 70px auto 0;
+
+input, div {
+min-width: 130px;
+}
 `;
 
 
@@ -30,47 +36,32 @@ const Stats = ()=> {
 
     const [month, setMonth] = useState(storeMonth);
     const currentMonth = useSelector(state => state.calendar[month]);
+    const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
 
-    const monthScore = calendar.map((oneMonth)=> {
-       return(<tr>
-           <td>{oneMonth.name}</td>
-           {
-               employees.map((employee)=>{
-                   const employeeScore = scoresAll
-                        .filter((ons) => {
-                            return ons.employee === employee.id
-                        })
-                       .filter(ont => {
-                           const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
-                           const currMonth = oneMonth.id;
-                           return date >= oneMonth.startDate.toDate().getTime() && date <= oneMonth?.endDate.toDate().getTime();
-                       })
-                       .map(obj => +obj.score)
-                       .reduce((a,b)=>  a + b, 0);
 
-                   return(
-                       <TableScore className={employeeScore > 18000 ? 'plan' : ''}>{employeeScore}</TableScore>
-                   )
-               })
-           }
 
-       </tr>)
-    });
 
     return(<div>
         <TabName><span>Statystyki</span></TabName>
-        <MyTable className="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td>Miesiąc</td>
-                    <Employees/>
-                </tr>
-            </thead>
-            <tbody>
-            {monthScore}
-            </tbody>
-        </MyTable>
+
+        <StatsTable/>
+        <SelectWrapper>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                defaultValue={month}
+                value={month}
+                onChange={event => setMonth(event.target.value)}
+            >
+                {months.map((option, index) => (
+                    <MenuItem key={index} value={index}>
+                        {option}
+                    </MenuItem>
+                ))}
+            </Select>
+        </SelectWrapper>
+        <Charts month={month}/>
     </div>)
 };
 

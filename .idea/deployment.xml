@@ -7,6 +7,9 @@
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$/build" web="/" />
           </mappings>
+          <excludedPaths>
+            <excludedPath path="/.htaccess" />
+          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>

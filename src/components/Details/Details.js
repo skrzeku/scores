@@ -5,6 +5,9 @@ import Styled from 'styled-components';
 import {cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn} from "../../variables";
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
+import FormScore from "../Scores/FormScore/FormScore";
 
 
 const db = firebase.firestore();
@@ -42,6 +45,19 @@ const Title = Styled.div`
 ${globalTitle}
 `;
 
+const FormWrapper = Styled.div`
+animation: 1s showform;
+margin-top: 15px;
+`;
+
+const BtnWrapper = Styled.div`
+button {
+margin: 0 10px;
+}
+`;
+
+
+
 
 const Details = (props) => {
     //Redux
@@ -52,6 +68,8 @@ const Details = (props) => {
     const currentEmployee = employees?.find((one) => one.id === props.object.employee);
     const dispatch = useDispatch();
     const [endi, setEnd] = useState(false);
+    const [shownForm, showFormHandler] = useState(false);
+
 
 
     const removeData = () => {
@@ -84,6 +102,8 @@ const Details = (props) => {
     };
 
 
+
+
     return (<ScoreWrapper>
         <ScoreInner>
             <CancelBtn onClick={Closeit}><i className="las la-times"></i></CancelBtn>
@@ -109,7 +129,22 @@ const Details = (props) => {
 
                 {
                     user &&
-                    <Button
+                    (<BtnWrapper>
+                        {
+                            !shownForm &&
+                            <Button
+                            variant="contained"
+                            color="primary"
+                            /* eslint-disable-next-line react/style-prop-object */
+                            // onClick={removeData}
+                            onClick={()=>showFormHandler(!shownForm)}
+                            startIcon={<EditIcon/>}
+                            >
+                            Edycja
+                            </Button>
+
+                        }
+                            <Button
                         variant="contained"
                         color="secondary"
                         onClick={removeData}
@@ -117,13 +152,22 @@ const Details = (props) => {
                     >
                         Usuń
                     </Button>
-                }
+                        </BtnWrapper>
 
-                {/*<RemoveBtn onClick={removeData}>Usuń<i className="las la-trash-alt"></i></RemoveBtn>*/}
-                {/*}*/}
+                    )
+                }
+                <div>
+
+                </div>
+
+
 
 
             </DetailInside>
+            {
+                shownForm && <FormWrapper><FormScore object={props.object} onClose={()=>props.onClose()}/></FormWrapper>
+
+            }
         </ScoreInner>
     </ScoreWrapper>)
 };

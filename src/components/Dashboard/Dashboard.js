@@ -26,12 +26,18 @@ import {tabName} from "../../variables";
 import {Table} from "../../variables";
 
 const TableWrapper = Styled.div`
-// height: 600px;
-// overflow: auto;
+max-height: 70vh;
+overflow: auto;
+padding-bottom: 10px;
 `;
+
 
 const MyTable = Styled.table`
    ${Table};
+   thead {
+   position: sticky;
+   top:0;
+   }
   `;
 const AddBtns = `
           background-color: ${colors.colorPrimary};
@@ -85,6 +91,8 @@ input, div {
 min-width: 120px;
 }
 `;
+
+
 
 const BtnsWrapper = Styled.div`
 display: flex;
@@ -200,7 +208,6 @@ class Dashboar extends Component {
                 {showFormBtn}
                 {showMinusFormBtn}
             </BtnsWrapper>
-
 
             {
                 this.state.currentMinus &&

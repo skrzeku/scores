@@ -4,6 +4,11 @@ import Styled from "styled-components";
 import {colorPrimary, globalTitle, tabName} from "../../variables";
 import {MenuItem, Select} from "@material-ui/core";
 import Crown from '../../assets/images/pobrane.gif';
+import Gypsy from '../../assets/images/gify.gif';
+import Emoji from '../../assets/images/gif3.gif';
+import Frog from '../../assets/images/gif4.gif';
+import Pen from '../../assets/images/pen.gif';
+import Face from '../../assets/images/face2.png';
 //Styles
 
 
@@ -81,6 +86,33 @@ min-width: 130px;
 }
 `;
 
+const CrownImg = Styled.img`
+height: 35px;
+width: auto;
+left: -4px;
+position: relative;
+z-index: 3;
+`;
+
+const GypsyImg = Styled.img`
+height: 150px;
+width: auto;
+margin-top: 35px;
+`;
+
+const EmojiImg = Styled.img`
+height: 90px;
+width: auto;
+`;
+
+const FaceImg = Styled.img`
+height: 70px;
+width: auto;
+position: absolute;
+top: 25px;
+left:48%;
+transform: translateX(-50%);
+`;
 
 
 
@@ -92,13 +124,13 @@ const Ranking = (props)=> {
         setMonth(props.month);
     }, [props.month]);
 
-    const CrownImg = Styled.img`
+    const ImgWrapper = Styled.div`
     position: absolute;
-    top: -100px;
+    top: -40px;
     z-index: 2;
-    width: 100%;
-    height: auto;
-    left: 0;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%) translateY(-90%);
     mix-blend-mode: darken;
     `;
 
@@ -113,8 +145,8 @@ const Ranking = (props)=> {
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.37));
     width: 500px;
     align-items: flex-end;
-    margin: 100px auto 50px;  
-        div {
+    margin: 150px auto 50px;  
+        > div {
         flex: 1;
         position: relative;
         height: 100px;
@@ -163,6 +195,7 @@ const Ranking = (props)=> {
     });
 
     const sortedScores =  monthScores.sort((a, b) => (a.sum < b.sum) ? 1 : -1);
+    console.log(sortedScores[0]);
 
     return(<React.Fragment>
         {
@@ -187,13 +220,10 @@ const Ranking = (props)=> {
 
         }
 
-
-
-
         <Podium>
             {
                 podium.map((place, index)=> {
-                    return(<div key={index}>{index === 1 ? <CrownImg src={Crown}/> : ''}<PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[place - 1]?.name}</PodriumName> {sortedScores[place - 1]?.sum} </div>)
+                    return(<div key={index}>{index === 1 ? (sortedScores[0]?.sum > 50000 ? <ImgWrapper><CrownImg src={Crown}/><FaceImg src={Face}/> <GypsyImg src={Gypsy}/></ImgWrapper> : <ImgWrapper><CrownImg src={Crown}/></ImgWrapper>) : ''}{index !== 1 ? (sortedScores[place - 1]?.sum > 25000 ? <ImgWrapper><EmojiImg src={Emoji}/></ImgWrapper> : '') : ''}<PodriumNumber>{place}</PodriumNumber><PodriumName>{sortedScores[place - 1]?.name}</PodriumName> {sortedScores[place - 1]?.sum} </div>)
                 })
             }
 

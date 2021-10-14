@@ -47,14 +47,14 @@ const Minuses = (props)=> {
             return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
         }).sort((a, b) => (a.client < b.client) ? 1 : -1);
 
-    console.log(MonthMinuses);
+    // console.log(MonthMinuses);
   // const min =  MonthMinuses.map((one)=> one.minus);
   // const lol = min.length >0 ? min[0] : [];
 
 
   return(<TableCell>{
         MonthMinuses.map((one, index)=> {
-            console.log(one);
+            // console.log(one);
             return(<OneMinus key={index} onClick={()=> props.setCurrentMinus(one)}>
                 {
                     one.client === 9999 ? <u>-{one.minus}</u> :-one.minus
