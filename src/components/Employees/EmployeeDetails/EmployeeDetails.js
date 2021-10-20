@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import {MenuItem, Select} from "@material-ui/core";
 import {globalTitle, tabName} from "../../../variables";
+import EmployeeStats from "../EmployeeStats/EmployeeStats";
 
 
 //styles
@@ -27,13 +28,26 @@ margin-bottom: 20px;
 
 const TabName = Styled.h2`
 ${tabName}
+display: block;
+
 `;
+
+const Heading = Styled.h2`
+margin-top: 50px;
+margin-bottom: 30px;
+font-weight: 600;
+`;
+
 
 const NameWrapper = Styled.div`
 display: flex;
 width: 65%;
 margin: 0 auto;
 justify-content: space-between;
+`;
+
+const TabWrapper = Styled.div`
+padding-top: 80px;
 `;
 
 
@@ -89,8 +103,11 @@ const EmployeeDetails = (props)=> {
     });
 
 
-    return(<div>
+    return(<TabWrapper>
+
         <TabName><span>Wyniki pracownika</span></TabName>
+        <Heading>Wyniki {calendar?.name +' ' + new Date().getFullYear()} </Heading>
+
         <NameWrapper>
             <Title>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</Title>
             <SelectWrapper>
@@ -133,7 +150,12 @@ const EmployeeDetails = (props)=> {
         }
 
 
-    </div>)
+        <Heading>Statystyki </Heading>
+        <EmployeeStats employee={props} month={month}/>
+
+
+
+    </TabWrapper>)
 };
 
 

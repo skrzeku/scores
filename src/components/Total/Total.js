@@ -1,5 +1,5 @@
-import React from 'react';
-import {useSelector} from "react-redux";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import Styled from 'styled-components';
 import {colorPrimary} from "../../variables";
 
@@ -55,13 +55,22 @@ margin-left: 10px;
         //Get states
     const Scores = useSelector(state => state.scores);
      const month = useSelector(state => state.month);
+     const calendars = useSelector(state => state.calendar)
      const calendar = useSelector(state => state.calendar[month]);
+     const dispatch = useDispatch();
+
 
 
      const endDate = calendar?.endDate.toDate();
      console.log(endDate);
-     const today = new Date().getTime();
-     const leftDays = Math.ceil((endDate?.getTime() - today)/ (1000*60*60*24));
+     // const today = new Date().getTime();
+     const today = new Date();
+
+     const leftDays = Math.ceil((endDate?.getTime() - today.getTime())/ (1000*60*60*24));
+
+
+
+
 
      const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
@@ -80,16 +89,50 @@ margin-left: 10px;
 
      };
 
+     // const today = new Date();
+     const currMonth = calendars?.find((one) => {
+         const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+         return date;
+     });
+     useEffect(()=> {
+         const today = new Date();
+         const currMonth = calendars?.find((one) => {
+             const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+             return date;
+         });
+         if (currMonth) {
+             dispatch({type:'CHANGE_MONTH', month: currMonth?.id});
+             return false;
+         }
+
+     }, [calendars])
+
 
      const getBusinessDatesCount = (start, endDate)=> {
-         let count = 1;
+         let count = 0;
          const curDate = new Date(start);
+         // console.log(curDate);
+         // console.log(endDate);
+
+         // while (curDate <= endDate) {
+         //     const dayOfWeek = curDate.getDay();
+         //     console.log(dayOfWeek);
+         //     if(!(dayOfWeek in [0, 6])) count++;
+         //     curDate.setDate(curDate.getDate() + 1);
+         // }
+         let arr = [];
+
          while (curDate <= endDate) {
              const dayOfWeek = curDate.getDay();
-             if(!(dayOfWeek in [0, 6])) count++;
+             if(!((dayOfWeek === 6) || (dayOfWeek === 0))) {
+                 arr.push(curDate);
+             }
              curDate.setDate(curDate.getDate() + 1);
          }
-         return count;
+         console.log(count);
+         console.log(arr.length);
+
+         return arr.length;
      };
 
      const leftBussyDays = getBusinessDatesCount(today, endDate);
@@ -113,7 +156,7 @@ margin-left: 10px;
 
          <div>
              <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
-             <LeftDays>{leftBussyDays > 1 ? '' + leftBussyDays+ ' dni robocze (' + endDate?.toLocaleDateString()  + ')': 'Miesiąc zakończony' }</LeftDays>
+             <LeftDays>{leftBussyDays > 0 ? '' + leftBussyDays+ ' dni robocze (' + endDate?.toLocaleDateString()  + ')': 'Miesiąc zakończony' }</LeftDays>
          </div>
 
 
@@ -123,4 +166,4 @@ margin-left: 10px;
 };
 
 
- export default Total;
+ export default React.memo(Total);

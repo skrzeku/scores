@@ -12,6 +12,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
 import {buttonWrapper} from "../../../variables";
 
+
 const Form = Styled.form`
 padding: 50px;
 position: relative;
@@ -71,6 +72,7 @@ const FormScore = (props)=> {
 
 
 
+
     const db = firebase.firestore();
     const classes = useStyles();
 
@@ -103,6 +105,7 @@ const FormScore = (props)=> {
                 // console.log(data);
                 // dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
                 // reset();
+
                 props.onClose();
             });
         }
@@ -112,6 +115,7 @@ const FormScore = (props)=> {
                 console.log(data);
                 // dispatch({type:'ADD_SCORE', scores: allScores, score: newScore});
                 // reset();
+
                 props.onClose();
             });
         }
@@ -306,7 +310,9 @@ const FormScore = (props)=> {
                 }
 
 
+
             </ButtonWrapper>
+
         </Form>
     )
 }

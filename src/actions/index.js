@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 export const employeesFetched = (employees) => ({
     type: 'FETCH_EMPLOYEES_SUCCESS',
     employees
@@ -25,7 +26,7 @@ export const addScore = (scores, score) => ({
 export const removeScore = (scores, index) => ({
     type: 'REMOVE_SCORE',
     scores,
-    index
+    index,
 });
 
 export const removeMinus = (minuses, index) => ({

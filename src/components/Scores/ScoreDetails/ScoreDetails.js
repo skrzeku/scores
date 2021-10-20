@@ -42,7 +42,7 @@ const ScoreDetails = (props)=> {
         const index = scoresAll.indexOf(score);
 
         db.collection("scores").doc(key).delete().then(() => {
-            dispatch({type: 'REMOVE_SCORE', scores, index});
+            // dispatch({type: 'REMOVE_SCORE', scores, index});
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });

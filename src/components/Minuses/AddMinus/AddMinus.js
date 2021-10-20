@@ -138,7 +138,6 @@ const AddMinus = (props)=> {
 
     return(
         <React.Fragment>
-        {props.showminusForm &&
         <FormWrapper>
 
 
@@ -242,10 +241,10 @@ const AddMinus = (props)=> {
 
 
         </FormInner>
-    </FormWrapper> }
+    </FormWrapper>
         </React.Fragment>)
 };
 
 
 
-export default AddMinus;
+export default React.memo(AddMinus);

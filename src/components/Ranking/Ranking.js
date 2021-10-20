@@ -242,4 +242,4 @@ const Ranking = (props)=> {
 
 
 
-export default Ranking;
+export default React.memo(Ranking);

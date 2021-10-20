@@ -1,6 +1,6 @@
-const initioalmonth = new Date().getMonth();
+// const initioalmonth = new Date().getMonth();
 
-export const month = (state = initioalmonth, action) => {
+export const month = (state = 1, action) => {
     switch (action.type) {
         case 'CHANGE_MONTH':
             return action.month;

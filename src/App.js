@@ -2,7 +2,7 @@ import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {employeesFetched, fetchCalendar, fetchUser, fetchMinuses} from "./actions";
+import {employeesFetched, fetchCalendar, fetchUser, fetchMinuses, changeMonth} from "./actions";
 import {fetchScores} from "./actions";
 import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
@@ -17,7 +17,9 @@ import {colorPrimary} from "./variables";
 import Stats from "./components/Stats/Stats";
 
 
+
 class App extends Component {
+
 
     constructor() {
 
@@ -26,10 +28,12 @@ class App extends Component {
             loading: false
         }
 
+
     }
 
 
     componentDidMount() {
+
 
         auth.onAuthStateChanged((user) => {
             this.props.fetchUser(user);
@@ -56,6 +60,7 @@ class App extends Component {
             });
             this.props.fetchScores(data);
             this.setState({loading: true});
+
         });
 
 
@@ -89,6 +94,16 @@ class App extends Component {
             var onejan = new Date(this.getFullYear(), 0, 1);
             return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
         };
+        // const today = new Date();
+        // const currMonth = this.props?.calendar?.find((one) => {
+        //     const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+        //     return date;
+        // });
+        // console.log(currMonth);
+        // if (currMonth) {
+        //     this.props.changeMonth(currMonth?.id);
+        // }
+        //
 
         const theme = createMuiTheme({
             palette: {
@@ -129,9 +144,11 @@ const mapStateToProps = (state) => {
     return {
         employees: state.employees,
         scores: state.scores,
-        user: state.user
+        user: state.user,
+        calendar: state.calendar,
+        month: state.month
     }
 };
-const mapDispatchToProps = {employeesFetched, fetchScores, fetchCalendar, fetchUser, fetchMinuses};
+const mapDispatchToProps = {employeesFetched, fetchScores, fetchCalendar, fetchUser, fetchMinuses, changeMonth};
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

@@ -6,6 +6,8 @@ import {changeMonth} from '../../actions/index';
 import AddEmployee from "../Employees/AddEmployee/AddEmployee";
 import AddMinus from "../Minuses/AddMinus/AddMinus";
 import NewScore from '../Scores/NewScore/NewScore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Scores from '../Scores/Scores';
 
@@ -122,6 +124,8 @@ class Dashboar extends Component {
 
     }
 
+
+
     shnowFormHandler = () => {
         this.setState({shownform: !this.state.shownform});
     };
@@ -151,15 +155,48 @@ class Dashboar extends Component {
 
     componentDidMount() {
         const today = new Date();
-        const currMonth = this.props.calendar?.find((one) => {
+        const currMonth = this.props?.calendar?.find((one) => {
             const date = today.getTime() >= one.startDate.toDate().getTime() && today.getTime() <= one.endDate.toDate().getTime();
             return date;
         });
-
+        // if (currMonth) {
+        //     this.props.changeMonth(currMonth?.id);
+        // }
+        // console.log(currMonth);
+        //
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const notify = () => toast.success('🦄 Wynik dodany!', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+            if ((prevProps.scores.length !== this.props.scores.length) && prevProps.scores.length > 0) {
+                if ( this.props.scores.length > prevProps.scores.length ) {
+                  notify();
+                }
+                else {
+                    toast.warn('🦄 Wynik usunięty!!', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            }
     }
 
 
     render() {
+
+
 
         const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
         const db = firebase.firestore();
@@ -208,6 +245,8 @@ class Dashboar extends Component {
                 {showFormBtn}
                 {showMinusFormBtn}
             </BtnsWrapper>
+            <ToastContainer />
+
 
             {
                 this.state.currentMinus &&
@@ -220,10 +259,19 @@ class Dashboar extends Component {
                          dbName={"scores"}/>}
 
             <Ranking month={this.props.month} showAll={false}/>
-            <NewScore shownNewScore={this.state.shownform} onClose={() => this.shnowFormHandler()}/>
-            <AddMinus showminusForm={this.state.showminusform} onClose={() => this.showMinusFormHandler()}/>
-            <AddEmployee showemployeeform={this.state.showAddEmployeeForm}
-                         onClose={() => this.showAddEmployeeHandler()}/>
+            {
+                this.state.shownform && <NewScore shownNewScore={this.state.shownform} onClose={() => this.shnowFormHandler()}/>
+            }
+
+            {
+                this.state.showminusform &&  <AddMinus showminusForm={this.state.showminusform} onClose={() => this.showMinusFormHandler()}/>
+            }
+
+            {
+                this.state.showAddEmployeeForm &&   <AddEmployee showemployeeform={this.state.showAddEmployeeForm}
+                                                                 onClose={() => this.showAddEmployeeHandler()}/>
+            }
+
         </div>)
     }
 }
@@ -234,7 +282,8 @@ const mapStateToProps = state => {
         employees: state.employees,
         month: state.month,
         calendar: state.calendar,
-        user: state.user
+        user: state.user,
+        scores: state.scores
     }
 };
 
