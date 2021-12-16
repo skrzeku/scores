@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Employees from "../Employees/Employees";
-import AddScore from '../Scores/AddScore/AddScore';
-import {changeMonth} from '../../actions/index';
+// import AddScore from '../Scores/AddScore/AddScore';
+import {changeMonth, changeYear} from '../../actions/index';
 import AddEmployee from "../Employees/AddEmployee/AddEmployee";
 import AddMinus from "../Minuses/AddMinus/AddMinus";
 import NewScore from '../Scores/NewScore/NewScore';
@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Scores from '../Scores/Scores';
+import {months, years} from "../../service";
 
 import "flatpickr/dist/themes/material_green.css";
 import firebase from "../../firebase";
@@ -89,6 +90,15 @@ position: absolute;
 line-height: 70px;
 left: 15px;
 z-index: 10;
+    >div:nth-child(2) {
+    margin-left: 10px;
+    min-width: unset;
+    input, div {
+    min-width: 70px;
+    // min-width: unset !important;
+    }
+    
+    }
 input, div {
 min-width: 120px;
 }
@@ -144,6 +154,10 @@ class Dashboar extends Component {
         this.setState({showselect: true});
     };
 
+    YearChangeHandler = (event)=> {
+        this.props.changeYear(event);
+    }
+
     setCurrentMinus = (e) => {
         this.setState({currentMinus: e});
     };
@@ -195,18 +209,19 @@ class Dashboar extends Component {
 
 
     render() {
+        console.log(this.props.year);
 
 
 
-        const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+
         const db = firebase.firestore();
 
         const showFormBtn = this.props.user ? <AddScoreBtn onClick={this.shnowFormHandler}><i
             className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
         const showMinusFormBtn = this.props.user ?
             <AddMinuBtn onClick={this.showMinusFormHandler}><i className="las la-minus-circle"></i></AddMinuBtn> : null;
-        const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
-        const addMinusWrapper = this.props.user ? (this.state.showminusform && <AddMinus/>) : null;
+        // const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
+        // const addMinusWrapper = this.props.user ? (this.state.showminusform && <AddMinus/>) : null;
 
 
         return (<div>
@@ -221,6 +236,17 @@ class Dashboar extends Component {
                 >
                     {months.map((option, index) => (
                         <MenuItem key={index} value={index}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <Select
+                    defaultValue={this.props.year}
+                    value={this.props.year}
+                    onChange={event => this.YearChangeHandler(event.target.value)}
+                >
+                    {years.map((option, index) => (
+                        <MenuItem key={index} value={option}>
                             {option}
                         </MenuItem>
                     ))}
@@ -283,12 +309,13 @@ const mapStateToProps = state => {
         month: state.month,
         calendar: state.calendar,
         user: state.user,
-        scores: state.scores
+        scores: state.scores,
+        year: state.year
     }
 };
 
 
-const mapDispatchToProps = {changeMonth};
+const mapDispatchToProps = {changeMonth, changeYear};
 
 
 const Dashboard = connect(mapStateToProps, mapDispatchToProps)(Dashboar);

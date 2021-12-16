@@ -9,6 +9,8 @@ import Emoji from '../../assets/images/gif3.gif';
 import Frog from '../../assets/images/gif4.gif';
 import Pen from '../../assets/images/pen.gif';
 import Face from '../../assets/images/face2.png';
+import {indexMonth, months, years} from "../../service";
+import DataSelects from "../DateSelects/DataSelects";
 //Styles
 
 
@@ -120,9 +122,16 @@ transform: translateX(-50%);
 
 const Ranking = (props)=> {
 
+    const scoresAll = useSelector(state => state.scores);
+    const employees = useSelector(state => state.employees);
+    const storeYear = useSelector(state => state.year);
+    const calendars = useSelector(state => state.calendar);
+
+    const storeMonth = useSelector(state => state.month);
+
     useEffect(()=> {
-        setMonth(props.month);
-    }, [props.month]);
+                setMonth(storeMonth);
+    }, [storeMonth]);
 
     const ImgWrapper = Styled.div`
     position: absolute;
@@ -163,16 +172,22 @@ const Ranking = (props)=> {
     `;
 
     //Getting from redux store
-    const scoresAll = useSelector(state => state.scores);
-    const employees = useSelector(state => state.employees);
 
-    const storeMonth = useSelector(state => state.month);
+
 
     //local state
+    console.log(props.month);
     const [month, setMonth] = useState(storeMonth);
-    const calendar = useSelector(state => state.calendar[month]);
+    const [year, setYear] = useState(storeYear);
+    // console.log(props.month);
+    // console.log(props.month ? props.month : storeMonth);
+    console.log(month + year);
+    // const calendar = useSelector(state => state.calendar[month]);
+    const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], calendars)]);
+    console.log(calendar);
+    console.log(storeYear);
 
-    const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+    // const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
 
     const podium = [2, 1, 3];
@@ -195,31 +210,15 @@ const Ranking = (props)=> {
     });
 
     const sortedScores =  monthScores.sort((a, b) => (a.sum < b.sum) ? 1 : -1);
-    console.log(sortedScores[0]);
+    // console.log(sortedScores[0]);
 
     return(<React.Fragment>
         {
             props.showAll &&   <div>  <TabName><span>Ranking</span></TabName><NameWrapper>
                 <Title>{months[month] + ' 2021'} </Title>
-                <SelectWrapper>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        defaultValue={month}
-                        value={month}
-                        onChange={event => setMonth(event.target.value)}
-                    >
-                        {months.map((option, index) => (
-                            <MenuItem key={index} value={index}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </SelectWrapper>
+               <DataSelects setYear={setYear} year={year} month={month} setMonth={setMonth}/>
             </NameWrapper></div>
-
         }
-
         <Podium>
             {
                 podium.map((place, index)=> {
@@ -228,7 +227,6 @@ const Ranking = (props)=> {
             }
 
         </Podium>
-
         {
             props.showAll &&
 

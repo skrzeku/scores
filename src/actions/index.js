@@ -43,6 +43,11 @@ export const changeMonth = (month) => ({
     month
 });
 
+export const changeYear = (year) => ({
+    type: "CHANGE_YEAR",
+    year
+});
+
 
 export const addMonthObject = (months, month) => ({
     type: "ADD_MONTH",

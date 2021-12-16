@@ -18,6 +18,21 @@ import Stats from "./components/Stats/Stats";
 
 
 
+export const changeCurrentMonth = (calendar, changeVoid)=> {
+    const today = new Date();
+    const currMonth = calendar?.find((one) => {
+        const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+        return date;
+    });
+    console.log(currMonth?.id);
+    if (currMonth) {
+        changeVoid(currMonth?.id);
+        // console.log(this.props.month);
+        return false;
+
+    }
+}
+
 class App extends Component {
 
 
@@ -30,6 +45,7 @@ class App extends Component {
 
 
     }
+
 
 
     componentDidMount() {
@@ -75,6 +91,9 @@ class App extends Component {
                     return one.data()
                 });
                 this.props.fetchCalendar(CurrentCalendar);
+                changeCurrentMonth(this.props.calendar, this.props.changeMonth);
+
+
             });
 
         db.collection('minuses').onSnapshot((snap) => {
@@ -85,7 +104,31 @@ class App extends Component {
             this.props.fetchMinuses(data);
         });
 
+
+
+
+
     }
+    componentWillMount() {
+
+    }
+
+    // componentWillMount() {
+    //     const today = new Date();
+    //     const currMonth = this.props.calendar?.find((one) => {
+    //         const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+    //         return date;
+    //     });
+    //     console.log(currMonth?.id);
+    //     if (currMonth) {
+    //         changeMonth(currMonth?.id);
+    //         return false;
+    //     }
+    // }
+
+
+
+
 
 
     render() {
@@ -104,6 +147,8 @@ class App extends Component {
         //     this.props.changeMonth(currMonth?.id);
         // }
         //
+
+
 
         const theme = createMuiTheme({
             palette: {

@@ -57,8 +57,6 @@ margin: 0 10px;
 `;
 
 
-
-
 const Details = (props) => {
     //Redux
     const employees = useSelector(state => state.employees);
@@ -69,7 +67,6 @@ const Details = (props) => {
     const dispatch = useDispatch();
     const [endi, setEnd] = useState(false);
     const [shownForm, showFormHandler] = useState(false);
-
 
 
     const removeData = () => {
@@ -102,8 +99,6 @@ const Details = (props) => {
     };
 
 
-
-
     return (<ScoreWrapper>
         <ScoreInner>
             <CancelBtn onClick={Closeit}><i className="las la-times"></i></CancelBtn>
@@ -114,7 +109,7 @@ const Details = (props) => {
             <DetailInside>
                 <p><strong>Pracownik:</strong> {currentEmployee?.name} {currentEmployee?.lastname}</p>
                 {
-                    props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p>:
+                    props.object?.score ? <p><strong>Wynik</strong> {props.object?.score}</p> :
                         <p><strong>Minus:</strong> {props.object?.minus}</p>
 
                 }
@@ -130,42 +125,37 @@ const Details = (props) => {
                 {
                     user &&
                     (<BtnWrapper>
-                        {
-                            !shownForm &&
-                            <Button
-                            variant="contained"
-                            color="primary"
-                            /* eslint-disable-next-line react/style-prop-object */
-                            // onClick={removeData}
-                            onClick={()=>showFormHandler(!shownForm)}
-                            startIcon={<EditIcon/>}
-                            >
-                            Edycja
-                            </Button>
+                            {
+                                !shownForm &&
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    /* eslint-disable-next-line react/style-prop-object */
+                                    // onClick={removeData}
+                                    onClick={() => showFormHandler(!shownForm)}
+                                    startIcon={<EditIcon/>}
+                                >
+                                    Edycja
+                                </Button>
 
-                        }
+                            }
                             <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={removeData}
-                        startIcon={<DeleteIcon/>}
-                    >
-                        Usuń
-                    </Button>
+                                variant="contained"
+                                color="secondary"
+                                onClick={removeData}
+                                startIcon={<DeleteIcon/>}
+                            >
+                                Usuń
+                            </Button>
                         </BtnWrapper>
 
                     )
                 }
-                <div>
-
-                </div>
-
-
-
 
             </DetailInside>
             {
-                shownForm && <FormWrapper><FormScore object={props.object} onClose={()=>props.onClose()}/></FormWrapper>
+                shownForm &&
+                <FormWrapper><FormScore object={props.object} onClose={() => props.onClose()}/></FormWrapper>
 
             }
         </ScoreInner>

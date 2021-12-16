@@ -4,6 +4,8 @@ import Styled from 'styled-components';
 
 import {colorPrimary} from "../../variables";
 import Minuses from "../Minuses/Minuses";
+import {months} from "../../service";
+import {indexMonth} from "../../service";
 
 import ScoreDetails from "./ScoreDetails/ScoreDetails";
 import Details from "../Details/Details";
@@ -17,16 +19,34 @@ const Scores = (props)=> {
     const employees = useSelector(state => state.employees);
     const month = useSelector(state => state.month);
     const minuses = useSelector(state => state.minuses);
+    const year = useSelector(state => state.year);
+    const allMonths = useSelector(state => state.calendar);
 
 
     const [currentScore, setScore] = useState(null);
 
-
-    const calendar = useSelector(state => state.calendar[month]);
-
+    // const indexMonth = allMonths.find((one)=> one.year === '2022');
 
 
-    const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
+
+    // console.log(indexMonth(year, months[month]));
+    // console.log(allMonths.indexOf(indexMonth('2022', 'Luty')));
+    // console.log(indexMonth(year, months[month]));
+    console.log(month);
+
+    console.log(year);
+
+
+    const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], allMonths)]);
+    console.log(calendar);
+
+
+
+    // console.log(useSelector(state => state.calendar));
+
+
+
+    // const weeks = [19, 18, 18, 19, 20, 21, 19, 20, 22];
 
 
          const sequential = (to, from = 0)=> {
@@ -41,6 +61,8 @@ const Scores = (props)=> {
     if (calendar?.startDate) {
         correctweeks = sequential(calendar?.endDate.toDate().getWeek(), calendar?.startDate.toDate().getWeek());
     }
+    // console.log(calendar.endDate.toDate().getWeek());
+    // console.log(calendar.startDate.toDate().getWeek());
 
 
 

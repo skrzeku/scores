@@ -4,6 +4,8 @@ import Styled from "styled-components";
 import {MenuItem, Select} from "@material-ui/core";
 import {globalTitle, tabName} from "../../../variables";
 import EmployeeStats from "../EmployeeStats/EmployeeStats";
+import DataSelects from "../../DateSelects/DataSelects";
+import {indexMonth, months} from "../../../service";
 
 
 //styles
@@ -54,24 +56,32 @@ padding-top: 80px;
 
 const EmployeeDetails = (props)=> {
 
-    console.log(props);
+
     //redux
     const scoresAll = useSelector(state => state.scores);
     const employees = useSelector(state => state.employees);
     const storeMonth = useSelector(state => state.month);
+    const storeYear = useSelector(state => state.year);
+    const calendars = useSelector(state => state.calendar);
 
     //local state
     const [month, setMonth] = useState(storeMonth);
-    const calendar = useSelector(state => state.calendar[month]);
-    const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+    const [year, setYear] = useState(storeYear);
+
+    console.log(year + month);
+    // const calendar = useSelector(state => state.calendar[month]);
+
+
+
+        useEffect(()=> {
+            setMonth(storeMonth);
+            setYear(storeYear);
+        }, [storeMonth])
+
+
+
+    const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], calendars)]);
     const headArray = ['l.p.', 'Wynik', 'Typ','nr klienta', 'data'];
-
-
-
-
-
-    console.log(calendar);
-
 
     const currentEmployee = employees?.find((one)=>one.id === +props.id);
     const currentScores = scoresAll
@@ -82,7 +92,6 @@ const EmployeeDetails = (props)=> {
         });
 
 
-    console.log(currentScores);
 
     const scoreTable = currentScores.map((one, index)=> {
         return (<tr>
@@ -110,21 +119,8 @@ const EmployeeDetails = (props)=> {
 
         <NameWrapper>
             <Title>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</Title>
-            <SelectWrapper>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={month}
-                    value={month}
-                    onChange={event => setMonth(event.target.value)}
-                >
-                    {months.map((option, index) => (
-                        <MenuItem key={index} value={index}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </SelectWrapper>
+            <DataSelects month={month} setMonth={setMonth} year={year} setYear={setYear}/>
+
         </NameWrapper>
 
 
@@ -151,7 +147,7 @@ const EmployeeDetails = (props)=> {
 
 
         <Heading>Statystyki </Heading>
-        <EmployeeStats employee={props} month={month}/>
+        <EmployeeStats employee={props} month={month} year={year}/>
 
 
 

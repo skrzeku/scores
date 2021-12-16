@@ -3,7 +3,8 @@ import {Doughnut} from "react-chartjs-2";
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import { Bar, Pie } from 'react-chartjs-2';
-import {filterbyDate} from "../../../service";
+import {filterbyDate, indexMonth, months} from "../../../service";
+import {types} from '../../../service';
 
 const ChartWrapper = Styled.div`
 width: 70%;
@@ -37,9 +38,17 @@ const Charts = (props)=> {
     const employees = useSelector(state => state.employees);
     const storeMonth = useSelector(state => state.month);
     const calendar = useSelector(state => state.calendar);
+    const storeYear = useSelector(state => state.year);
+    const month = props? props.month : storeMonth;
+    const year = props? props.year : storeYear;
 
-    const types = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'GMF', 'GMF + Opinie', 'Opinie','Instagram', 'inny'];
-    const currentMonth = useSelector(state => state.calendar[props.month]);
+    const currentMonth = useSelector(state => state.calendar[month]);
+    const newCurrentMonth = useSelector(state => state.calendar[indexMonth(year, months[month], calendar)]);
+    console.log(year);
+
+    console.log(newCurrentMonth);
+    console.log(currentMonth);
+
 
     //quantitative statistics
 
@@ -60,11 +69,11 @@ const Charts = (props)=> {
             name: one,
             value: 0
         };
-        const filteredscores = filterbyDate(one, true, scoresAll, currentMonth)
+        const filteredscores = filterbyDate(one, true, scoresAll, newCurrentMonth, year)
             .map((oni)=>oni.type).length;
         obj.name = one;
         obj.value = filteredscores;
-        console.log(filteredscores);
+        // console.log(filteredscores);
         return obj;
 
 
@@ -80,7 +89,7 @@ const Charts = (props)=> {
             name: one,
             value: 0
         };
-        const filteredscores = filterbyDate(one, false, scoresAll, currentMonth)
+        const filteredscores = filterbyDate(one, false, scoresAll, newCurrentMonth, year)
             .map((oni)=>oni.type).length;
 
         obj.name = one;
@@ -98,7 +107,7 @@ const Charts = (props)=> {
             name: one,
             value: 0
         };
-        const filteredscores = filterbyDate(one, true, scoresAll, currentMonth)
+        const filteredscores = filterbyDate(one, true, scoresAll, newCurrentMonth, year)
             .map((oni)=> +oni.score)
             .reduce((a, b)=> a + b, 0);
         obj.name = one;
@@ -113,7 +122,7 @@ const Charts = (props)=> {
             name: one,
             value: 0
         };
-        const filteredscores = filterbyDate(one, false, scoresAll, currentMonth)
+        const filteredscores = filterbyDate(one, false, scoresAll, newCurrentMonth, year)
             .map((oni)=> +oni.score)
             .reduce((a, b)=> a + b, 0);
         obj.name = one;
@@ -283,8 +292,8 @@ const Charts = (props)=> {
     return(<Row>
         <Heading>Statystyki Ilościowe</Heading>
 
-            <Column><Label>{currentMonth.name} {new Date().getFullYear()}</Label></Column>
-            <Column><Label>Rok {new Date().getFullYear()}</Label></Column>
+            <Column><Label>{newCurrentMonth?.name} {newCurrentMonth?.year}</Label></Column>
+            <Column><Label>Rok {newCurrentMonth?.year}</Label></Column>
 
         <Column>
             <Bar  data={data} height={400} options={options2}/>
@@ -295,8 +304,8 @@ const Charts = (props)=> {
         <Heading>Statystyki wartościowe</Heading>
 
         <Row>
-            <Column><Label>{currentMonth.name} {new Date().getFullYear()}</Label></Column>
-            <Column><Label>Rok {new Date().getFullYear()}</Label></Column>
+            <Column><Label>{newCurrentMonth?.name} {newCurrentMonth?.year}</Label></Column>
+            <Column><Label>Rok {newCurrentMonth?.year}</Label></Column>
         </Row>
         <Column>
             <Bar data={dataValueMonth} height={400} options={options2}/>

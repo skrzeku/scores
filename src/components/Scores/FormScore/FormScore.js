@@ -11,6 +11,7 @@ import firebase from "../../../firebase";
 import {makeStyles} from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
 import {buttonWrapper} from "../../../variables";
+import {types, shorts} from "../../../service";
 
 
 const Form = Styled.form`
@@ -51,15 +52,15 @@ const useStyles = makeStyles((theme) => ({
 const FormScore = (props)=> {
 
     console.log(props.object);
-    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'GMF', 'GMF + Opinie', 'Opinie','Instagram', 'inny'];
-    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o', 'rc', 'gmf', 'gmf+o', 'opi', 'ins', ''];
+    console.log(useSelector(state => state.year));
+
 
     const { register, handleSubmit, formState, formState: {errors, isSubmitSuccessful}, control, reset } = useForm({
         defaultValues: {
             score: props.object ? props.object.score : '',
             client: props.object ? props.object.client : '',
             date: props.object ? props.object.date.toDate() : new Date(),
-            type: props.object ? options.indexOf(props.object.type) : '',
+            type: props.object ? types.indexOf(props.object.type) : '',
             employee: props.object ? props.object.employee : '',
             mailing: props.object ? props.mailing : false,
             newClient: props.object ? props.newClient: false
@@ -82,10 +83,9 @@ const FormScore = (props)=> {
 
 
     const onSubmit = (data, e) => {
-        console.log(data);
         const newScore = {
             score: data.score,
-            type: options[data.type],
+            type: types[data.type],
             mailing: data.mailing ? data.mailing : false,
             employee: +data.employee,
             date: data.date ? data.date : new Date(),
@@ -215,7 +215,7 @@ const FormScore = (props)=> {
                     <FormControl className={classes.formControl}>
                         <InputLabel id="demo-simple-select-label">Typ umowy</InputLabel>
                         <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label" error={!!errors.type}>
-                            {options.map((option, index) => (
+                            {types.map((option, index) => (
                                 <MenuItem key={index} value={index}>
                                     {option}
                                 </MenuItem>

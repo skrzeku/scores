@@ -109,8 +109,6 @@ const AddMinus = (props)=> {
             date: new Date(),
             client: data.lastMonth ? data.client = 9999 : data.client
         };
-        // console.log(newMinuse);
-        // console.log(newMinuse);
         db.collection('minuses').add(newMinuse).then(()=> {
             dispatch({type:'ADD_MINUSES', minuses: myminuses, minuse: newMinuse});
             reset();
@@ -119,14 +117,6 @@ const AddMinus = (props)=> {
 
     };
 
-
-    // const addMinuses = () => {
-    //
-    //
-    //     db.collection('minuses').add(newMinuse).then(()=> {
-    //         dispatch({type:'ADD_MINUSES', minuses: myminuses, minuse: newMinuse});
-    //     });
-    // };
 
     const handleChange = (tags)=> {
       setNumber(tags);

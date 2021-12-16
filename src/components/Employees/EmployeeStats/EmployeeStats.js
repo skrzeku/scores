@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
 import { Bar, Pie } from 'react-chartjs-2';
-import {filterbyDate} from "../../../service";
+import {filterbyDate, indexMonth, months, types} from "../../../service";
 
 const Row = Styled.div`
 
@@ -24,11 +24,15 @@ font-weight: bold;
 const EmployeeStats = (props)=> {
 
     const scoresAll = useSelector(state => state.scores);
-    const currMonth = useSelector(state => state.month)
+    const currMonth = useSelector(state => state.month);
+    const currYear = useSelector(state => state.year);
+    const calendars = useSelector(state => state.calendar);
 
-    const types = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'GMF', 'GMF + Opinie', 'Opinie','Instagram', 'inny'];
-    const currentMonth = useSelector(state => state.calendar[props.month]);
-    console.log(props.employee);
+
+    // const currentMonth = useSelector(state => state.calendar[props.month]);
+    const currentMonth = useSelector(state => state.calendar[indexMonth(props.year, months[props.month], calendars)]);
+
+    console.log(currentMonth);
 
     const mapofLennght = types.map((one)=> {
         let obj = {
@@ -51,7 +55,7 @@ const EmployeeStats = (props)=> {
             name: one,
             value: 0
         };
-        const filteredscores = filterbyDate(one, false, scoresAll, currentMonth)
+        const filteredscores = filterbyDate(one, false, scoresAll, currentMonth, props.year)
             .filter((emp)=> emp.employee === +props.employee.id)
             .map((oni)=>oni.type).length;
 
@@ -152,8 +156,8 @@ const EmployeeStats = (props)=> {
         ],
     };
 
-    return(<div> <Column><Label>{currentMonth.name} {new Date().getFullYear()}</Label></Column>
-        <Column><Label>Rok {new Date().getFullYear()}</Label></Column>
+    return(<div> <Column><Label>{currentMonth?.name} {props.year}</Label></Column>
+        <Column><Label>Rok {props.year}</Label></Column>
         <Column><Bar  data={data} height={400} options={options2}/></Column>
         <Column>
             <Bar  data={data2}  height={400} options={options}/>

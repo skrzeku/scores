@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Styled from 'styled-components';
 import {colorPrimary} from "../../variables";
+import {indexMonth, months} from "../../service";
 
 const TotalWrapper = Styled.div`
 display: flex;
 justify-content: space-between;
-width: calc(100% - 500px);
+width: calc(100% - 600px);
 margin-right: auto;
-margin-left: 180px;
+margin-left: 280px;
 align-items: flex-end;
 padding: 0 10px 10px;
 `;
@@ -55,9 +56,14 @@ margin-left: 10px;
         //Get states
     const Scores = useSelector(state => state.scores);
      const month = useSelector(state => state.month);
+     const year = useSelector(state => state.year);
      const calendars = useSelector(state => state.calendar)
-     const calendar = useSelector(state => state.calendar[month]);
+     // const calendar = useSelector(state => state.calendar[month]);
+     const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], calendars)]);
+     // const year = useSelector(state => state.year);
      const dispatch = useDispatch();
+
+     console.log(year);
 
 
 
@@ -72,7 +78,7 @@ margin-left: 10px;
 
 
 
-     const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+     // const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
 
 
@@ -95,15 +101,15 @@ margin-left: 10px;
          return date;
      });
      useEffect(()=> {
-         const today = new Date();
-         const currMonth = calendars?.find((one) => {
-             const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
-             return date;
-         });
-         if (currMonth) {
-             dispatch({type:'CHANGE_MONTH', month: currMonth?.id});
-             return false;
-         }
+         // const today = new Date();
+         // const currMonth = calendars?.find((one) => {
+         //     const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
+         //     return date;
+         // });
+         // if (currMonth) {
+         //     dispatch({type:'CHANGE_MONTH', month: currMonth?.id});
+         //     return false;
+         // }
 
      }, [calendars])
 
@@ -155,7 +161,7 @@ margin-left: 10px;
      return(<TotalWrapper>
 
          <div>
-             <TotalMonth>{months[month] + ' ' + new Date().getFullYear()} </TotalMonth>
+             <TotalMonth>{months[month] + ' ' + year} </TotalMonth>
              <LeftDays>{leftBussyDays > 0 ? '' + leftBussyDays+ ' dni robocze (' + endDate?.toLocaleDateString()  + ')': 'Miesiąc zakończony' }</LeftDays>
          </div>
 
@@ -167,3 +173,4 @@ margin-left: 10px;
 
 
  export default React.memo(Total);
+ // export default Total;

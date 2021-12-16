@@ -6,7 +6,7 @@ import Styled from 'styled-components';
 import {buttonWrapper, cancelBtn, colorPrimary, formInner, formWrapper, sendBtn} from "../../../variables";
 import TextField from '@material-ui/core/TextField';
 import FormScore from "../FormScore/FormScore";
-
+import {shorts, types} from "../../../service";
 
 
 // import Checkbox from '@material-ui/core/Checkbox';
@@ -122,15 +122,14 @@ const NewScore = (props)=> {
 
 
 
-    const options = ['Pozycjonowanie', 'Premium Start', 'Facebook', 'Remarketing', 'Strona WWW', 'B2B', 'ssl', 'ads', 'Logotyp', 'Ads + Remarketing', 'Optymalizacja', 'Premium Start + Optymalizacja', 'reCaptcha', 'GMF', 'GMF + Opinie', 'Opinie','Instagram', 'inny'];
-    const shorts = ['Seo', 'S', 'Fb', 'Rem', 'www', 'b2b', 'ssl', 'ads', 'L', 'a+rem', 'o', 's+o', 'rc', 'gmf', 'gmf+o', 'opi', 'ins', ''];
+
 
 
     const onSubmit = (data, e) => {
         console.log(e);
         const newScore = {
             score: data.score,
-            type: options[data.type],
+            type: types[data.type],
             mailing: data.mailing ? data.mailing : false,
             employee: +data.employee,
             date: data.date ? data.date : new Date(),
