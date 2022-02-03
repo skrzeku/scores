@@ -23,6 +23,8 @@ export const indexMonth = (year, month, array)=> {
         })
     )
 };
+
+
 export const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 export const years= ['2021', '2022'];
 

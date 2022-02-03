@@ -7,15 +7,13 @@ import StatsTable from "./StatsTable/StatsTable";
 import Charts from "./Charts/Charts";
 import {MenuItem, Select} from "@material-ui/core";
 import {months, years} from "../../service";
+import {TabName} from "../../template-parts/TabName";
 
 const MyTable = Styled.table`
    ${Table};
    margin-top: 80px;
   `;
-const TabName = Styled.h2`
-${tabName};
-display: block;
-`;
+
 
 const SelectWrapper = Styled.div`
 text-align: left;
@@ -49,7 +47,7 @@ const Stats = ()=> {
 
 
     return(<div>
-        <TabName><span>Statystyki</span></TabName>
+        <TabName title={'Statystyki'}/>
 
         <StatsTable/>
         <SelectWrapper>

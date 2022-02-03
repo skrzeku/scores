@@ -13,8 +13,9 @@ min-width: 130px;
 
 
 const DataSelects = ({month, setMonth, year, setYear})=> {
+    console.log(month);
     return(
-        <SelectWrapper>
+        <>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -39,7 +40,7 @@ const DataSelects = ({month, setMonth, year, setYear})=> {
                     </MenuItem>
                 ))}
             </Select>
-        </SelectWrapper>
+        </>
     )
 }
 

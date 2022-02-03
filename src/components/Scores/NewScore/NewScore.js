@@ -1,3 +1,5 @@
+
+
 import React, {useState, useEffect} from 'react';
 import {useForm, Controller, useFieldArray} from 'react-hook-form';
 import {useDispatch, useSelector} from "react-redux";
@@ -80,7 +82,6 @@ ${sendBtn}
 `;
 
 const CancelBtn = Styled.a`
-
 ${cancelBtn}
 `;
 
@@ -106,7 +107,7 @@ const NewScore = (props)=> {
     const classes = useStyles();
     console.log(props);
 
-            //Redux
+    //Redux
     const employees = useSelector(state => state.employees);
     const allScores = useSelector(state => state.scores);
 
@@ -169,154 +170,154 @@ const NewScore = (props)=> {
     return(
         <ThemeProvider theme={theme}>
 
-        <FormWrapper>
-        <FormInner>
-            <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
+            <FormWrapper>
+                <FormInner>
+                    <CancelBtn onClick={()=>props.onClose()}><i className="las la-times"></i></CancelBtn>
 
-            <FormTitle>Dodaj wynik</FormTitle>
-        {/*<Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off" >*/}
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "score"*/}
-        {/*        defaultValue=""*/}
-        {/*        rules={{ required: 'true' }}*/}
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <TextField*/}
-        {/*                label="Wynik"*/}
-        {/*                type="number"*/}
-        {/*                error={!!errors.score}*/}
-        {/*                value={errors?.score?.rules}*/}
-        {/*                onChange={onChange}*/}
-        {/*            />*/}
-        {/*        )}*/}
-        {/*    />*/}
-        {/*    /!*<input {...register("score", {required: true})} type="number"/>*!/*/}
-        {/*    /!*{errors.score && <div>"First name is required"</div>}*!/*/}
+                    <FormTitle>Dodaj wynik</FormTitle>
+                    {/*<Form onSubmit={handleSubmit(onSubmit)} className={classes.root} autoComplete="off" >*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "score"*/}
+                    {/*        defaultValue=""*/}
+                    {/*        rules={{ required: 'true' }}*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <TextField*/}
+                    {/*                label="Wynik"*/}
+                    {/*                type="number"*/}
+                    {/*                error={!!errors.score}*/}
+                    {/*                value={errors?.score?.rules}*/}
+                    {/*                onChange={onChange}*/}
+                    {/*            />*/}
+                    {/*        )}*/}
+                    {/*    />*/}
+                    {/*    /!*<input {...register("score", {required: true})} type="number"/>*!/*/}
+                    {/*    /!*{errors.score && <div>"First name is required"</div>}*!/*/}
 
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "client"*/}
-        {/*        defaultValue=""*/}
-        {/*        rules={{ required: 'true', maxLength: 4 }}*/}
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <TextField*/}
-        {/*                label="Nr klienta"*/}
-        {/*                type="number"*/}
-        {/*                error={!!errors.client}*/}
-        {/*                value={value}*/}
-        {/*                onChange={onChange}*/}
-        {/*            />*/}
-        {/*        )}*/}
-        {/*    />*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "client"*/}
+                    {/*        defaultValue=""*/}
+                    {/*        rules={{ required: 'true', maxLength: 4 }}*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <TextField*/}
+                    {/*                label="Nr klienta"*/}
+                    {/*                type="number"*/}
+                    {/*                error={!!errors.client}*/}
+                    {/*                value={value}*/}
+                    {/*                onChange={onChange}*/}
+                    {/*            />*/}
+                    {/*        )}*/}
+                    {/*    />*/}
 
 
-        {/*    <MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
+                    {/*    <MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
 
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "date"*/}
-        {/*        defaultValue={new Date()}*/}
-        {/*        rules={{ required: 'true' }}*/}
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <KeyboardDatePicker*/}
-        {/*                disableToolbar*/}
-        {/*                variant="inline"*/}
-        {/*                autoOk*/}
-        {/*                error={!!errors.date}*/}
-        {/*                label={"Data"}*/}
-        {/*                format="dd/MM/yyyy"*/}
-        {/*                value={value}*/}
-        {/*                onChange={onChange}*/}
-        {/*                KeyboardButtonProps={{*/}
-        {/*                    "aria-label": "change date"*/}
-        {/*                }}*/}
-        {/*            />*/}
-        {/*        )}*/}
-        {/*    />*/}
-        {/*    </MuiPickersUtilsProvider>*/}
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "type"*/}
-        {/*        defaultValue={""}*/}
-        {/*        rules={{ required: 'true' }}*/}
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <FormControl className={classes.formControl}>*/}
-        {/*                <InputLabel id="demo-simple-select-label">Typ umowy</InputLabel>*/}
-        {/*                <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label" error={!!errors.type}>*/}
-        {/*                {options.map((option, index) => (*/}
-        {/*                    <MenuItem key={index} value={index}>*/}
-        {/*                        {option}*/}
-        {/*                    </MenuItem>*/}
-        {/*                ))}*/}
-        {/*            </Select>*/}
-        {/*            </FormControl>*/}
-        {/*        )}*/}
-        {/*    />*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "date"*/}
+                    {/*        defaultValue={new Date()}*/}
+                    {/*        rules={{ required: 'true' }}*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <KeyboardDatePicker*/}
+                    {/*                disableToolbar*/}
+                    {/*                variant="inline"*/}
+                    {/*                autoOk*/}
+                    {/*                error={!!errors.date}*/}
+                    {/*                label={"Data"}*/}
+                    {/*                format="dd/MM/yyyy"*/}
+                    {/*                value={value}*/}
+                    {/*                onChange={onChange}*/}
+                    {/*                KeyboardButtonProps={{*/}
+                    {/*                    "aria-label": "change date"*/}
+                    {/*                }}*/}
+                    {/*            />*/}
+                    {/*        )}*/}
+                    {/*    />*/}
+                    {/*    </MuiPickersUtilsProvider>*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "type"*/}
+                    {/*        defaultValue={""}*/}
+                    {/*        rules={{ required: 'true' }}*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <FormControl className={classes.formControl}>*/}
+                    {/*                <InputLabel id="demo-simple-select-label">Typ umowy</InputLabel>*/}
+                    {/*                <Select id="trinity-select" onChange={onChange} value={value} labelId="demo-simple-select-label" error={!!errors.type}>*/}
+                    {/*                {options.map((option, index) => (*/}
+                    {/*                    <MenuItem key={index} value={index}>*/}
+                    {/*                        {option}*/}
+                    {/*                    </MenuItem>*/}
+                    {/*                ))}*/}
+                    {/*            </Select>*/}
+                    {/*            </FormControl>*/}
+                    {/*        )}*/}
+                    {/*    />*/}
 
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "employee"*/}
-        {/*        defaultValue={""}*/}
-        {/*        rules={{ required: 'true' }}*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "employee"*/}
+                    {/*        defaultValue={""}*/}
+                    {/*        rules={{ required: 'true' }}*/}
 
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <FormControl className={classes.formControl}>*/}
-        {/*                <InputLabel id="employeelabel">Pracownik</InputLabel>*/}
-        {/*                <Select id="trinity-select" labelId="employeelabel" onChange={onChange} value={value} error={!!errors.employee}>*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <FormControl className={classes.formControl}>*/}
+                    {/*                <InputLabel id="employeelabel">Pracownik</InputLabel>*/}
+                    {/*                <Select id="trinity-select" labelId="employeelabel" onChange={onChange} value={value} error={!!errors.employee}>*/}
 
-        {/*                    {employees.map((option, index) => (*/}
-        {/*                        <MenuItem key={index} value={option.id}>*/}
-        {/*                            {option.name + ' ' + option.lastname}*/}
-        {/*                        </MenuItem>*/}
-        {/*                    ))}*/}
-        {/*                </Select>*/}
-        {/*            </FormControl>*/}
-        {/*        )}*/}
-        {/*    />*/}
-        {/*    <Controller*/}
-        {/*    control={control}*/}
-        {/*    name= "mailing"*/}
-        {/*    render={({ field: {onChange, value}})=> (*/}
-        {/*        <FormControlLabel*/}
-        {/*                          control={*/}
-        {/*            <Checkbox*/}
-        {/*                onChange={onChange} value={value}*/}
-        {/*                color="primary"*/}
-        {/*            />}*/}
-        {/*                          label="mailing"/>*/}
+                    {/*                    {employees.map((option, index) => (*/}
+                    {/*                        <MenuItem key={index} value={option.id}>*/}
+                    {/*                            {option.name + ' ' + option.lastname}*/}
+                    {/*                        </MenuItem>*/}
+                    {/*                    ))}*/}
+                    {/*                </Select>*/}
+                    {/*            </FormControl>*/}
+                    {/*        )}*/}
+                    {/*    />*/}
+                    {/*    <Controller*/}
+                    {/*    control={control}*/}
+                    {/*    name= "mailing"*/}
+                    {/*    render={({ field: {onChange, value}})=> (*/}
+                    {/*        <FormControlLabel*/}
+                    {/*                          control={*/}
+                    {/*            <Checkbox*/}
+                    {/*                onChange={onChange} value={value}*/}
+                    {/*                color="primary"*/}
+                    {/*            />}*/}
+                    {/*                          label="mailing"/>*/}
 
-        {/*        )}*/}
-        {/*    />*/}
-        {/*    <Controller*/}
-        {/*        control={control}*/}
-        {/*        name= "newClient"*/}
-        {/*        render={({ field: {onChange, value}})=> (*/}
-        {/*            <FormControlLabel*/}
-        {/*                              control={*/}
-        {/*                                  <Checkbox*/}
-        {/*                                      onChange={onChange} value={value}*/}
-        {/*                                      color="primary"*/}
-        {/*                                  />}*/}
-        {/*                              label="Nowy klient"/>*/}
+                    {/*        )}*/}
+                    {/*    />*/}
+                    {/*    <Controller*/}
+                    {/*        control={control}*/}
+                    {/*        name= "newClient"*/}
+                    {/*        render={({ field: {onChange, value}})=> (*/}
+                    {/*            <FormControlLabel*/}
+                    {/*                              control={*/}
+                    {/*                                  <Checkbox*/}
+                    {/*                                      onChange={onChange} value={value}*/}
+                    {/*                                      color="primary"*/}
+                    {/*                                  />}*/}
+                    {/*                              label="Nowy klient"/>*/}
 
-        {/*        )}*/}
-        {/*    />*/}
-        {/*    /!*<SendBtn type="submit" value="Dodaj"/>*!/*/}
+                    {/*        )}*/}
+                    {/*    />*/}
+                    {/*    /!*<SendBtn type="submit" value="Dodaj"/>*!/*/}
 
-        {/*    <ButtonWrapper>*/}
-        {/*        <Button*/}
-        {/*            type="submit"*/}
-        {/*            variant="contained"*/}
-        {/*            color="primary"*/}
-        {/*            startIcon={<SaveIcon />}*/}
-        {/*        >*/}
-        {/*            Dodaj*/}
-        {/*        </Button>*/}
-        {/*    </ButtonWrapper>*/}
-        {/*</Form>*/}
-            <FormScore onClose={()=>props.onClose()}/>
-        </FormInner>
-    </FormWrapper>
+                    {/*    <ButtonWrapper>*/}
+                    {/*        <Button*/}
+                    {/*            type="submit"*/}
+                    {/*            variant="contained"*/}
+                    {/*            color="primary"*/}
+                    {/*            startIcon={<SaveIcon />}*/}
+                    {/*        >*/}
+                    {/*            Dodaj*/}
+                    {/*        </Button>*/}
+                    {/*    </ButtonWrapper>*/}
+                    {/*</Form>*/}
+                    <FormScore onClose={()=>props.onClose()}/>
+                </FormInner>
+            </FormWrapper>
         </ThemeProvider>)
 };
 

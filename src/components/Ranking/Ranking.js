@@ -11,6 +11,7 @@ import Pen from '../../assets/images/pen.gif';
 import Face from '../../assets/images/face2.png';
 import {indexMonth, months, years} from "../../service";
 import DataSelects from "../DateSelects/DataSelects";
+import {TabName} from "../../template-parts/TabName";
 //Styles
 
 
@@ -70,15 +71,14 @@ ${globalTitle}
 margin-bottom: 20px;
 `;
 
-const TabName = Styled.h2`
-${tabName}
-`;
+
 
 const NameWrapper = Styled.div`
 display: flex;
 width: 65%;
 margin: 0 auto;
 justify-content: space-between;
+padding-top: 80px;
 `;
 
 const SelectWrapper = Styled.div`
@@ -213,10 +213,12 @@ const Ranking = (props)=> {
     // console.log(sortedScores[0]);
 
     return(<React.Fragment>
+
         {
-            props.showAll &&   <div>  <TabName><span>Ranking</span></TabName><NameWrapper>
+            props.showAll &&   <div>  <TabName title={'Ranking'}/>
+                <NameWrapper>
                 <Title>{months[month] + ' 2021'} </Title>
-               <DataSelects setYear={setYear} year={year} month={month} setMonth={setMonth}/>
+               <SelectWrapper><DataSelects setYear={setYear} year={year} month={month} setMonth={setMonth}/></SelectWrapper>
             </NameWrapper></div>
         }
         <Podium>

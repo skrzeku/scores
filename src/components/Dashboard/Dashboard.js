@@ -5,7 +5,7 @@ import Employees from "../Employees/Employees";
 import {changeMonth, changeYear} from '../../actions/index';
 import AddEmployee from "../Employees/AddEmployee/AddEmployee";
 import AddMinus from "../Minuses/AddMinus/AddMinus";
-import NewScore from '../Scores/NewScore/NewScore';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,6 +27,8 @@ import {
 import {colorPrimary} from "../../variables";
 import {tabName} from "../../variables";
 import {Table} from "../../variables";
+import DataSelects from "../DateSelects/DataSelects";
+import NewScore from "../Scores/NewScore/NewScore";
 
 const TableWrapper = Styled.div`
 max-height: 70vh;
@@ -136,6 +138,8 @@ class Dashboar extends Component {
 
 
 
+
+
     shnowFormHandler = () => {
         this.setState({shownform: !this.state.shownform});
     };
@@ -151,6 +155,7 @@ class Dashboar extends Component {
 
     MonthChangeHandler = (event) => {
         this.props.changeMonth(+event);
+        console.log(+event);
         this.setState({showselect: true});
     };
 
@@ -164,6 +169,13 @@ class Dashboar extends Component {
 
     setCurrentScore = (e) => {
         this.setState({currentScore: e});
+    };
+
+    userPermition = ()=> {
+        if(this.props.user && this.props.user?.email !== 'pracownik@inet-media.pl') {
+            return true
+        }
+        else return false;
     };
 
 
@@ -210,15 +222,18 @@ class Dashboar extends Component {
 
     render() {
         console.log(this.props.year);
+        console.log(this.props.user?.email);
+
+
 
 
 
 
         const db = firebase.firestore();
 
-        const showFormBtn = this.props.user ? <AddScoreBtn onClick={this.shnowFormHandler}><i
+        const showFormBtn = this.userPermition() ? <AddScoreBtn onClick={this.shnowFormHandler}><i
             className="las la-file-invoice-dollar"></i></AddScoreBtn> : null;
-        const showMinusFormBtn = this.props.user ?
+        const showMinusFormBtn = this.userPermition() ?
             <AddMinuBtn onClick={this.showMinusFormHandler}><i className="las la-minus-circle"></i></AddMinuBtn> : null;
         // const addScoreWrapper = this.props.user ? (this.state.shownform && <AddScore/>) : null;
         // const addMinusWrapper = this.props.user ? (this.state.showminusform && <AddMinus/>) : null;
@@ -227,30 +242,7 @@ class Dashboar extends Component {
         return (<div>
             <TabName><span>Wyniki</span></TabName>
             <SelectWrapper>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={this.props.month}
-                    value={this.props.month}
-                    onChange={event => this.MonthChangeHandler(event.target.value)}
-                >
-                    {months.map((option, index) => (
-                        <MenuItem key={index} value={index}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Select
-                    defaultValue={this.props.year}
-                    value={this.props.year}
-                    onChange={event => this.YearChangeHandler(event.target.value)}
-                >
-                    {years.map((option, index) => (
-                        <MenuItem key={index} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+            <DataSelects setYear={this.YearChangeHandler} year={this.props.year} month={this.props.month} setMonth={this.MonthChangeHandler}/>
             </SelectWrapper>
             <Total/>
             <TableWrapper>
@@ -266,7 +258,7 @@ class Dashboar extends Component {
 
             </TableWrapper>
             <BtnsWrapper>
-                {this.props.user && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i
+                {this.userPermition() && <AddEmployeeBtn onClick={this.showAddEmployeeHandler.bind(this)}><i
                     className="las la-user-plus"></i></AddEmployeeBtn>}
                 {showFormBtn}
                 {showMinusFormBtn}

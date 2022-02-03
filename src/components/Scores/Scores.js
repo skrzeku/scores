@@ -38,7 +38,7 @@ const Scores = (props)=> {
 
 
     const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], allMonths)]);
-    console.log(calendar);
+    console.log(indexMonth(year, 1, allMonths));
 
 
 

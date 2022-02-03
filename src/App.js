@@ -1,8 +1,16 @@
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {connect} from "react-redux";
-import {employeesFetched, fetchCalendar, fetchUser, fetchMinuses, changeMonth} from "./actions";
+import {
+    employeesFetched,
+    fetchCalendar,
+    fetchUser,
+    fetchMinuses,
+    changeMonth,
+    clientsFetched,
+    fetchNotes
+} from "./actions";
 import {fetchScores} from "./actions";
 import firebase, {auth} from './firebase';
 import Login from './components/Login/Login';
@@ -15,6 +23,10 @@ import Ranking from './components/Ranking/Ranking';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import {colorPrimary} from "./variables";
 import Stats from "./components/Stats/Stats";
+import {months} from "./service";
+import Clients from "./components/Clients/Clients";
+import {data} from './datas';
+import Client from "./components/Clients/Client/Client";
 
 
 
@@ -24,9 +36,23 @@ export const changeCurrentMonth = (calendar, changeVoid)=> {
         const date = today.getTime() >= one.startDate?.toDate().getTime() && today.getTime() <= one.endDate?.toDate().getTime();
         return date;
     });
-    console.log(currMonth?.id);
+
     if (currMonth) {
-        changeVoid(currMonth?.id);
+        console.log(currMonth);
+       const lol = months.indexOf(
+            months.find((one, index)=> {
+                return one === currMonth.name
+            })
+        )
+
+
+
+        changeVoid( months.indexOf(
+            months.find((one, index)=> {
+                return one === currMonth.name
+            })
+        ));
+        // console.log(changeVoid(currMonth?.id));
         // console.log(this.props.month);
         return false;
 
@@ -51,10 +77,17 @@ class App extends Component {
     componentDidMount() {
 
 
+
         auth.onAuthStateChanged((user) => {
             this.props.fetchUser(user);
         });
         const db = firebase.firestore();
+
+        console.log(data);
+        this.props.clientsFetched(data.Clients);
+
+
+
 
 
         //get employees
@@ -92,6 +125,7 @@ class App extends Component {
                 });
                 this.props.fetchCalendar(CurrentCalendar);
                 changeCurrentMonth(this.props.calendar, this.props.changeMonth);
+                // console.log(this.props.month);
 
 
             });
@@ -103,6 +137,16 @@ class App extends Component {
             });
             this.props.fetchMinuses(data);
         });
+
+            db.collection('notes').onSnapshot((snap) => {
+                const data = snap.docs.map(doc => {
+                    const obj = Object.assign(doc.data(), {key: doc.id});
+                    return obj
+                });
+                console.log(data);
+                this.props.fetchNotes(data);
+            });
+
 
 
 
@@ -132,6 +176,7 @@ class App extends Component {
 
 
     render() {
+        // console.log(changeCurrentMonth(this.props.calendar, this.props.changeMonth));
 
         Date.prototype.getWeek = function () {
             var onejan = new Date(this.getFullYear(), 0, 1);
@@ -168,16 +213,18 @@ class App extends Component {
                             </div> :
                             null
                     }
-                    <div></div>
 
                     <Navigation/>
                     <Router>
-                        <Dashboard path={'/'}/>
+                        <Dashboard path={'/'} default/>
                         <Login path={'/login'} component={Login}/>
                         <History path={'/history'} component={History}/>
                         <EmployeeDetails path={'/employee/:id'} />
+                        <Clients path={'/clients'} />
+                        <Client path={'/client/:id'} />
                         <Ranking path={'/ranking'} showAll={true} component={Ranking}/>
                         <Stats path={'/stats'} component={Stats}/>
+
                     </Router>
                 </ThemeProvider>
             </div>
@@ -191,9 +238,10 @@ const mapStateToProps = (state) => {
         scores: state.scores,
         user: state.user,
         calendar: state.calendar,
-        month: state.month
+        month: state.month,
+        clients: state.clients
     }
 };
-const mapDispatchToProps = {employeesFetched, fetchScores, fetchCalendar, fetchUser, fetchMinuses, changeMonth};
+const mapDispatchToProps = {employeesFetched, fetchScores, fetchCalendar, fetchUser, fetchMinuses, changeMonth, clientsFetched, fetchNotes};
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

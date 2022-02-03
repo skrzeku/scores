@@ -17,6 +17,15 @@ z-index: 10;
 
 `;
 
+export const GlobalTitle = Styled.h2`
+font-size: 30px;
+font-weight: bold;
+position: relative;
+margin-top: 50px;
+margin-bottom: 30px;
+  
+`;
+
 
 export const formInner =`
 width: 600px;
@@ -125,3 +134,12 @@ export const Table = `
      }
     }
   `;
+
+export const ClientLink = `
+text-decoration: underline;
+color: ${colorPrimary};
+cursor: pointer;
+  &:hover {
+    opacity: .6;
+ }
+`;

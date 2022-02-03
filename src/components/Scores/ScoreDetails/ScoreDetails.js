@@ -4,6 +4,7 @@ import firebase from "../../../firebase";
 import Styled from 'styled-components';
 import {colorPrimary} from "../../../variables";
 import { useTransition, animated } from 'react-spring';
+import {navigate} from "@reach/router";
 
 
 //Styles
@@ -48,8 +49,12 @@ const ScoreDetails = (props)=> {
         });
     };
 
+    const navigateToClient = (id) => {
+        navigate('/client/' + id);
+    };
+
     return(<ScoreWrapper>
-        <h2>Wynik</h2>
+        <h2>Wyniks</h2>
         <div>
 
             <p>Pracownik: {currentEmployee?.name} {currentEmployee?.lastname}</p>
@@ -57,7 +62,7 @@ const ScoreDetails = (props)=> {
                     score?.score ? <p>Wynik {score?.score}</p> : <p>Minus: {score?.minus}</p>
                 }
             <p>Data: {score?.date.toDate().toLocaleDateString()}</p>
-            <p>Nr klienta: {score?.client}</p>
+            <p>Nr klienta: <a onClick={()=> navigateToClient(score?.client)}>{score?.client}</a></p>
             <button onClick={removeData}>Usuń Wynik</button>
             <button onClick={props.onClose}>Anuluj</button>
 

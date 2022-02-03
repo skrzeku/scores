@@ -3,12 +3,27 @@ export const employeesFetched = (employees) => ({
     type: 'FETCH_EMPLOYEES_SUCCESS',
     employees
 });
+export const clientsFetched = (clients) => ({
+    type: 'FETCH_CLIENTS_SUCCESS',
+    clients
+});
 
 
 export const AddEmployee = (employees, employee) => ({
     type: 'ADD_EMPLOYEE',
     employees,
     employee
+});
+
+export const fetchNotes = (notes) => ({
+    type: 'NOTES_FETCHED',
+    notes
+});
+
+export const addNote = (notes, note) => ({
+   type: 'ADD_NOTE',
+    notes,
+    note
 });
 
 

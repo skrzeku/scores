@@ -10,8 +10,8 @@ import Styled from "styled-components";
 import firebase from "../../../firebase";
 import {makeStyles} from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
-import {buttonWrapper} from "../../../variables";
-import {types, shorts} from "../../../service";
+import {buttonWrapper, colorPrimary} from "../../../variables";
+import {types, shorts, months} from "../../../service";
 
 
 const Form = Styled.form`
@@ -28,6 +28,7 @@ position: relative;
 const ButtonWrapper = Styled.div`
 ${buttonWrapper}
 `;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,6 +81,7 @@ const FormScore = (props)=> {
 
     const employees = useSelector(state => state.employees);
     const allScores = useSelector(state => state.scores);
+
 
 
     const onSubmit = (data, e) => {

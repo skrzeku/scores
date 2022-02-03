@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import Styled from "styled-components";
+import {indexMonth, months} from "../../service";
 
 const OneMinus = Styled.span`
 display: inline-block;
@@ -32,8 +33,12 @@ const Minuses = (props)=> {
 
 
   const minuses = useSelector(state => state.minuses);
+  const year = useSelector(state => state.year);
+  const allMonths = useSelector(state => state.calendar);
     const month = useSelector(state => state.month);
-    const calendar = useSelector(state => state.calendar[month]);
+    // const calendar = useSelector(state => state.calendar[month]);
+    const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], allMonths)]);
+
 
     const[currentMinus, setMinus] = useState(null);
 

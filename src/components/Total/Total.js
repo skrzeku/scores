@@ -135,15 +135,15 @@ margin-left: 10px;
              }
              curDate.setDate(curDate.getDate() + 1);
          }
-         console.log(count);
-         console.log(arr.length);
+         // console.log(count);
+         // console.log(arr.length);
 
          return arr.length;
      };
 
      const leftBussyDays = getBusinessDatesCount(today, endDate);
 
-     console.log(leftBussyDays);
+     // console.log(leftBussyDays);
 
 
 

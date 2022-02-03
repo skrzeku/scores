@@ -6,6 +6,8 @@ import {calendar} from "./calendar";
 import {user} from "./user";
 import {minuses} from "./minuses";
 import {year} from './year'
+import {clients} from "./clients";
+import {notes} from "./notes";
 
 
 export default combineReducers({
@@ -15,6 +17,9 @@ export default combineReducers({
     calendar,
     user,
     minuses,
-    year
+    year,
+    clients,
+    notes
+
 
 });

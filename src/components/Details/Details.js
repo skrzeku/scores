@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import firebase from "firebase";
+import {userPermition} from "../../service";
 import Styled from 'styled-components';
-import {cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn} from "../../variables";
+import {cancelBtn, colorPrimary, formInner, formWrapper, globalTitle, sendBtn, ClientLink} from "../../variables";
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 import FormScore from "../Scores/FormScore/FormScore";
+import {navigate} from "@reach/router";
 
 
 const db = firebase.firestore();
@@ -56,6 +58,10 @@ margin: 0 10px;
 }
 `;
 
+const ClientLinks = Styled.a`
+${ClientLink}
+`;
+
 
 const Details = (props) => {
     //Redux
@@ -67,6 +73,8 @@ const Details = (props) => {
     const dispatch = useDispatch();
     const [endi, setEnd] = useState(false);
     const [shownForm, showFormHandler] = useState(false);
+
+    console.log('tutaj');
 
 
     const removeData = () => {
@@ -98,6 +106,17 @@ const Details = (props) => {
         }, 400)
     };
 
+    const userPermition = ()=> {
+        if(user && user?.email !== 'pracownik@inet-media.pl') {
+            return true
+        }
+        else return false;
+    };
+
+    const navigateToClient = (id) => {
+        navigate('/client/' + id);
+    };
+
 
     return (<ScoreWrapper>
         <ScoreInner>
@@ -120,10 +139,10 @@ const Details = (props) => {
                     <strong>Data:</strong> {props.object?.date.seconds ? props.object?.date.toDate().toLocaleDateString() : props.object?.date.toLocaleDateString()}
                 </p>
                 <p><strong>Nr
-                    klienta:</strong> {props.object.client == 9999 ? 'Za poprzedni miesiąc' : props.object.client}</p>
+                    klienta:</strong> <ClientLinks onClick={()=> navigateToClient(props.object?.client)}>{props.object.client == 9999 ? 'Za poprzedni miesiąc' : props.object.client}</ClientLinks></p>
 
                 {
-                    user &&
+                    userPermition() &&
                     (<BtnWrapper>
                             {
                                 !shownForm &&

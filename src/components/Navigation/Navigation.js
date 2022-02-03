@@ -44,6 +44,7 @@ const Navigation = (props)=> {
     const NavLink = Styled.i`
     font-size: 40px;
     color: white;
+    text-align: center;
     margin-right: 20px;
     transition: 0.2s all ease;
         &:hover {
@@ -53,7 +54,8 @@ const Navigation = (props)=> {
 
     const NavMenu = Styled.ul`
     background-color: ${colorPrimary};
-    padding: 15px 30px;
+    padding: 15px 0 15px 20px;
+    text-align: center;
     border-bottom-left-radius: 15px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     `;
@@ -68,7 +70,9 @@ const Navigation = (props)=> {
             <Link to="/"><NavLink className="las la-home"></NavLink></Link>
             <Link to="/stats"><NavLink className="las la-chart-bar"></NavLink></Link>
             <Link to="/ranking"><NavLink className="las la-medal"></NavLink></Link>
+            <Link to="/clients"><NavLink className="las la-users"></NavLink></Link>
             <Link to="/login"><NavLink className="las la-sign-in-alt"></NavLink></Link>
+
 
 
         </NavMenu>

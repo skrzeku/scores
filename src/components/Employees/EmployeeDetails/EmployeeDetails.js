@@ -6,6 +6,8 @@ import {globalTitle, tabName} from "../../../variables";
 import EmployeeStats from "../EmployeeStats/EmployeeStats";
 import DataSelects from "../../DateSelects/DataSelects";
 import {indexMonth, months} from "../../../service";
+import {useParams} from "@reach/router";
+import {TabName} from "../../../template-parts/TabName";
 
 
 //styles
@@ -28,11 +30,6 @@ ${globalTitle}
 margin-bottom: 20px;
 `;
 
-const TabName = Styled.h2`
-${tabName}
-display: block;
-
-`;
 
 const Heading = Styled.h2`
 margin-top: 50px;
@@ -54,7 +51,7 @@ padding-top: 80px;
 
 
 
-const EmployeeDetails = (props)=> {
+const EmployeeDetails = ()=> {
 
 
     //redux
@@ -63,6 +60,8 @@ const EmployeeDetails = (props)=> {
     const storeMonth = useSelector(state => state.month);
     const storeYear = useSelector(state => state.year);
     const calendars = useSelector(state => state.calendar);
+
+    const {id} = useParams();
 
     //local state
     const [month, setMonth] = useState(storeMonth);
@@ -83,9 +82,10 @@ const EmployeeDetails = (props)=> {
     const calendar = useSelector(state => state.calendar[indexMonth(year, months[month], calendars)]);
     const headArray = ['l.p.', 'Wynik', 'Typ','nr klienta', 'data'];
 
-    const currentEmployee = employees?.find((one)=>one.id === +props.id);
+    const currentEmployee = employees?.find((one)=>one.id === +id);
+
     const currentScores = scoresAll
-        .filter((score)=> score.employee === +props.id)
+        .filter((score)=> score.employee === +id)
         .filter(ont => {
             const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
             return date >= calendar?.startDate.toDate().getTime() && date <= calendar?.endDate.toDate().getTime();
@@ -114,12 +114,12 @@ const EmployeeDetails = (props)=> {
 
     return(<TabWrapper>
 
-        <TabName><span>Wyniki pracownika</span></TabName>
+        <TabName title={'Wyniki pracownika'}/>
         <Heading>Wyniki {calendar?.name +' ' + new Date().getFullYear()} </Heading>
 
         <NameWrapper>
             <Title>{currentEmployee?.name} {currentEmployee?.lastname[0] + '.'}</Title>
-            <DataSelects month={month} setMonth={setMonth} year={year} setYear={setYear}/>
+            <SelectWrapper><DataSelects month={month} setMonth={setMonth} year={year} setYear={setYear}/></SelectWrapper>
 
         </NameWrapper>
 
@@ -147,7 +147,7 @@ const EmployeeDetails = (props)=> {
 
 
         <Heading>Statystyki </Heading>
-        <EmployeeStats employee={props} month={month} year={year}/>
+        <EmployeeStats employee={currentEmployee} month={month} year={year}/>
 
 
 

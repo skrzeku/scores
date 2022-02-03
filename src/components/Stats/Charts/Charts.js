@@ -5,6 +5,7 @@ import Styled from "styled-components";
 import { Bar, Pie } from 'react-chartjs-2';
 import {filterbyDate, indexMonth, months} from "../../../service";
 import {types} from '../../../service';
+import {GlobalTitle} from "../../../variables";
 
 const ChartWrapper = Styled.div`
 width: 70%;
@@ -290,7 +291,7 @@ const Charts = (props)=> {
 
 
     return(<Row>
-        <Heading>Statystyki Ilościowe</Heading>
+        <GlobalTitle>Statystyki Ilościowe</GlobalTitle>
 
             <Column><Label>{newCurrentMonth?.name} {newCurrentMonth?.year}</Label></Column>
             <Column><Label>Rok {newCurrentMonth?.year}</Label></Column>
@@ -301,7 +302,7 @@ const Charts = (props)=> {
         <Column>
             <Bar  data={data2}  height={400} options={options}/>
         </Column>
-        <Heading>Statystyki wartościowe</Heading>
+        <GlobalTitle>Statystyki wartościowe</GlobalTitle>
 
         <Row>
             <Column><Label>{newCurrentMonth?.name} {newCurrentMonth?.year}</Label></Column>
