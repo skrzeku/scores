@@ -123,7 +123,7 @@ transform: translateX(-50%);
 const Ranking = (props)=> {
 
     const scoresAll = useSelector(state => state.scores);
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const storeYear = useSelector(state => state.year);
     const calendars = useSelector(state => state.calendar);
 

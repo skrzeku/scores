@@ -79,7 +79,7 @@ const FormScore = (props)=> {
     const classes = useStyles();
 
 
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const allScores = useSelector(state => state.scores);
 
 

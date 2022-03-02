@@ -24,13 +24,13 @@ font-size: 14px;
 const StatsTable = ()=> {
     // Redux
     const scoresAll = useSelector(state => state.scores);
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const storeMonth = useSelector(state => state.month);
     const calendar = useSelector(state => state.calendar);
 
     const [month, setMonth] = useState(storeMonth);
     const currentMonth = useSelector(state => state.calendar[month]);
-
+        console.log(employees);
     // global
         const countMonthEmployeeScore = (employee)=> {
             return calendar.map((oneMonth) => {

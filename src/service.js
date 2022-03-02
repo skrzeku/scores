@@ -12,7 +12,6 @@ export const filterbyDate = (one, bool, arr, currentMonth, year)=>  arr
             const date = ont.date.seconds ? ont.date.toDate().getTime() : ont.date.getTime();
             return date >= new Date(+year, 0, 1) && date <= new Date(+year, 11, 30);
 
-            // return ont;
         }
     })
 

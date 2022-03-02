@@ -28,8 +28,10 @@ const Employees = () => {
     };
 
 
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const scoresAll = useSelector(state => state.scores);
+    const activeEmployees = employees.filter(one => one.isActive);
+    console.log(activeEmployees);
 
 
     const AllEmployees = employees.map((one, index) => {

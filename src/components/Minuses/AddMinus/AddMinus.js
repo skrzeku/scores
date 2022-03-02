@@ -86,7 +86,7 @@ const AddMinus = (props)=> {
     console.log(props);
 
     //get states
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const myminuses = useSelector(state => state.minuses);
     const[employee, setEmployee] = useState(employees[0]?.id);
     const [number, setNumber] = useState(0);

@@ -16,7 +16,7 @@ import Details from "../Details/Details";
 const Scores = (props)=> {
 
     const scoresAll = useSelector(state => state.scores);
-    const employees = useSelector(state => state.employees);
+    const employees = useSelector(state => state.employees.filter(one => one.isActive));
     const month = useSelector(state => state.month);
     const minuses = useSelector(state => state.minuses);
     const year = useSelector(state => state.year);
